@@ -9,8 +9,6 @@ class User_model extends CI_Model {
     }
 
     function login($user_name, $user_password) {
-
-
         $this->db->select('*');
         $this->db->from($this->table);
         $this->db->where('UserName', $user_name);

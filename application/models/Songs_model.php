@@ -34,15 +34,12 @@ class Songs_model extends CI_Model {
             $this->db->limit($limit, $offset);
         $this->db->order_by('songs.Updated_On', $order);
         $query = $this->db->get();
-//         print_r($this->db->last_query());exit;
         $result = array();
         if ($query !== FALSE && $query->num_rows() > 0) {
             $result = $query->result_array();
         }
         return $result;
     }
-
-    
 
     public function get_single($song) {
         $sql = "SELECT * FROM songs where ID=$song";
@@ -58,7 +55,6 @@ class Songs_model extends CI_Model {
         $this->db->where('ID', $id);
         return $this->db->delete('songs');
     }
-
 }
 ?>
 

@@ -14,7 +14,6 @@ class Comment_model extends CI_Model {
     function insert_data($data) {
 
         $this->db->insert($this->table, $data);
-//            print_r($this->db->last_query());exit;
         return $this->db->insert_id();
     }
 

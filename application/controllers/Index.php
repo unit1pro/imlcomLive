@@ -18,11 +18,16 @@ class Index extends CI_Controller {
 
     function index() {
         $session_data = $this->session->userdata('user_data');
+        $user_id = $session_data['UID'];
 
         $data['songs_data'] = $this->Home_model->get_video();
         $data['login_msg'] = $this->session->userdata('login_msg');
         $data['page_title'] = "Home";
-        $data['user_data'] = $session_data;
+        if($user_id){
+        $data['user_data'] = $this->User_model->get_single($user_id);            
+        } else {
+        $data['user_data'] = $session_data;                      
+        }
         $data['page'] = "home";
         $this->load->view('front/page', $data);
     }

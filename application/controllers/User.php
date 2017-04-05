@@ -10,15 +10,28 @@ class User extends CI_Controller {
     }
 
     function index() {
-
         $session_data = $this->session->userdata('user_data');
         if (isset($session_data) && ($session_data['UID'])) {
             $data['artist_data'] = $this->User_model->get_data();
-//                    print "<pre>";print_r($data['artist_data']);exit;
             $data['page_title'] = "User List";
             $data['user_data'] = $session_data;
             $data['page'] = "list_user";
             $this->load->view('backend/page', $data);
+        } else {
+            $this->session->unset_userdata('user_data');
+            redirect('user/login', 'refresh');
+        }
+    }
+
+    function profile() {
+        $session_data = $this->session->userdata('user_data');
+        $user_id = $session_data['UID'];
+
+        if (isset($session_data) && ($session_data['UID'])) {
+            $data['user_data'] = $this->User_model->get_single($user_id);
+            $data['page_title'] = "Profile Page";
+            $data['page'] = "profile";
+            $this->load->view('front/page', $data);
         } else {
             $this->session->unset_userdata('user_data');
             redirect('user/login', 'refresh');
@@ -339,6 +352,7 @@ class User extends CI_Controller {
         $this->session->sess_destroy();
         redirect('User', 'refresh');
     }
+
     function logoutFront() {
         $this->session->unset_userdata('user_data');
         $this->session->sess_destroy();
@@ -364,6 +378,71 @@ class User extends CI_Controller {
         }
         echo json_encode($response);
         exit;
+    }
+
+    function update_profile() {
+        $session_data = $this->session->userdata('user_data');
+        try {
+            if (!$session_data['UID'])
+                throw new Exception("Session Expired Please Login");
+
+            if (!empty($_FILES)) {
+                $target_dir = UPLOADS . '/images/';
+                $target_file = $target_dir . basename($_FILES["upload"]["name"]);
+                $uploadOk = 1;
+                $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
+                if (imageFileType) {
+                    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+                        $data['error_msg'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    }
+                    if (move_uploaded_file($_FILES["upload"]["tmp_name"], $target_file)) {
+                        $response['status'] = 1;
+                    } else {
+                        $data['error_msg'] = "File uploading Failed because ";
+                    }
+                }
+            } else {
+                $response['error_msg'] = "File doenst exits";
+            }
+            $formdata = $_POST;
+
+            $user_data = array(
+                'FirstName' => isset($formdata['FirstName']) && $formdata['FirstName'] ? $formdata['FirstName'] : '',
+                'LastName' => isset($formdata['LastName']) && $formdata['LastName'] ? $formdata['LastName'] : '',
+                'Email' => isset($formdata['Email']) && $formdata['Email'] ? $formdata['Email'] : '',
+                'Website' => isset($formdata['Website']) && $formdata['Website'] ? $formdata['Website'] : '',
+                'ContactMe' => isset($formdata['ContactMe']) && $formdata['ContactMe'] ? $formdata['ContactMe'] : '',
+                'DOB' => isset($formdata['DOB']) && $formdata['DOB'] ? date('Y-m-d', strtotime($formdata['DOB'])) : '',
+                'City' => isset($formdata['City']) && $formdata['City'] ? $formdata['City'] : '',
+                'State' => isset($formdata['State']) && $formdata['State'] ? $formdata['State'] : '',
+                'Country' => isset($formdata['Country']) && $formdata['Country'] ? $formdata['Country'] : '',
+                'Photo' => isset($formdata['photo_name']) && $formdata['photo_name'] ? $formdata['photo_name'] : ''
+            );
+
+            $user_id = $session_data['UID'];
+            $result = $this->User_model->update_user($user_id, $user_data);
+            if ($result) {
+                $data['success'] = true;
+                $data['user_data'] = $session_data;
+                $data['msg'] = "User Updated";
+                $data['page_title'] = "Profile Page";
+                $data['page'] = 'profile';
+                redirect('User/profile', 'refresh');
+            } else {
+                $data['success'] = false;
+                $data['error_msg'] = "Updation Failed";
+                $data['page_title'] = "Profile Page";
+                $data['page'] = 'profile';
+                $data['user_data'] = $session_data;
+                $this->load->view('front/page', $data);
+            }
+        } catch (Exception $exc) {
+            $response['success'] = FALSE;
+            $response['msg'] = $exc->getMessage();
+        }
+        echo json_encode($response);
+        exit();
     }
 
 }

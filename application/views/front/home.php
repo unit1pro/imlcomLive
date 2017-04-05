@@ -1,4 +1,3 @@
-<!--<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/vendors/nefty_popup/lib/demo.css" />-->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/vendors/nefty_popup/dist/jquery.niftymodals.css" /> 
 <script src="<?php echo base_url(); ?>/vendors/nefty_popup/dist/jquery.niftymodals.js"></script>
 <script>
@@ -9,10 +8,8 @@
             var modal = $(this).data('modal');
             $("#" + modal).niftyModal();
         });
-    });</script> 
-
-<!-- for the blur effect -->
-<!-- by @derSchepp https://github.com/Schepp/CSS-Filters-Polyfill -->
+    });
+</script> 
 <script>
     // this is important for IEs
     var polyfilter_scriptpath = '<?php echo base_url(); ?>/vendors/nefty_popup/lib/js/';</script>
@@ -98,7 +95,7 @@
                 ?>
             </div>
         </div>
-        <div class="layout-column flex-45 flex-xs-100 public-section" style="overflow: hidden">
+        <div class="layout-column flex-100 flex-xs-100 public-section" style="overflow: hidden">
             <div style="height: 100%;width: 100%;overflow-y: auto;" >
                 <div class="layout-column comment-section">
                     <textarea placeholder="Post Your Views Or Songs" data-modal="modal-12" class="views textarea-views"></textarea>
@@ -106,202 +103,20 @@
                 <div id="public_wall">
 
                 </div>
-                <!--                <div class="layout-column comment-section">
-                                    <div class="layout-row user-comments">
-                                        <img src="<?php echo base_url('front') ?>/img/no_picture.png" alt="user-image"/>
-                                        <div class="comment-wrap"><a href="#"> Anuska </a>
-                                        </div>
-                                    </div>
-                                    <div class="layout-row user-comments">
-                                        <div class="">
-                                            <span>my new song</span>
-                                        </div>
-                                    </div>
-                                    <audio controls>
-                                        <source src="horse.ogg" type="audio/ogg">
-                                    </audio>
-                                    <div class="layout-row action-wrapper">
-                                        <div class="layout-row layout-align-start-center flex-20"><i class="fa fa-thumbs-up"></i> Like</div>
-                                        <div class="layout-row layout-align-start-center flex-20"><i class="fa fa-comment"></i> Comments</div>
-                                        <div class="layout-row layout-align-end-center flex-20"><i class="fa fa-share"></i> Share</div>
-                                    </div>
-                                    <div class="layout-row comment-count">
-                                        <span><i class="fa fa-thumbs-up"></i></span>
-                                        <span class="heart"> <i class="fa fa-heart"></i></span>
-                                        <a href="#">Anuska , neha and 22 more</a>
-                                    </div>
-                                    <div class="layout-row comment-wrap">
-                                        <span class="flex-75">View Previous Comments</span>
-                                        <span class="flex-50 no-count">4 out 9</span>
-                                    </div>
-                                    <div class="layout-row user-comments">
-                                        <img src="<?php echo base_url('front') ?>/img/no_picture.png" alt="user-image"/>
-                                        <div class="layout-column user-detail">
-                                            <div class="layout-row">
-                                                <span class="user-name">Lokesdh tiwari</span>
-                                                <span>Congret bhai shaib</span>
-                                            </div>
-                                            <div class="layout-row">
-                                                <span class="user-name">Like</span>
-                                                <span class="user-name">Reply</span>
-                                                <span>28 min agao</span>
-                                            </div>
-                                        </div>
-                
-                                    </div>
-                
-                                    <div class="layout-row user-comments">
-                                        <img src="img/no_picture.png" alt="user-image"/>
-                                        <div class="layout-column user-detail">
-                                            <div class="layout-row">
-                                                <span class="user-name">Lokesdh tiwari</span>
-                                                <span>Congret bhai shaib</span>
-                                            </div>
-                                            <div class="layout-row">
-                                                <span class="user-name">Like</span>
-                                                <span class="user-name">Reply</span>
-                                                <span>28 min</span>
-                                            </div>
-                                        </div>
-                
-                                    </div>
-                                    <div class="layout-column comment-wrap">
-                                        <span>View more Comments</span>
-                                    </div>
-                                    <div class="layout-row user-comments">
-                                        <img src="img/no_picture.png" alt="user-image"/>
-                                        <div class="input-area"><input placeholder="Write a Comments"/>
-                                            <i class="fa fa-camera"></i>
-                                            <i class="fa fa-smile-o"></i>
-                                        </div>
-                                    </div>
-                
-                                </div>
-                                <div class="layout-column comment-section">
-                                    <div class="layout-column layout-align-center-center">
-                                        <video height="170" controls>
-                                            <source src="https://www.youtube.com/" type="video/mp4">
-                                        </video>
-                                    </div>
-                                    <div class="layout-row action-wrapper">
-                                        <div class="layout-row layout-align-start-center flex-20"><i class="fa fa-thumbs-up"></i> Like</div>
-                                        <div class="layout-row layout-align-start-center flex-20"><i class="fa fa-comment"></i> Comments</div>
-                                        <div class="layout-row layout-align-end-center flex-20"><i class="fa fa-share"></i> Share</div>
-                                    </div>
-                                    <div class="layout-row comment-count">
-                                        <span><i class="fa fa-thumbs-up"></i></span>
-                                        <span class="heart"> <i class="fa fa-heart"></i></span>
-                                        <a href="#">Anuska , neha and 22 more</a>
-                                    </div>
-                                    <div class="layout-row comment-wrap">
-                                        <span class="flex-75">View Previous Comments</span>
-                                        <span class="flex-50 no-count">4 out 9</span>
-                                    </div>
-                                    <div class="layout-row user-comments">
-                                        <img src="img/no_picture.png" alt="user-image"/>
-                                        <div class="layout-column user-detail">
-                                            <div class="layout-row">
-                                                <span class="user-name">Lokesdh tiwari</span>
-                                                <span>Congret bhai shaib</span>
-                                            </div>
-                                            <div class="layout-row">
-                                                <span class="user-name">Like</span>
-                                                <span class="user-name">Reply</span>
-                                                <span>28 min agao</span>
-                                            </div>
-                                        </div>
-                
-                                    </div>
-                                    <div class="layout-row user-comments">
-                                        <img src="img/no_picture.png" alt="user-image"/>
-                                        <div class="layout-column user-detail">
-                                            <div class="layout-row">
-                                                <span class="user-name">Lokesdh tiwari</span>
-                                                <span>Congret bhai shaib</span>
-                                            </div>
-                                            <div class="layout-row">
-                                                <span class="user-name">Like</span>
-                                                <span class="user-name">Reply</span>
-                                                <span>28 min agao</span>
-                                            </div>
-                                        </div>
-                
-                                    </div>
-                                    <div class="layout-column comment-wrap">
-                                        <span>View more Comments</span>
-                                    </div>
-                                    <div class="layout-row user-comments">
-                                        <img src="img/no_picture.png" alt="user-image"/>
-                                        <div class="input-area"><input placeholder="Write a Comments"/>
-                                            <i class="fa fa-camera"></i>
-                                            <i class="fa fa-smile-o"></i>
-                                        </div>
-                                    </div>
-                
-                                </div>-->
             </div>
         </div>
-        <div class="flex-30 flex-xs-100 layout-column profile-section" style="overflow: hidden;<?php echo isset($user_data) && $user_data['UID'] ? 'display: block' : 'display: none' ?>;">
+<!--        <div class="flex-30 flex-xs-100 layout-column profile-section" style="overflow: hidden;<?php echo isset($user_data) && $user_data['UID'] ? 'display: block' : 'display: none' ?>;">
             <div style="height: 100%;width: 100%;overflow-y: auto;">
-                <?php if ($user_data['UserType'] == 5) { ?>
-                    <div class="layout-column comment-section">
-                        <textarea placeholder="Post Your Views Or Songs" data-modal="modal-12" class="views textarea-views"></textarea>
-                    </div>
-                <?php } ?>
+        <?php if ($user_data[0]['UserType'] == 5) { ?>
+                        <div class="layout-column comment-section">
+                            <textarea placeholder="Post Your Views Or Songs" data-modal="modal-12" class="views textarea-views"></textarea>
+                        </div>
+        <?php } ?>
                 <div class="industry_wall"></div>
-                <!--                <div class="layout-column profile-picture">
-                                    <img src="img/user-image.png" alt="user-image"/>
-                                    <span class="user-name1">Rohit settity</span>
-                                    <span class="user-status">I am so glad to have to aal here ,to me and may family :) :).So glad to seee you all here.</span>
-                                </div>
-                                <div class="layout-column unknown-comment">
-                                    <span>Mahish Mahtota <a>@coccolo</a></span>
-                                    <span>I am so glad to have to aal here ,to me and may family,I am so glad to have to aal here ,to me and may family,I am so glad to have to aal here ,to me and may family</span>
-                
-                                </div>
-                                <div class="layout-row">
-                                    <video height="170"  controls>
-                                        <source src="https://www.youtube.com/" type="video/mp4">
-                                    </video>
-                                </div>
-                                <div class="layout-column  profile-picture">
-                                    <div class="layout-row">
-                                        <img src="img/user-image.png" alt="user-image"/>
-                                        <span class="flex-80 layout-row layout-align-end-end hour-count">14h</span></div>
-                                    <span class="user-name1">mohit settity</span>
-                                    <span class="user-status">I am so glad to have to aal here ,to me and may family :) :).So glad to seee you all here.</span>
-                                </div>
-                                <div class="layout-column  profile-picture">
-                                    <div class="layout-row">
-                                        <img src="img/user-image.png" alt="user-image"/>
-                                        <span class="flex-80 layout-row layout-align-end-end hour-count">14h</span></div>
-                                    <span class="user-name1">mohit settity</span>
-                                    <span class="user-status">I am so glad to have to aal here ,to me and may family :) :).So glad to seee you all here.</span>
-                                </div>
-                                <div class="layout-column  profile-picture">
-                                    <div class="layout-row">
-                                        <img src="img/user-image.png" alt="user-image"/>
-                                        <span class="flex-80 layout-row layout-align-end-end hour-count">14h</span></div>
-                                    <span class="user-name1">mohit settity</span>
-                                    <span class="user-status">I am so glad to have to aal here ,to me and may family :) :).So glad to seee you all here.</span>
-                                </div>
-                                <div class="layout-column  profile-picture">
-                                    <div class="layout-row">
-                                        <img src="img/user-image.png" alt="user-image"/>
-                                        <span class="flex-80 layout-row layout-align-end-end hour-count">14h</span></div>
-                                    <span class="user-name1">mohit settity</span>
-                                    <span class="user-status">I am so glad to have to aal here ,to me and may family :) :).So glad to seee you all here.</span>
-                                </div>
-                                <div class="layout-row  share-it">
-                                    <span class="layout-row flex-20 layout-align-start-center"><i class="fa fa-reply"></i></span>
-                                    <span class="layout-row flex-30 layout-align-start-center"><i class="fa fa-retweet"></i> 66</span>
-                                    <span class="layout-row flex-30 layout-align-start-center"><i class="fa fa-heart"></i> 40</span>
-                                    <span class="layout-row flex-20 layout-align-start-center"><i class="fa fa-ellipsis-h"></i></span>
-                
-                                </div>-->
+
             </div>
-        </div>
-        <div class="flex-30 flex-xs-100 login-wrapper layout-column layout-align-start-center" style="<?php echo isset($user_data) && $user_data['UID'] ? 'display: none' : 'display: block' ?>;">
+        </div>-->
+        <div class="flex-30 flex-xs-100 login-wrapper layout-column layout-align-start-center" style="<?php echo isset($user_data) && $user_data[0]['UID'] ? 'display: none' : 'display: block' ?>;">
             <div class="login-part layout-column layout-align-center-center">
                 <img src="<?php echo base_url('front') ?>/img/login.png" alt="login bg"/>
                 <img src="<?php echo base_url('front') ?>/img/login_music_symbol.png" class="imgg-abo"/>
@@ -329,7 +144,6 @@
                     <button class="login-btn user_login_switch" id="small-hoxa"> <img src="<?php echo base_url('front') ?>/img/login-1.png" /></button>
                     <button class="btn-sign user_signup_button"><img src="<?php echo base_url('front') ?>/img/login_signup_button.png"/></button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -352,14 +166,6 @@
                         <i class="glyphicon glyphicon-plus"></i>
                         <span>Click To Add files Or Drop Your Files Here</span>
                     </span>
-                    <!--                    <button type="submit" class="btn btn-primary start">
-                                            <i class="glyphicon glyphicon-upload"></i>
-                                            <span>Start upload</span>
-                                        </button>
-                                        <button type="reset" class="btn btn-warning cancel">
-                                            <i class="glyphicon glyphicon-ban-circle"></i>
-                                            <span>Cancel upload</span>
-                                        </button>-->
                 </div>
 
                 <div class="col-lg-5">
@@ -389,22 +195,7 @@
                             <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
                         </div>
                     </div>
-                    <div>
-                        <!--                        <button class="btn btn-primary start">
-                                                    <i class="glyphicon glyphicon-upload"></i>
-                                                    <span>Start</span>
-                                                </button>
-                                                <button data-dz-remove class="btn btn-warning cancel">
-                                                    <i class="glyphicon glyphicon-ban-circle"></i>
-                                                    <span>Cancel</span>
-                                                </button>
-                                                <button data-dz-remove class="btn btn-danger delete">
-                                                    <i class="glyphicon glyphicon-trash"></i>
-                                                    <span>Delete</span>
-                                                </button>-->
-                    </div>
                 </div>
-
             </div>
             <div class="row" style="    margin-top: -15px;">
                 <div class="col-md-8">
@@ -432,27 +223,11 @@
     var offset_song = 0;
 
     $(document).ready(function () {
-
-//        console.log($('header').height());
         $('.video-section').height($(window).height() - $('header').height());
         $('.public-section').height($(window).height() - $('header').height());
         $('.profile-section').height($(window).height() - $('header').height() - 20);
         get_post({'limit': limit, 'offset': offset, 'offset_song': offset_song});
         get_post_industry({'limit': limit_ind, 'offset': offset_ind});
-//        $(document).on('scroll', function () {
-//    console.log($('.public-section1').scrollTop() + $('.public-section1').innerHeight());
-//    console.log($('.public-section1').height());
-//            if ($('.public-section1').scrollTop() + $('.public-section1').innerHeight() >= $('.public-section1').height())
-//            {
-//
-//                console.log(offset);
-//                get_post({'limit': limit, 'offset': offset});
-//            }
-//        });
-//        setTimeout(function () {
-//
-//            
-//        }, 15000);
         $('.user_signup_switch').on('click', function () {
             $('.login_form').hide();
             $('.signup_form').show();
@@ -510,9 +285,6 @@
     myDropzone.on("addedfile", function (file) {
         $('.comment_form_submit').prop('disabled', true);
         // Hookup the start button
-//        file.previewElement.querySelector(".start").onclick = function () {
-//            myDropzone.enqueueFile(file);
-//        };
     });
 // Update the total progress bar
     myDropzone.on("totaluploadprogress", function (progress) {
@@ -566,7 +338,6 @@
         } else {
             alert("Please write somthing to submit the form");
         }
-
     });
 </script>
 <script>
@@ -577,13 +348,12 @@
             'type': 'post',
             success: function (result) {
                 var obj = $.parseJSON(result);
-//                console.log(obj);
                 var html = '';
                 if (obj.success) {
                     $.each(obj.comment, function (index, comments) {
-                        var user_image = base_url + '/front/img/no_picture.png'
+                        var user_image = base_url + 'uploads/images/user.png'
                         if (comments.Photo != '') {
-                            user_image = base_url + '/uploads/user_images/' + comments.Photo;
+                            user_image = base_url + 'uploads/images/' + comments.Photo;
                         }
 
                         html += '<div class="layout-column comment-section" data-post_id = "' + comments.COM_ID + '">';
@@ -608,7 +378,7 @@
                                     html += '</div>';
                                 } else if (attach.attachment_type == 'videos') {
                                     html += '<div class="layout-column layout-align-center-center" data-att_id="' + attach.att_id + '">';
-                                    html += '<video height="170" controls>';
+                                    html += '<video height="auto" controls>';
                                     html += '<source src="' + base_url + '/uploads/videos/' + attach.attachment_path + '" type="video/mp4">';
                                     html += '</video>';
                                     html += '</div>';
@@ -632,9 +402,7 @@
                 } else {
                     alert(obj.msg);
                 }
-
             }
-
         });
     }
 
@@ -652,9 +420,9 @@
                 var html = '';
                 if (obj.success) {
                     $.each(obj.comment, function (index, comments) {
-                        var user_image = base_url + '/front/img/user-image.png'
+                        var user_image = base_url + 'uploads/images/user.png'
                         if (comments.Photo != '') {
-                            user_image = base_url + '/uploads/user_images/' + comments.Photo;
+                            user_image = base_url + 'uploads/images/' + comments.Photo;
                         }
                         if (comments.song) {
                             html += '<div class="layout-column comment-section" data-song_id = "' + comments.ID + '">';
@@ -697,7 +465,7 @@
                                     html += '</div>';
                                 } else if (attach.attachment_type == 'videos') {
                                     html += '<div class="layout-column layout-align-center-center" data-att_id="' + attach.att_id + '">';
-                                    html += '<video height="170" controls>';
+                                    html += '<video height="auto" controls>';
                                     html += '<source src="' + base_url + '/uploads/videos/' + attach.attachment_path + '" type="video/mp4">';
                                     html += '</video>';
                                     html += '</div>';
@@ -729,9 +497,9 @@
                             html += '<span class="flex-75">View Previous Comments</span>';
                             html += '</div>';
                             $.each(comments.subComments, function (scKey, sc) {
-                                var user_image = base_url + '/front/img/user-image.png'
+                                var user_image = base_url + 'uploads/images/user.png'
                                 if (sc.Photo != '') {
-                                    user_image = base_url + '/uploads/user_images/' + sc.Photo;
+                                    user_image = base_url + 'uploads/images/' + sc.Photo;
                                 }
                                 html += '<div class="layout-row user-comments">';
                                 html += '<img src="' + user_image + '" alt="user-image"/>';
@@ -770,7 +538,6 @@
         });
     }
     function get_post_industry(data) {
-//        offset_ind += limit_ind;
 
         $.ajax({
             'url': '<?php echo site_url('Index/get_posts_industry') ?>',
@@ -778,13 +545,12 @@
             'type': 'post',
             success: function (result) {
                 var obj = $.parseJSON(result);
-//                console.log(obj);
                 var html = '';
                 if (obj.success) {
                     $.each(obj.comment, function (index, comments) {
-                        var user_image = base_url + '/front/img/user-image.png'
+                        var user_image = base_url + 'uploads/images/user.png'
                         if (comments.Photo != '') {
-                            user_image = base_url + '/uploads/user_images/' + comments.Photo;
+                            user_image = base_url + 'uploads/mages/' + comments.Photo;
                         }
 
                         html += '<div class="layout-column comment-section" data-post_id = "' + comments.COM_ID + '">';
@@ -809,7 +575,7 @@
                                     html += '</div>';
                                 } else if (attach.attachment_type == 'videos') {
                                     html += '<div class="layout-column layout-align-center-center" data-att_id="' + attach.att_id + '">';
-                                    html += '<video height="170" controls>';
+                                    html += '<video height="auto" controls>';
                                     html += '<source src="' + base_url + '/uploads/videos/' + attach.attachment_path + '" type="video/mp4">';
                                     html += '</video>';
                                     html += '</div>';
@@ -839,9 +605,9 @@
                             html += '<span class="flex-75">View Previous Comments</span>';
                             html += '</div>';
                             $.each(comments.subComments, function (scKey, sc) {
-                                var user_image = base_url + '/front/img/user-image.png'
+                                var user_image = base_url + 'uploads/images/user.png'
                                 if (sc.Photo != '') {
-                                    user_image = base_url + '/uploads/user_images/' + sc.Photo;
+                                    user_image = base_url + 'uploads/images/' + sc.Photo;
                                 }
                                 html += '<div class="layout-row user-comments">';
                                 html += '<img src="' + user_image + '" alt="user-image"/>';
@@ -879,7 +645,7 @@
         var post_id = $(ele).parent().parent().attr('data-post_id');
         var song_id = $(ele).parent().parent().attr('data-song_id');
         if (typeof post_id === "undefined") {
-            var data = {'parent_id': '-1', 'COMMENTS': comment, 'Song_id' : song_id};
+            var data = {'parent_id': '-1', 'COMMENTS': comment, 'Song_id': song_id};
         } else {
             var data = {'parent_id': post_id, 'COMMENTS': comment};
         }
@@ -894,9 +660,9 @@
                 if (obj.success) {
 
                     $.each(obj.comment, function (scKey, sc) {
-                        var user_image = base_url + '/front/img/user-image.png'
+                        var user_image = base_url + 'uploads/images/user.png'
                         if (sc.Photo != '') {
-                            user_image = base_url + '/uploads/user_images/' + sc.Photo;
+                            user_image = base_url + 'uploadsimages/' + sc.Photo;
                         }
                         html += '<div class="layout-row user-comments">';
                         html += '<img src="' + user_image + '" alt="user-image"/>';
