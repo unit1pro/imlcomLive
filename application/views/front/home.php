@@ -95,7 +95,7 @@
                 ?>
             </div>
         </div>
-        <div class="layout-column flex-100 flex-xs-100 public-section" style="overflow: hidden">
+        <div class="layout-column flex-45 flex-xs-100 public-section" style="overflow: hidden">
             <div style="height: 100%;width: 100%;overflow-y: auto;" >
                 <div class="layout-column comment-section">
                     <textarea placeholder="Post Your Views Or Songs" data-modal="modal-12" class="views textarea-views"></textarea>

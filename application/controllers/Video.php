@@ -21,13 +21,16 @@ class Video extends CI_Controller {
 
         $song_id = $this->uri->segment(3);
         $song_data = $this->Home_model->getVideoBySongId($song_id);
-        $comments = $this->Comment_model->get_data(array('parent_id' => 0, 'UserType' => 4, 'iml_comment_song.Song_id' => $song_id));
+//        $comments = $this->Comment_model->get_data(array('parent_id' => 0, 'UserType' => 4, 'iml_comment_song.Song_id' => $song_id));
+        $comments = $this->Comment_model->get_song_comment($song_id);
+
         if (is_array($comments) && !empty($comments)) {
             foreach ($comments as $key => $value) {
                 $comments[$key]['attachment'] = $this->Comment_model->getAttachment(array('comment_id' => $value['COM_ID']));
-                $comments[$key]['subComments'] = $this->Comment_model->get_data(array('parent_id' => $value['COM_ID']), 2, 0, 'DESC');
+                $comments[$key]['subComments'] = $this->Comment_model->get_comment_byparent($value['COM_ID']);
             }
         }
+
         $allVideos = $this->Home_model->get_video();
         $artistAllVideo = $this->Home_model->get_artist_video($song_data[0]['UID'], $song_data[0]['ID']);
         $data['songs_data'] = $song_data;
@@ -43,6 +46,7 @@ class Video extends CI_Controller {
         $data['page'] = "video";
         $this->load->view('front/page', $data);
     }
+    
 
     function post_hit_count() {
         try {

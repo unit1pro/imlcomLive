@@ -1,4 +1,3 @@
-
 <?php
 $imageUploadPath = UPLOADS . '/images';
 $videoUploadPath = UPLOADS . '/videos';
@@ -61,7 +60,7 @@ $song_id = $songs_data[0]['ID'];
                     <?php
                     if (isset($comments) && !empty($comments)) {
                         foreach ($comments as $comment) {
-                            $userImageComment = isset($comment) && $comment['Photo'] != '' ? base_url('uploads/images') . '/' . $user_data['Photo'] : base_url('front') . '/img/user-image.png';
+                            $userImageComment = isset($comment) && $comment['Photo'] != '' ? base_url('uploads/images/') . '/' . $comment['Photo'] : base_url('front') . '/img/user-image.png';
                             ?>
                             <div class="layout-row user-comments-youtube">
                                 <img src="<?php echo $userImageComment ?>" alt="user-image"/>
@@ -71,7 +70,7 @@ $song_id = $songs_data[0]['ID'];
                                             <div class="layout-row">
                                                 <span class="user-name"><?php echo $comment['FirstName'] . ' ' . $comment['LastName'] ?></span>
                                                 <!--<span>3 min agao</span>-->
-                                            </div>
+                                            </div>  
                                             <div><?php echo $comment['COMMENTS'] ?></div>
                                             <div class="layout-row">
                                                 <span class="user-name"><a href="javascript:void(0)" onclick="replyOnComment(this)" >Reply</a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="likeComment(this)" ><i class="fa fa-thumbs-up"></a></i>&nbsp;  &nbsp; <a href="javascript:void(0)" onclick="dislikeComment(this)" ><i class="fa fa-thumbs-down"></i></a></span>
@@ -154,75 +153,92 @@ $song_id = $songs_data[0]['ID'];
     new_view++;
     var song_id = '<?php echo $songs_data[0]['ID']; ?>';
 
+    var limit = 2;
+    var offset = 0;
+    var offset_song = 0;
+
     $(document).ready(function () {
         $('.video-section1').height($(window).height() - $('header').height());
         post_hit_count({'new_view': new_view, 'song_id': song_id});
-    })
-
-    function post_hit_count(data) {
-        $.ajax({
-            'url': '<?php echo site_url('Video/post_hit_count') ?>',
-            'data': data,
-            'type': 'post',
-            success: function (result) {
-                console.log(result);
-            }
-        });
-    }
-
-    $('.post_comment').click(function (e) {
-//        console.log(e);
-//        e.stopPropagation();
-        var user_id = $(this).parent().attr('data-userId');
-        if (user_id) {
-            var comment = $(this).parent().find('textarea').val();
-            post_comment(comment, user_id, '<?php echo $song_id; ?>');
-        } else {
-            login_popup();
-        }
+//        get_post_comment({'song_id': song_id, 'limit': limit, 'offset': offset, 'offset_song': offset_song});
+        
     });
 
-    function post_comment(comment, user_id, song_id) {
-        if (comment != '' && user_id && song_id) {
-            var data = {'COMMENTS': comment, 'user_id': user_id, 'Song_id': song_id};
+
+//        function get_post_comment(data) {
+//            $.ajax({
+//                'url': '<?php// echo site_url('Video/get_posts_comment') ?>',
+//                'data': data,
+//                'type': 'post',
+//                success: function (result) {
+//                    var obj = $.parseJSON(result);
+//                }
+//            });
+//        }
+        function post_hit_count(data) {
             $.ajax({
-                url: site_url + '/index/post_comment',
-                data: data,
-                type: 'post',
+                'url': '<?php echo site_url('Video/post_hit_count') ?>',
+                'data': data,
+                'type': 'post',
                 success: function (result) {
-                    var obj = $.parseJSON(result);
-                    console.log(obj);
-                    var html = '';
-                    if (obj.success) {
-                        $.each(obj.comment, function (index, comments) {
-                            var user_image = base_url + 'uploads/images/user.png';
-                            if (comments.Photo != '') {
-                                user_image = base_url + 'uploads/images/' + comments.Photo;
-                            }
-                            html += '<div class="layout-row user-comments-youtube">';
-                            html += '<img src="' + user_image + '" alt="user-image"/>';
-                            html += '<div class="layout-column user-detail flex-90" id="main_comment">';
-                            html += '<div class="layout-row">';
-                            html += '<div class="layout-column flex-90">';
-                            html += '<div class="layout-row">';
-                            html += '<span class="user-name">' + comments.FirstName + ' ' + comments.LastName + '</span>';
-                            html += '</div>';
-                            html += '<div>' + comments.COMMENTS + '</div>';
-                            html += '<div class="layout-row">';
-                            html += '<span class="user-name"><span>Reply</span> &nbsp; &nbsp;<i class="fa fa-thumbs-up"></i>&nbsp;  &nbsp; <i class="fa fa-thumbs-down"></i></span>';
-                            html += '</div>';
-                            html += '</div>';
-                            html += '<div class="float-right flex-10 layout-row layout-align-end-start"><i class="fa fa-ellipsis-v"></i></div> ';
-                            html += '</div>';
-                            html += '</div>';
-                            html += '</div>';
-                        });
-                        console.log(html);
-                        $('#comment_section').prepend(html);
-                    }
+//                    console.log(result);
                 }
             });
         }
-    }
+
+        $('.post_comment').click(function (e) {
+//        console.log(e);
+//        e.stopPropagation();
+            var user_id = $(this).parent().attr('data-userId');
+            if (user_id) {
+                var comment = $(this).parent().find('textarea').val();
+                post_comment(comment, user_id, '<?php echo $song_id; ?>');
+            } else {
+                login_popup();
+            }
+        });
+
+        function post_comment(comment, user_id, song_id) {
+            if (comment != '' && user_id && song_id) {
+                var data = {'COMMENTS': comment, 'user_id': user_id, 'Song_id': song_id};
+                $.ajax({
+                    url: site_url + '/index/post_comment',
+                    data: data,
+                    type: 'post',
+                    success: function (result) {
+                        var obj = $.parseJSON(result);
+                        console.log(obj);
+                        var html = '';
+                        if (obj.success) {
+                            $.each(obj.comment, function (index, comments) {
+                                var user_image = base_url + 'uploads/images/user.png';
+                                if (comments.Photo != '') {
+                                    user_image = base_url + 'uploads/images/' + comments.Photo;
+                                }
+                                html += '<div class="layout-row user-comments-youtube">';
+                                html += '<img src="' + user_image + '" alt="user-image"/>';
+                                html += '<div class="layout-column user-detail flex-90" id="main_comment">';
+                                html += '<div class="layout-row">';
+                                html += '<div class="layout-column flex-90">';
+                                html += '<div class="layout-row">';
+                                html += '<span class="user-name">' + comments.FirstName + ' ' + comments.LastName + '</span>';
+                                html += '</div>';
+                                html += '<div>' + comments.COMMENTS + '</div>';
+                                html += '<div class="layout-row">';
+                                html += '<span class="user-name"><span>Reply</span> &nbsp; &nbsp;<i class="fa fa-thumbs-up"></i>&nbsp;  &nbsp; <i class="fa fa-thumbs-down"></i></span>';
+                                html += '</div>';
+                                html += '</div>';
+                                html += '<div class="float-right flex-10 layout-row layout-align-end-start"><i class="fa fa-ellipsis-v"></i></div> ';
+                                html += '</div>';
+                                html += '</div>';
+                                html += '</div>';
+                            });
+                            console.log(html);
+                            $('#comment_section').prepend(html);
+                        }
+                    }
+                });
+            }
+        }
 </script>
 
