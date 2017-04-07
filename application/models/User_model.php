@@ -23,7 +23,14 @@ class User_model extends CI_Model {
             return false;
         }
     }
-    
+
+    function get_emails() {
+        $sql = "SELECT Email FROM usermain";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        return $result;
+    }
+
     function update_user($user_id, $user_data) {
         $this->db->where('UID', $user_id);
         return $result = $this->db->update('usermain', $user_data);

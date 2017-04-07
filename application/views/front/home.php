@@ -2,9 +2,12 @@
 <script src="<?php echo base_url(); ?>/vendors/nefty_popup/dist/jquery.niftymodals.js"></script>
 <script>
     $(document).ready(function () {
+        var status = '<?php echo $_SESSION['login_msg']; ?>';
+        if (status) {
+            alert(status);
+        }
 
         $('.views').on('focus', function () {
-
             var modal = $(this).data('modal');
             $("#" + modal).niftyModal();
         });
@@ -22,61 +25,16 @@
     var Dropzone = require("enyo-dropzone");
     Dropzone.autoDiscover = false;</script>
 <style>
-    /*    html, body {
-          height: 100%;
-        }*/
-    #actions {
-        margin: 0em 0;
-    }
-
-
-    /* Mimic table appearance */
-    div.table {
-        display: table;
-    }
-    div.table .file-row {
-        display: table-row;
-    }
-    div.table .file-row > div {
-        display: table-cell;
-        vertical-align: top;
-        border-top: 1px solid #ddd;
-        padding: 8px;
-    }
-    div.table .file-row:nth-child(odd) {
-        background: #f9f9f9;
-    }
-
-
-
-    /* The total progress gets shown by event listeners */
-    #total-progress {
-        opacity: 0;
-        transition: opacity 0.3s linear;
-    }
-
-    /* Hide the progress bar when finished */
-    #previews .file-row.dz-success .progress {
-        opacity: 0;
-        transition: opacity 0.3s linear;
-    }
-
-    /* Hide the delete button initially */
-    #previews .file-row .delete {
-        display: none;
-    }
-
-    /* Hide the start and cancel buttons and show the delete button */
-
-    #previews .file-row.dz-success .start,
-    #previews .file-row.dz-success .cancel {
-        display: none;
-    }
-    #previews .file-row.dz-success .delete {
-        display: block;
-    }
-
-
+    #actions{margin:0}
+    div.table{display:table}
+    div.table .file-row{display:table-row}
+    div.table .file-row > div{display:table-cell;vertical-align:top;border-top:1px solid #ddd;padding:8px}
+    div.table .file-row:nth-child(odd){background:#f9f9f9}
+    #total-progress{opacity:0;transition:opacity .3s linear}
+    #previews .file-row.dz-success .progress{opacity:0;transition:opacity .3s linear}
+    #previews .file-row .delete{display:none}
+    #previews .file-row.dz-success .start,#previews .file-row.dz-success .cancel{display:none}
+    #previews .file-row.dz-success .delete{display:block}
 </style>
 
 <?php $imageUploadPath = UPLOADS . '/images'; ?>
@@ -108,9 +66,9 @@
 <!--        <div class="flex-30 flex-xs-100 layout-column profile-section" style="overflow: hidden;<?php echo isset($user_data) && $user_data['UID'] ? 'display: block' : 'display: none' ?>;">
             <div style="height: 100%;width: 100%;overflow-y: auto;">
         <?php if ($user_data[0]['UserType'] == 5) { ?>
-                        <div class="layout-column comment-section">
-                            <textarea placeholder="Post Your Views Or Songs" data-modal="modal-12" class="views textarea-views"></textarea>
-                        </div>
+                                <div class="layout-column comment-section">
+                                    <textarea placeholder="Post Your Views Or Songs" data-modal="modal-12" class="views textarea-views"></textarea>
+                                </div>
         <?php } ?>
                 <div class="industry_wall"></div>
 
@@ -135,7 +93,7 @@
                 <div class="layout-column login-abo signup-abo signup_form" id="" style="display: none">
                     <i class="fa fa-user"></i>
                     <span>New User</span>
-                    <form id="signup_form">
+                    <form id="signup_form" action="<?php echo site_url('user/signup_front') ?>" method="post">
                         <div class="area-input"><input type="text" placeholder="username"  name="username" id="username" class="required"/><i class="fa fa-user"></i></div>
                         <div class="area-input"><input type="text" placeholder="email" name="email" id="email" class="required"/><i class="fa fa-mail-reply-all"></i></div>
                         <div class="area-input"><input type="password" placeholder="password" name="password" id="password" class="required"/><i class="fa fa-lock"></i></div>
@@ -255,7 +213,7 @@
             $('#signup_form .required').each(function () {
                 if ($(this).val() == '') {
                     error = 1;
-                    $(this).css('border', '#ff0000 solid 1px');
+                    $(this).css('background-color', '#ff0000 solid 1px');
                 }
             });
             if (!error) {
@@ -358,8 +316,8 @@
 
                         html += '<div class="layout-column comment-section" data-post_id = "' + comments.COM_ID + '">';
                         html += '<div class="layout-row user-comments">';
-                        html += '<img src="' + user_image + '" alt="user-image"/>';
-                        html += '<div class="comment-wrap"><a href="#"> ' + comments.FirstName + ' ' + comments.LastName + ' </a></div>';
+                        html += '<a href="' + base_url + 'index.php/User/profile/' + comments.UID + '"><img src="' + user_image + '" alt="user-image"/></a>';
+                        html += '<div class="comment-wrap"> ' + comments.FirstName + ' ' + comments.LastName + '</div>';
                         html += '</div>';
                         if (comments.COMMENTS != '') {
                             html += '<div class="layout-row user-comments">';
@@ -430,8 +388,8 @@
                             html += '<div class="layout-column comment-section" data-post_id = "' + comments.COM_ID + '">';
                         }
                         html += '<div class="layout-row user-comments">';
-                        html += '<img src="' + user_image + '" alt="user-image"/>';
-                        html += '<div class="comment-wrap"><a href="#"> ' + comments.FirstName + ' ' + comments.LastName + ' </a></div>';
+                        html += '<a href="' + base_url + 'index.php/User/profile/' + comments.UID + '"><img src="' + user_image + '" alt="user-image"/></a>';
+                        html += '<div class="comment-wrap">' + comments.FirstName + ' ' + comments.LastName + '</div>';
                         html += '</div><hr style="    margin-top: 5px;margin-bottom: 5px;">';
                         if (comments.song) {
                             html += '<div class="layout-row user-comments">';
@@ -641,122 +599,53 @@
     }
 
     function commentSubmit(ele) {
-        var comment = $(ele).parent().find('textarea').val();
-        var post_id = $(ele).parent().parent().attr('data-post_id');
-        var song_id = $(ele).parent().parent().attr('data-song_id');
-        if (typeof post_id === "undefined") {
-            var data = {'parent_id': '-1', 'COMMENTS': comment, 'Song_id': song_id};
-        } else {
-            var data = {'parent_id': post_id, 'COMMENTS': comment};
-        }
-        $.ajax({
-            'url': '<?php echo site_url('Index/post_comment') ?>',
-            'data': data,
-            'type': 'post',
-            success: function (result) {
-                var obj = $.parseJSON(result);
-                console.log(obj);
-                var html = '';
-                if (obj.success) {
-
-                    $.each(obj.comment, function (scKey, sc) {
-                        var user_image = base_url + 'uploads/images/user.png'
-                        if (sc.Photo != '') {
-                            user_image = base_url + 'uploadsimages/' + sc.Photo;
-                        }
-                        html += '<div class="layout-row user-comments">';
-                        html += '<img src="' + user_image + '" alt="user-image"/>';
-                        html += '<div class="layout-column user-detail">';
-                        html += '<div class="layout-row">';
-                        html += '<span class="user-name">' + sc.FirstName + ' ' + sc.LastName + '</span>';
-                        html += '<span>' + sc.COMMENTS + '</span>';
-                        html += '</div>';
-                        html += '<div class="layout-row">';
-                        html += '<span class="user-name">Like</span>';
-//                        html += '<span class="user-name">Reply</span>';
-//                                html += '<span>28 min</span>';
-                        html += '</div>';
-                        html += '</div>';
-
-                        html += '</div>';
-                    });
-
-                    $(ele).parent().parent().append(html);
-                }
+        var user = '<?php echo $_SESSION['user_data']['UID']; ?>';
+        if (user) {
+            var comment = $(ele).parent().find('textarea').val();
+            var post_id = $(ele).parent().parent().attr('data-post_id');
+            var song_id = $(ele).parent().parent().attr('data-song_id');
+            if (typeof post_id === "undefined") {
+                var data = {'parent_id': '-1', 'COMMENTS': comment, 'Song_id': song_id};
+            } else {
+                var data = {'parent_id': post_id, 'COMMENTS': comment};
             }
-        });
+            $.ajax({
+                'url': '<?php echo site_url('Index/post_comment') ?>',
+                'data': data,
+                'type': 'post',
+                success: function (result) {
+                    var obj = $.parseJSON(result);
+                    console.log(obj);
+                    var html = '';
+                    if (obj.success) {
+
+                        $.each(obj.comment, function (scKey, sc) {
+                            var user_image = base_url + 'uploads/images/user.png'
+                            if (sc.Photo != '') {
+                                user_image = base_url + 'uploadsimages/' + sc.Photo;
+                            }
+                            html += '<div class="layout-row user-comments">';
+                            html += '<img src="' + user_image + '" alt="user-image"/>';
+                            html += '<div class="layout-column user-detail">';
+                            html += '<div class="layout-row">';
+                            html += '<span class="user-name">' + sc.FirstName + ' ' + sc.LastName + '</span>';
+                            html += '<span>' + sc.COMMENTS + '</span>';
+                            html += '</div>';
+                            html += '<div class="layout-row">';
+                            html += '<span class="user-name">Like</span>';
+                            html += '</div>';
+                            html += '</div>';
+
+                            html += '</div>';
+                        });
+
+                        $(ele).parent().parent().append(html);
+                    }
+                }
+            });
+        } else {
+            alert('Please Login to user the service.');
+        }
 
     }
 </script>
-
-<!--<div class="layout-column comment-section">
-    <div class="layout-row user-comments">
-        <img src="<?php echo base_url('front') ?>/img/no_picture.png" alt="user-image"/>
-        <div class="comment-wrap"><a href="#"> Anuska </a>
-        </div>
-    </div>
-    <div class="layout-row user-comments">
-        <div class="">
-            <span>my new song</span>
-        </div>
-    </div>
-    <audio controls>
-        <source src="horse.ogg" type="audio/ogg">
-    </audio>
-    <div class="layout-row action-wrapper">
-        <div class="layout-row layout-align-start-center flex-20"><i class="fa fa-thumbs-up"></i> Like</div>
-        <div class="layout-row layout-align-start-center flex-20"><i class="fa fa-comment"></i> Comments</div>
-        <div class="layout-row layout-align-end-center flex-20"><i class="fa fa-share"></i> Share</div>
-    </div>
-    <div class="layout-row comment-count">
-        <span><i class="fa fa-thumbs-up"></i></span>
-        <span class="heart"> <i class="fa fa-heart"></i></span>
-        <a href="#">Anuska , neha and 22 more</a>
-    </div>
-    <div class="layout-row comment-wrap">
-        <span class="flex-75">View Previous Comments</span>
-        <span class="flex-50 no-count">4 out 9</span>
-    </div>
-    <div class="layout-row user-comments">
-        <img src="<?php echo base_url('front') ?>/img/no_picture.png" alt="user-image"/>
-        <div class="layout-column user-detail">
-            <div class="layout-row">
-                <span class="user-name">Lokesdh tiwari</span>
-                <span>Congret bhai shaib</span>
-            </div>
-            <div class="layout-row">
-                <span class="user-name">Like</span>
-                <span class="user-name">Reply</span>
-                <span>28 min agao</span>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="layout-row user-comments">
-        <img src="img/no_picture.png" alt="user-image"/>
-        <div class="layout-column user-detail">
-            <div class="layout-row">
-                <span class="user-name">Lokesdh tiwari</span>
-                <span>Congret bhai shaib</span>
-            </div>
-            <div class="layout-row">
-                <span class="user-name">Like</span>
-                <span class="user-name">Reply</span>
-                <span>28 min</span>
-            </div>
-        </div>
-
-    </div>
-    <div class="layout-column comment-wrap">
-        <span>View more Comments</span>
-    </div>
-    <div class="layout-row user-comments">
-        <img src="img/no_picture.png" alt="user-image"/>
-        <div class="input-area"><input placeholder="Write a Comments"/>
-            <i class="fa fa-camera"></i>
-            <i class="fa fa-smile-o"></i>
-        </div>
-    </div>
-
-</div>-->

@@ -25,16 +25,38 @@ class User extends CI_Controller {
 
     function profile() {
         $session_data = $this->session->userdata('user_data');
-        $user_id = $session_data['UID'];
+        $user_id = $this->uri->segment(3);
+        $profile_id = $session_data;
 
         if (isset($session_data) && ($session_data['UID'])) {
             $data['user_data'] = $this->User_model->get_single($user_id);
+            $data['profile_data'] = $this->User_model->get_single($profile_id['UID']);
             $data['page_title'] = "Profile Page";
             $data['page'] = "profile";
             $this->load->view('front/page', $data);
         } else {
             $this->session->unset_userdata('user_data');
             redirect('user/login', 'refresh');
+        }
+    }
+
+    function signup() {
+        $this->form_validation->set_rules('UserName', 'Username', 'required');
+        $this->form_validation->set_rules('Password', 'Password', 'required');
+        if ($this->form_validation->run()) {
+            $formdata = $this->input->post();
+            $result = $this->User_model->login($formdata['UserName'], $formdata['Password']);
+            if ($result) {
+                $sess_array = array();
+                $this->session->set_userdata('user_data', (array) $result[0]);
+                redirect('User/index', 'refresh');
+            } else {
+                $this->load->view('backend/login');
+            }
+        } else {
+            $data['page_title'] = "Login";
+            $data['page'] = 'login';
+            $this->load->view('backend/login');
         }
     }
 
@@ -67,7 +89,7 @@ class User extends CI_Controller {
             if ($result) {
                 $sess_array = array();
                 $this->session->set_userdata('user_data', (array) $result[0]);
-                $this->session->set_userdata('login_msg', 'Login successful');
+                $this->session->set_userdata('login_msg', '');
                 redirect('index', 'refresh');
             } else {
                 $this->session->set_userdata('login_msg', 'Wrong Username or password');
@@ -75,6 +97,38 @@ class User extends CI_Controller {
             }
         } else {
             $this->session->set_userdata('login_msg', 'Please enter Username and password');
+            redirect('index', 'refresh');
+        }
+    }
+
+    function signup_front() {
+        $formdata = $this->input->post();
+        if ($formdata['password'] == $formdata['conf_password']) {
+            $emails = $this->User_model->get_emails();
+            $list_emial = array_column($emails, 'Email');
+
+            if (empty(array_search($formdata['email'], $list_emial))) {
+                $user_data = array(
+                    'UserName' => isset($formdata['username']) && $formdata['username'] ? $formdata['username'] : '',
+                    'Email' => isset($formdata['email']) && $formdata['email'] ? $formdata['email'] : '',
+                    'Password' => isset($formdata['password']) && $formdata['password'] ? md5($formdata['password']) : '',
+                );
+                $result = $this->User_model->insert_data($user_data);
+                if ($result) {
+                    $sess_array = array();
+                    $this->session->set_userdata('user_data', (array) $result[0]);
+                    $this->session->set_userdata('login_msg', 'User Successful Registed, You can login into your account');
+                    redirect('index', 'refresh');
+                } else {
+                    $this->session->set_userdata('login_msg', 'Sign up Failed!!!');
+                    redirect('index', 'refresh');
+                }
+            } else {
+                $this->session->set_userdata('login_msg', 'Please choose different Email, there is a user using this Email address.');
+                redirect('index', 'refresh');
+            }
+        } else {
+            $this->session->set_userdata('login_msg', 'Password not matched!!!');
             redirect('index', 'refresh');
         }
     }
@@ -417,7 +471,13 @@ class User extends CI_Controller {
                 'City' => isset($formdata['City']) && $formdata['City'] ? $formdata['City'] : '',
                 'State' => isset($formdata['State']) && $formdata['State'] ? $formdata['State'] : '',
                 'Country' => isset($formdata['Country']) && $formdata['Country'] ? $formdata['Country'] : '',
-                'Photo' => isset($formdata['photo_name']) && $formdata['photo_name'] ? $formdata['photo_name'] : ''
+                'Photo' => isset($formdata['photo_name']) && $formdata['photo_name'] ? $formdata['photo_name'] : '',
+                'AboutMe' => isset($formdata['AboutMe']) && $formdata['AboutMe'] ? $formdata['AboutMe'] : '',
+                'DateJoined' => date("Y-m-d"),
+                'UserType' => '4',
+                'isActive' => '1',
+                'Created_By' => '1',
+                'Updated_By' => $_SESSION['user_data']['UID']
             );
 
             $user_id = $session_data['UID'];

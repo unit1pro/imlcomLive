@@ -39,7 +39,7 @@ class Video extends CI_Controller {
         $data['artistAllVideo'] = $artistAllVideo;
         $data['page_title'] = "Video";
         if ($user_id) {
-            $data['user_data'] = $this->User_model->get_single($user_id);
+            $data['profile_data'] = $this->User_model->get_single($user_id);
         } else {
             $data['user_data'] = $session_data;
         }

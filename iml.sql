@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2017 at 01:31 PM
+-- Generation Time: Apr 07, 2017 at 11:43 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -131,7 +131,12 @@ INSERT INTO `iml_comment_song` (`COM_ID`, `ID`, `parent_id`, `AUTHOR`, `EMAIL`, 
 (29, 1, 0, NULL, NULL, 'ergfdgfdg', NULL, 13, b'1', '2017-04-06 09:30:47', 1, '2017-04-06 09:30:47', 1),
 (30, 1, 0, NULL, NULL, 'rex', NULL, 13, b'1', '2017-04-06 11:12:51', 1, '2017-04-06 11:12:51', 1),
 (31, 1, 0, NULL, NULL, 'latest', NULL, 13, b'1', '2017-04-06 13:22:48', 1, '2017-04-06 13:22:48', 1),
-(32, 1, 0, NULL, NULL, 'hello', NULL, 15, b'1', '2017-04-06 13:23:27', 1, '2017-04-06 13:23:27', 1);
+(32, 1, 0, NULL, NULL, 'hello', NULL, 15, b'1', '2017-04-06 13:23:27', 1, '2017-04-06 13:23:27', 1),
+(33, 1, -1, NULL, NULL, 'ggggg', NULL, 10, b'1', '2017-04-07 06:39:33', 1, '2017-04-07 06:39:33', 1),
+(34, 21, -1, NULL, NULL, 'hello from rajkumar', NULL, 10, b'1', '2017-04-07 09:19:57', 21, '2017-04-07 09:19:57', 21),
+(35, 21, 0, NULL, NULL, 'Hello', NULL, 15, b'1', '2017-04-07 09:32:12', 21, '2017-04-07 09:32:12', 21),
+(36, 21, 0, NULL, NULL, 'sdfsdfsd', NULL, 15, b'1', '2017-04-07 11:17:42', 21, '2017-04-07 11:17:42', 21),
+(37, 21, 36, NULL, NULL, 'hmmm', NULL, 0, b'1', '2017-04-07 11:20:03', 21, '2017-04-07 11:20:03', 21);
 
 -- --------------------------------------------------------
 
@@ -247,8 +252,8 @@ INSERT INTO `songs` (`ID`, `CAT_ID`, `Song_Title`, `composer`, `director`, `Writ
 (12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 14, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-05 09:45:08', 1, '0000-00-00 00:00:00', 1),
 (13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 33, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-06 13:22:53', 1, '0000-00-00 00:00:00', 1),
 (14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 17, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-06 07:02:28', 1, '0000-00-00 00:00:00', 1),
-(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 12, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-06 13:23:30', 1, '0000-00-00 00:00:00', 1),
-(16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 12, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-05 09:49:24', 1, '0000-00-00 00:00:00', 1);
+(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 21, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-07 11:21:06', 1, '0000-00-00 00:00:00', 1),
+(16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 13, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-07 11:17:57', 1, '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -327,7 +332,8 @@ INSERT INTO `usermain` (`UID`, `UserName`, `Password`, `FirstName`, `LastName`, 
 (9, 'hansa', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Hanshaduti', 'Kundu', '', '', '', '', 'hanshaduti@indianmusiclab.com', '0000-00-00', '', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, b'1', '2017-03-07 04:07:43', 1, '2017-03-07 04:07:43', 1),
 (10, 'anurag', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Anurag', 'Puranik', '', '', '', '', 'anurag@indianmusiclab.com', '0000-00-00', '', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, b'1', '2017-03-07 04:09:29', 1, '2017-03-07 04:09:29', 1),
 (11, 'ashwani', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Ashwani', 'Bisoya', '', '', '', '', 'ashwani@indianmusiclab.com', '0000-00-00', '', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, b'1', '2017-03-07 04:11:24', 1, '2017-03-07 04:11:24', 1),
-(12, 'sachin', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Sachin', 'Dave', '', '', '', '', 'sachin@indiantimesdaily.com', '0000-00-00', '', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, b'1', '2017-03-07 04:12:50', 1, '2017-03-07 04:12:50', 1);
+(12, 'sachin', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Sachin', 'Dave', '', '', '', '', 'sachin@indiantimesdaily.com', '0000-00-00', '', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, b'1', '2017-03-07 04:12:50', 1, '2017-03-07 04:12:50', 1),
+(21, 'rajkumar', '96e79218965eb72c92a549dd5a330112', 'Raj', 'Kumar', '9839653641', 'Mumbai', 'Maharastra', 'India', 'rkgt76@gmail.com', '1991-12-14', 'Full Stack Developer', '2017-04-07', '855354f514e70099cbd0220ded75ddc3.JPG', 'raj.kr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, b'1', '2017-04-07 09:19:21', 1, '2017-04-07 09:19:21', 21);
 
 -- --------------------------------------------------------
 
@@ -524,7 +530,7 @@ ALTER TABLE `group_categories`
 -- AUTO_INCREMENT for table `iml_comment_song`
 --
 ALTER TABLE `iml_comment_song`
-  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `industry_communication`
 --
@@ -554,7 +560,7 @@ ALTER TABLE `song_cat`
 -- AUTO_INCREMENT for table `usermain`
 --
 ALTER TABLE `usermain`
-  MODIFY `UID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `UID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `usersuspensionlog`
 --

@@ -37,13 +37,13 @@
                                 <a href="#"><img src="<?php echo base_url() ?>front/img/youtube.png" alt="youtube"/></a>
                             </div>
                             <?php
-                            if (isset($user_data[0]['UID'])) {
-                                $userImageHeader = isset($user_data) && $user_data[0]['Photo'] != '' ? base_url('uploads/images') . '/' . $user_data[0]['Photo'] : base_url('front') . '/img/user-image.png';
+                            if (isset($profile_data[0]['UID'])) {
+                                $userImageHeader = isset($profile_data) && $profile_data[0]['Photo'] != '' ? base_url('uploads/images') . '/' . $profile_data[0]['Photo'] : base_url('front') . '/img/user-image.png';
                                 ?>
                                 <div class="layout-row">
-                                    <a href="<?php echo site_url('User/profile') ?>">
+                                    <a href="<?php echo site_url('User/profile/'.$profile_data[0]['UID']) ?>">
                                         <img src="<?php echo $userImageHeader; ?>" height="20"/>
-                                        <span style="color: #ff0000"><?php echo $user_data[0]['FirstName'] . ' ' . $user_data[0]['LastName'] ?></span>
+                                        <span style="color: #ff0000"><?php echo $profile_data[0]['FirstName'] . ' ' . $profile_data[0]['LastName'] ?></span>
                                     </a>
                                 </div>
                                 <div class="layout-row">

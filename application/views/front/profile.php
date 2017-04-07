@@ -1,12 +1,7 @@
-<?php
-// print "<pre>";
-//print_r($user_data);
-//exit;
-?>
 <h1 class="page-header">Edit Profile</h1>
 <div class="row">
     <!-- left column -->
-    <form action="<?php echo site_url('User/update_profile'); ?>" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
+    <form id="formdata" action="<?php echo site_url('User/update_profile'); ?>" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="text-center">
                 <?php $userImageHeader = isset($user_data[0]) && $user_data[0]['Photo'] != '' ? base_url('uploads/images') . '/' . $user_data[0]['Photo'] : base_url('front') . '/img/user-image.png'; ?>
@@ -107,9 +102,18 @@
 </div>
 
 <script>
+    var session_user = '<?php echo $_SESSION['user_data']['UID'];?>';
+    var profile_user = '<?php echo $this->uri->segment(3);?>';
+    
+    if(session_user !== profile_user){
+        $("#formdata input").prop("disabled", true);
+    }
+    
     $("#upload").change(function () {
         var photo = $(this).val();
         photo = photo.replace(/^.*[\\\/]/, '');
         $('input#photo_name').val(photo);
     });
+    
+    
 </script>
