@@ -23,10 +23,10 @@ class Index extends CI_Controller {
         $data['songs_data'] = $this->Home_model->get_video();
         $data['login_msg'] = $this->session->userdata('login_msg');
         $data['page_title'] = "Home";
-        if($user_id){
-        $data['user_data'] = $this->User_model->get_single($user_id);            
+        if ($user_id) {
+            $data['user_data'] = $this->User_model->get_single($user_id);
         } else {
-        $data['user_data'] = $session_data;                      
+            $data['profile_data'] = $session_data;
         }
         $data['page'] = "home";
         $this->load->view('front/page', $data);
@@ -161,16 +161,16 @@ class Index extends CI_Controller {
             $limit = isset($formdata['limit']) && $formdata['limit'] ? $formdata['limit'] : NULL;
             $offset = isset($formdata['offset']) && $formdata['offset'] ? $formdata['offset'] : NULL;
             $offset_song = isset($formdata['offset_song']) && $formdata['offset_song'] ? $formdata['offset_song'] : NULL;
-            $conditions_song = array('songs.isActive'=>1);
+            $conditions_song = array('songs.isActive' => 1);
             $conditions = array(
                 'parent_id' => 0,
                 'UserType' => 4,
             );
             $comments = $this->Comment_model->get_data($conditions, $limit, $offset);
-            $song_limit = 5-count($comments);
+            $song_limit = 5 - count($comments);
             $songs = $this->Songs_model->get($conditions_song, $song_limit, $offset_song);
 //            print_r($songs);exit;
-            $i=0;
+            $i = 0;
             if (is_array($comments) && !empty($comments)) {
                 foreach ($comments as $key => $value) {
 //                    print_r($value['COM_ID']);
@@ -181,20 +181,18 @@ class Index extends CI_Controller {
                     $comments[$key]['subComments'] = $this->Comment_model->get_data(array('parent_id' => $value['COM_ID']), 2, 0, 'DESC');
                 }
 //                exit;
-            } 
+            }
 //            echo $i;
-            if(is_array($songs) && !empty($songs)){
+            if (is_array($songs) && !empty($songs)) {
                 foreach ($songs as $key1 => $value1) {
-                    $comments[$i]=$value1;
-                    $comments[$i]['song']=true;
-                    $comments[$i++]['subComments']=$this->Comment_model->get_data(array('Song_id' => $value1['ID']), 2, 0, 'DESC');
-                    
-                    
+                    $comments[$i] = $value1;
+                    $comments[$i]['song'] = true;
+                    $comments[$i++]['subComments'] = $this->Comment_model->get_data(array('Song_id' => $value1['ID']), 2, 0, 'DESC');
                 }
             }
 //            print_r($comments);exit;
             $response['success'] = TRUE;
-            $response['song_offset'] = $offset_song+$song_limit;
+            $response['song_offset'] = $offset_song + $song_limit;
             $response['comment'] = $comments;
         } catch (Exception $exc) {
             $response['success'] = FALSE;

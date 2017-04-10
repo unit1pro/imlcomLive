@@ -29,8 +29,8 @@ class User extends CI_Controller {
         $profile_id = $session_data;
 
         if (isset($session_data) && ($session_data['UID'])) {
-            $data['user_data'] = $this->User_model->get_single($user_id);
-            $data['profile_data'] = $this->User_model->get_single($profile_id['UID']);
+            $data['profile_data'] = $this->User_model->get_single($user_id);
+            $data['user_data'] = $this->User_model->get_single($profile_id['UID']);
             $data['page_title'] = "Profile Page";
             $data['page'] = "profile";
             $this->load->view('front/page', $data);
@@ -89,14 +89,14 @@ class User extends CI_Controller {
             if ($result) {
                 $sess_array = array();
                 $this->session->set_userdata('user_data', (array) $result[0]);
-                $this->session->set_userdata('login_msg', '');
+                $this->session->set_userdata('alert_msg', '');
                 redirect('index', 'refresh');
             } else {
-                $this->session->set_userdata('login_msg', 'Wrong Username or password');
+                $this->session->set_userdata('alert_msg', 'Wrong Username or password');
                 redirect('index', 'refresh');
             }
         } else {
-            $this->session->set_userdata('login_msg', 'Please enter Username and password');
+            $this->session->set_userdata('alert_msg', 'Please enter Username and password');
             redirect('index', 'refresh');
         }
     }
@@ -110,6 +110,8 @@ class User extends CI_Controller {
             if (empty(array_search($formdata['email'], $list_emial))) {
                 $user_data = array(
                     'UserName' => isset($formdata['username']) && $formdata['username'] ? $formdata['username'] : '',
+                    'FirstName' => isset($formdata['firstName']) && $formdata['firstName'] ? $formdata['firstName'] : '',
+                    'LastName' => isset($formdata['lastName']) && $formdata['lastName'] ? $formdata['lastName'] : '',
                     'Email' => isset($formdata['email']) && $formdata['email'] ? $formdata['email'] : '',
                     'Password' => isset($formdata['password']) && $formdata['password'] ? md5($formdata['password']) : '',
                 );
@@ -117,18 +119,18 @@ class User extends CI_Controller {
                 if ($result) {
                     $sess_array = array();
                     $this->session->set_userdata('user_data', (array) $result[0]);
-                    $this->session->set_userdata('login_msg', 'User Successful Registed, You can login into your account');
+                    $this->session->set_userdata('alert_msg', 'User Successful Registed, You can login into your account');
                     redirect('index', 'refresh');
                 } else {
-                    $this->session->set_userdata('login_msg', 'Sign up Failed!!!');
+                    $this->session->set_userdata('alert_msg', 'Sign up Failed!!!');
                     redirect('index', 'refresh');
                 }
             } else {
-                $this->session->set_userdata('login_msg', 'Please choose different Email, there is a user using this Email address.');
+                $this->session->set_userdata('alert_msg', 'Please choose different Email, there is a user using this Email address.');
                 redirect('index', 'refresh');
             }
         } else {
-            $this->session->set_userdata('login_msg', 'Password not matched!!!');
+            $this->session->set_userdata('alert_msg', 'Password not matched!!!');
             redirect('index', 'refresh');
         }
     }
@@ -482,19 +484,20 @@ class User extends CI_Controller {
 
             $user_id = $session_data['UID'];
             $result = $this->User_model->update_user($user_id, $user_data);
+            $profile_data = $this->User_model->get_single($user_id);
             if ($result) {
                 $data['success'] = true;
-                $data['user_data'] = $session_data;
-                $data['msg'] = "User Updated";
+                $data['profile_data'] = $profile_data;
+                $data['alert_msg'] = "User Updated";
                 $data['page_title'] = "Profile Page";
                 $data['page'] = 'profile';
-                redirect('User/profile', 'refresh');
+                redirect('User/profile/'.$user_id, 'refresh');
             } else {
                 $data['success'] = false;
-                $data['error_msg'] = "Updation Failed";
+                $data['alert_msg'] = "Updation Failed";
                 $data['page_title'] = "Profile Page";
                 $data['page'] = 'profile';
-                $data['user_data'] = $session_data;
+                $data['profile_data'] = $profile_data;
                 $this->load->view('front/page', $data);
             }
         } catch (Exception $exc) {

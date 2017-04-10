@@ -43,7 +43,7 @@ class Comment_model extends CI_Model {
     }
 
     public function get_song_comment($song_id) {
-        $sql = "SELECT iml_comment_song.*, usermain.* FROM iml_comment_song LEFT JOIN usermain ON iml_comment_song.Created_By=usermain.UID WHERE song_id='$song_id' ORDER BY `COM_ID` DESC";
+        $sql = "SELECT iml_comment_song.*, usermain.* FROM iml_comment_song INNER JOIN usermain ON iml_comment_song.Created_By=usermain.UID WHERE song_id='$song_id' ORDER BY `COM_ID` DESC";
 
         $query = $this->db->query($sql);
         $result = array();
