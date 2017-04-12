@@ -46,7 +46,6 @@ class Video extends CI_Controller {
         $data['page'] = "video";
         $this->load->view('front/page', $data);
     }
-    
 
     function post_hit_count() {
         try {
@@ -57,7 +56,7 @@ class Video extends CI_Controller {
             $song_data = array(
                 'HITS' => $data['new_view']
             );
-            $this->Songs_model->update_song($data['song_id'], $song_data);
+            $result = $this->Songs_model->update_song($data['song_id'], $song_data);
         } catch (Exception $exc) {
             $response['success'] = FALSE;
             $response['msg'] = $exc->getMessage();

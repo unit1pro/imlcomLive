@@ -6,6 +6,8 @@ class Comment_model extends CI_Model {
     public $attachment_table = 'comment_attachments';
     public $user_table = 'usermain';
     public $song_table = 'songs';
+    public $like_table = 'social_response';
+
 //    public $song_comment = 'iml_comment_song';
 
     function __construct() {
@@ -52,7 +54,7 @@ class Comment_model extends CI_Model {
         }
         return $result;
     }
-    
+
     public function get_comment_byparent($parent_id) {
         $sql = "SELECT * FROM iml_comment_song WHERE parent_id='$parent_id' ORDER BY `created_On` DESC";
 
@@ -84,6 +86,34 @@ class Comment_model extends CI_Model {
             }
         }
         $this->db->update($this->table, $data);
+        return TRUE;
+    }
+
+    function get_like_status($conditions) {
+        $this->db->select('*');
+        $this->db->from($this->like_table);
+        if (!empty($conditions)) {
+            foreach ($conditions as $key => $value) {
+                $this->db->where($key, $value);
+            }
+        }
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+
+    function insert_response($data) {
+        $this->db->insert($this->like_table, $data);
+        return $this->db->insert_id();
+    }
+
+    function update_like_status($data, $conditions = array()) {
+        if (!empty($conditions)) {
+            foreach ($conditions as $key => $value) {
+                $this->db->where($key, $value);
+            }
+        }
+        $this->db->update($this->like_table, $data);
         return TRUE;
     }
 
