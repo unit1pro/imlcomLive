@@ -1,4 +1,3 @@
-
 <?php
 $imageUploadPath = UPLOADS . '/images';
 $videoUploadPath = UPLOADS . '/videos';
@@ -48,11 +47,11 @@ $song_id = $songs_data[0]['ID'];
             </div>
             <div class="layout-column user-comment-area">
                 <?php
-                $userImage = isset($user_data) && $user_data['Photo'] != '' ? base_url('uploads/images') . '/' . $user_data['Photo'] : base_url('front') . '/img/user-image.png';
+                $userImage = isset($profile_data) && $profile_data['Photo'] != '' ? base_url('uploads/images') . '/' . $profile_data['Photo'] : base_url('front') . '/img/user-image.png';
                 ?>
                 <div class="layout-row user-comments-youtube input-section">
                     <img src="<?php echo $userImage ?>" alt="user-image"/>
-                    <div class="input-area" data-userId = <?php echo isset($user_data) && $user_data[0]['UID'] ? $user_data[0]['UID'] : '' ?>>
+                    <div class="input-area" data-userId = <?php echo isset($profile_data) && $profile_data[0]['UID'] ? $profile_data[0]['UID'] : '' ?>>
                         <textarea name="comment_field" class="comment_field" placeholder="Write a Comments" style="width: 100%" rows="3"></textarea>
                         <a href="javascript:void(0)" class="post_comment"><i class="fa fa-check-circle fa-3x" style="    color: #105704;"></i></a>
                     </div>
@@ -61,7 +60,7 @@ $song_id = $songs_data[0]['ID'];
                     <?php
                     if (isset($comments) && !empty($comments)) {
                         foreach ($comments as $comment) {
-                            $userImageComment = isset($comment) && $comment['Photo'] != '' ? base_url('uploads/images') . '/' . $user_data['Photo'] : base_url('front') . '/img/user-image.png';
+                            $userImageComment = isset($comment) && $comment['Photo'] != '' ? base_url('uploads/images/') . '/' . $comment['Photo'] : base_url('front') . '/img/user-image.png';
                             ?>
                             <div class="layout-row user-comments-youtube">
                                 <img src="<?php echo $userImageComment ?>" alt="user-image"/>
@@ -71,7 +70,7 @@ $song_id = $songs_data[0]['ID'];
                                             <div class="layout-row">
                                                 <span class="user-name"><?php echo $comment['FirstName'] . ' ' . $comment['LastName'] ?></span>
                                                 <!--<span>3 min agao</span>-->
-                                            </div>
+                                            </div>  
                                             <div><?php echo $comment['COMMENTS'] ?></div>
                                             <div class="layout-row">
                                                 <span class="user-name"><a href="javascript:void(0)" onclick="replyOnComment(this)" >Reply</a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="likeComment(this)" ><i class="fa fa-thumbs-up"></a></i>&nbsp;  &nbsp; <a href="javascript:void(0)" onclick="dislikeComment(this)" ><i class="fa fa-thumbs-down"></i></a></span>
@@ -82,7 +81,7 @@ $song_id = $songs_data[0]['ID'];
                                     <?php
                                     if (isset($comment['subComments']) && !empty($comment['subComments'])) {
                                         foreach ($comment['subComments'] as $subComment) {
-                                            $userImagesubComment = isset($subComment) && $subComment['Photo'] != '' ? base_url('uploads/images') . '/' . $user_data['Photo'] : base_url('front') . '/img/user-image.png';
+                                            $userImagesubComment = isset($subComment) && $subComment['Photo'] != '' ? base_url('uploads/images') . '/' . $profile_data['Photo'] : base_url('front') . '/img/user-image.png';
                                             ?>
                                             <div class="layout-row sub-comment">
                                                 <img src="<?php echo $userImagesubComment ?>" alt="user-image"/>
@@ -154,10 +153,16 @@ $song_id = $songs_data[0]['ID'];
     new_view++;
     var song_id = '<?php echo $songs_data[0]['ID']; ?>';
 
+    var limit = 2;
+    var offset = 0;
+    var offset_song = 0;
+
     $(document).ready(function () {
         $('.video-section1').height($(window).height() - $('header').height());
         post_hit_count({'new_view': new_view, 'song_id': song_id});
-    })
+//        get_post_comment({'song_id': song_id, 'limit': limit, 'offset': offset, 'offset_song': offset_song});
+
+    });
 
     function post_hit_count(data) {
         $.ajax({
@@ -165,20 +170,19 @@ $song_id = $songs_data[0]['ID'];
             'data': data,
             'type': 'post',
             success: function (result) {
-                console.log(result);
+//                    console.log(result);
             }
         });
     }
 
     $('.post_comment').click(function (e) {
-//        console.log(e);
-//        e.stopPropagation();
         var user_id = $(this).parent().attr('data-userId');
         if (user_id) {
             var comment = $(this).parent().find('textarea').val();
             post_comment(comment, user_id, '<?php echo $song_id; ?>');
         } else {
-            login_popup();
+//                login_popup();
+            alert("Please Login to use the service.");
         }
     });
 
