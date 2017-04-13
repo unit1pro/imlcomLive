@@ -40,8 +40,10 @@ $song_id = $songs_data[0]['ID'];
                         <!--<i class="fa fa-ellipsis-h"></i>More-->
                     </span>
                     <span class="layout-row flex-50 layout-align-end-center">
-                        <span><i class="fa fa-hand-o-up"></i>888</span> &nbsp;&nbsp;   
-                        <span><i class="fa fa-hand-o-down"></i>6</span>   
+                        <div class="layout-row action-wrapper">
+                            <div class="layout-row layout-align-start-center flex-40"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, <?php echo $song_id; ?> )" data-post_type="1" data-response_type="1" data-commentid="<?php echo $song_id; ?>"><i class="fa fa-thumbs-up"></i> <?php echo $total_likes.'Like';?></a></div>
+                            <div class="layout-row layout-align-start-center flex-40"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, <?php echo $song_id; ?> )" data-post_type="1" data-response_type="2" data-commentid="<?php echo $song_id; ?>"><i class="fa fa-thumbs-down"></i> <?php echo $total_dislikes.'Dislike';?></a></div>
+                        </div>
                     </span>
                 </div>
             </div>

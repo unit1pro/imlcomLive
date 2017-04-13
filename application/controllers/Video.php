@@ -34,6 +34,9 @@ class Video extends CI_Controller {
         $allVideos = $this->Home_model->get_video();
         $artistAllVideo = $this->Home_model->get_artist_video($song_data[0]['UID'], $song_data[0]['ID']);
         $data['songs_data'] = $song_data;
+
+        $data['total_likes'] = $this->Comment_model->get_total_like([$song_data[0]['ID']], 1);
+        $data['total_dislikes'] = $this->Comment_model->get_total_dislike([$song_data[0]['ID']], 2);
         $data['comments'] = $comments;
         $data['allVideos'] = $allVideos;
         $data['artistAllVideo'] = $artistAllVideo;
