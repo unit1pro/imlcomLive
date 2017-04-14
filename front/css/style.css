@@ -17,6 +17,13 @@ body {
 img{
     max-width: 100%;
 }
+
+.liked{
+    color:#74db67 !important;
+}
+.disliked{
+    color:#a83030 !important;
+}
 .container {
     max-width: 1170px !important;
     width: 100%;

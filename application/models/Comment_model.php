@@ -7,9 +7,7 @@ class Comment_model extends CI_Model {
     public $user_table = 'usermain';
     public $response_table = 'social_response';
     public $song_table = 'songs';
-    public $like_table = 'social_response';
 
-//    public $song_comment = 'iml_comment_song';
 
     function __construct() {
         parent::__construct();
@@ -33,6 +31,8 @@ class Comment_model extends CI_Model {
         $this->db->from($this->table);
         $this->db->join($this->user_table, 'iml_comment_song.id = usermain.UID', 'inner');
 //        $this->db->join($this->response_table, 'usermain.UID = social_response.updated_by', 'inner');
+        
+//        $query = "SELECT c.*,u.* from ".$this->table." as c INNER JOIN ".$this->user_table." ON c.id = u.UID INNER JOIN (SELECT count(1) as like_count,response_on from ".$this->response_table." WHERE response_type = 1 group by response_type) as lc ON c.=lc.response_on COM"
         if (!empty($conditions)) {
             foreach ($conditions as $key => $value) {
                 $this->db->where($key, $value);
@@ -47,12 +47,12 @@ class Comment_model extends CI_Model {
     }
 
     public function get_total_like($post_id, $response_type) {
-        $query = $this->db->query("SELECT * FROM $this->response_table WHERE response_on='" . $post_id['0'] . "' and response_type='".$response_type."'");
+        $query = $this->db->query("SELECT * FROM $this->response_table WHERE response_on='" . $post_id['0'] . "' and response_type='" . $response_type . "'");
         return $query->num_rows();
     }
 
     public function get_total_dislike($post_id, $response_type) {
-        $query = $this->db->query("SELECT * FROM $this->response_table WHERE response_on='" . $post_id['0'] . "' and response_type='".$response_type."'");
+        $query = $this->db->query("SELECT * FROM $this->response_table WHERE response_on='" . $post_id['0'] . "' and response_type='" . $response_type . "'");
         return $query->num_rows();
     }
 
@@ -103,19 +103,20 @@ class Comment_model extends CI_Model {
 
     function get_like_status($conditions) {
         $this->db->select('*');
-        $this->db->from($this->like_table);
+        $this->db->from($this->response_table);
         if (!empty($conditions)) {
             foreach ($conditions as $key => $value) {
                 $this->db->where($key, $value);
             }
         }
         $query = $this->db->get();
+//        print_r($this->db->last_query());exit;
         $result = $query->result_array();
         return $result;
     }
 
     function insert_response($data) {
-        $this->db->insert($this->like_table, $data);
+        $this->db->insert($this->response_table, $data);
         return $this->db->insert_id();
     }
 
@@ -125,8 +126,19 @@ class Comment_model extends CI_Model {
                 $this->db->where($key, $value);
             }
         }
-        $this->db->update($this->like_table, $data);
+        $this->db->update($this->response_table, $data);
+        
         return TRUE;
+    }
+
+    function getResponse($post_id, $user_id) {
+        $sql = "SELECT response_type FROM social_response WHERE response_on='$post_id' and updated_by='$user_id'";
+        $query = $this->db->query($sql);
+        $result = array();
+        if ($query !== FALSE && $query->num_rows() > 0) {
+            $result = $query->result_array();
+        }
+        return $result;
     }
 
 }

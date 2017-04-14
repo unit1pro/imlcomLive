@@ -1,8 +1,3 @@
-<?php
-//print "<pre>";
-//print_r($songs_data);
-//exit;
-?>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/vendors/nefty_popup/dist/jquery.niftymodals.css" /> 
 <script src="<?php echo base_url(); ?>/vendors/nefty_popup/dist/jquery.niftymodals.js"></script>
 <script>
@@ -338,9 +333,17 @@
                             });
                         }
                         html += '<div class="layout-row action-wrapper">';
-                        html += '<div class="layout-row layout-align-start-center flex-25"><a href="javascript:void(0)" class="like_button"><i class="fa fa-thumbs-up"></i> Like</a></div>';
+                        if (comments.song) {
+                            html += '<div class="layout-row layout-align-start-center flex-25"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + comments.ID + ')" data-post_type="1" data-response_type="1" data-commentid="' + comments.ID + '"><i class="fa fa-thumbs-up"></i> Like </a></div>';
+                        } else {
+                            html += '<div class="layout-row layout-align-start-center flex-25"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + comments.COM_ID + ')" data-post_type="2" data-response_type="1" data-commentid="' + comments.COM_ID + '"><i class="fa fa-thumbs-up"></i> Like </a></div>';
+                        }
+                        if (comments.song) {
+                            html += '<div class="layout-row layout-align-start-center flex-25"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + comments.ID + ')" data-post_type="1" data-response_type="2" data-commentid="' + comments.ID + '"><i class="fa fa-thumbs-down"></i> Dislike </a> </div>';
+                        } else {
+                            html += '<div class="layout-row layout-align-start-center flex-25"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + comments.COM_ID + ')" data-post_type="2" data-response_type="2" data-commentid="' + comments.COM_ID + '"><i class="fa fa-thumbs-down"></i> Dislike </a></div>';
+                        }
                         html += '<div class="layout-row layout-align-start-center flex-25" ><a href="#" class="comment_button"><i class="fa fa-comment"></i>Comments</a></div>';
-//                        html += '<div class="layout-row layout-align-end-center flex-20"><i class="fa fa-share"></i> Share</div>';
                         html += '</div>';
                         html += '<div class="comment_textarea" style="display:none">';
                         html += '<textarea class="col-md-11" placeholder="Comment"></textarea>';
@@ -369,11 +372,11 @@
             'type': 'post',
             success: function (result) {
                 var obj = $.parseJSON(result);
-//                console.log(obj);
                 offset_song = obj.song_offset;
                 var html = '';
                 if (obj.success) {
                     $.each(obj.comment, function (index, comments) {
+//                        console.log(comments);
                         var user_image = base_url + 'uploads/images/user.png'
                         if (comments.Photo != '') {
                             user_image = base_url + 'uploads/images/' + comments.Photo;
@@ -431,15 +434,61 @@
                             });
                         }
                         html += '<div class="layout-row action-wrapper">';
+                        var response = comments.user_response;
+//                        console.log(comments.user_response);
                         if (comments.song) {
-                            html += '<div class="layout-row layout-align-start-center flex-25"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + comments.ID + ')" data-post_type="1" data-response_type="1" data-commentid="' + comments.ID + '"><i class="fa fa-thumbs-up"></i> Like </a></div>';
+                            if (response == '1') {
+                                html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + comments.ID + ')" data-post_type="1" data-response_type="1" data-commentid="' + comments.ID + '"><i class="fa fa-thumbs-up liked"></i></a>';
+
+                            } else {
+                                html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + comments.ID + ')" data-post_type="1" data-response_type="1" data-commentid="' + comments.ID + '"><i class="fa fa-thumbs-up"></i></a>';
+
+                            }
+                            html += '<span class="like_count_span">';
+                            if (comments.like_count) {
+                                html += comments.like_count + ' Likes ';
+                            }
+                            html += '</span>';
+                            html += '</div>';
                         } else {
-                            html += '<div class="layout-row layout-align-start-center flex-25"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + comments.COM_ID + ')" data-post_type="2" data-response_type="1" data-commentid="' + comments.COM_ID + '"><i class="fa fa-thumbs-up"></i> Like </a></div>';
+                            if (response == '1') {
+                                html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + comments.COM_ID + ')" data-post_type="2" data-response_type="1" data-commentid="' + comments.COM_ID + '"><i class="fa fa-thumbs-up liked"></i></a>';
+                            } else {
+                                html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + comments.COM_ID + ')" data-post_type="2" data-response_type="1" data-commentid="' + comments.COM_ID + '"><i class="fa fa-thumbs-up"></i></a>';
+                            }
+                            html += '<span class="like_count_span">';
+                            if (comments.like_count) {
+                                html += comments.like_count + ' Likes ';
+                            }
+                            html += '</span>';
+                            html += '</div>';
                         }
                         if (comments.song) {
-                            html += '<div class="layout-row layout-align-start-center flex-25"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + comments.ID + ')" data-post_type="1" data-response_type="2" data-commentid="' + comments.ID + '"><i class="fa fa-thumbs-down"></i> Dislike </a> </div>';
+                            if (response == 2) {
+                                html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + comments.ID + ')" data-post_type="1" data-response_type="2" data-commentid="' + comments.ID + '"><i class="fa fa-thumbs-down disliked"></i></a>';
+                            } else {
+                                html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + comments.ID + ')" data-post_type="1" data-response_type="2" data-commentid="' + comments.ID + '"><i class="fa fa-thumbs-down"></i></a>';
+                            }
+                            html += '<span class="dislike_count_span">';
+                            if (comments.dislike_count) {
+
+                                html += comments.dislike_count + ' Dislikes';
+                            }
+                            html += '</span>';
+                            html += ' </div>';
                         } else {
-                            html += '<div class="layout-row layout-align-start-center flex-25"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + comments.COM_ID + ')" data-post_type="2" data-response_type="2" data-commentid="' + comments.COM_ID + '"><i class="fa fa-thumbs-down"></i> Dislike </a></div>';
+                            if (response == 2) {
+                                html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + comments.COM_ID + ')" data-post_type="2" data-response_type="2" data-commentid="' + comments.COM_ID + '"><i class="fa fa-thumbs-down disliked"></i></a>';
+                            } else {
+                                html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + comments.COM_ID + ')" data-post_type="2" data-response_type="2" data-commentid="' + comments.COM_ID + '"><i class="fa fa-thumbs-down"></i></a>';
+                            }
+                            html += '<span class="dislike_count_span">';
+                            if (comments.dislike_count) {
+
+                                html += comments.dislike_count + ' Dislikes';
+                            }
+                            html += '</span>';
+                            html += ' </div>';
                         }
                         html += '<div class="layout-row layout-align-start-center flex-25" ><a href="#" class="comment_button"><i class="fa fa-comment"></i>Comments</a></div>';
 //                        html += '<div class="layout-row layout-align-end-center flex-20"><i class="fa fa-share"></i> Share</div>';
@@ -449,35 +498,47 @@
                         html += '<button class="btn btn-info col-md-1 comment_submit" onclick="commentSubmit(this);"><i class="fa fa-arrow-right"></i></button>';
                         html += '</div>';
 
-                        html += '<div class="layout-row comment-count">';
-                        if (comments.like_count) {
-                            html += comments.like_count + ' Likes ';
-                        }
-                        if(comments.dislike_count){
-                            html += comments.dislike_count + ' Dislikes';                            
-                        }
-                        html += '</div>';
-//                      
-//                          console.log(comments.subComments.length);
                         if (typeof comments.subComments !== "undefined" && comments.subComments.length !== 0) {
                             html += '<div class="layout-row comment-wrap">';
-                            html += '<span class="flex-75">View Previous Comments</span>';
+//                            html += '<span class="flex-75">View Previous Comments</span>';
                             html += '</div>';
                             $.each(comments.subComments, function (scKey, sc) {
+                                console.log(sc);
+                                var sc_response = sc.user_response;
                                 var user_image = base_url + 'uploads/images/user.png';
                                 if (sc.Photo != '') {
                                     user_image = base_url + 'uploads/images/' + sc.Photo;
                                 }
-                                html += '<div class="layout-row user-comments">';
+                                html += '<div class="layout-row user-comments" style="width:100%;">';
                                 html += '<img src="' + user_image + '" alt="user-image"/>';
-                                html += '<div class="layout-column user-detail">';
+                                html += '<div class="layout-column user-detail" style="width:100%;">';
                                 html += '<div class="layout-row">';
                                 html += '<span class="user-name">' + sc.FirstName + ' ' + sc.LastName + '</span>';
                                 html += '<span>' + sc.COMMENTS + '</span>';
                                 html += '</div>';
                                 html += '<div class="layout-row action-wrapper">';
-                                html += '<div class="layout-row layout-align-start-center flex-45"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + sc.COM_ID + ')" data-post_type="3" data-response_type="1" data-commentid="' + sc.COM_ID + '"><i class="fa fa-thumbs-up"></i>Like</a></div>';
-                                html += '<div class="layout-row layout-align-start-center flex-45"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + sc.COM_ID + ')" data-post_type="3" data-response_type="2" data-commentid="' + sc.COM_ID + '"><i class="fa fa-thumbs-down"></i>Dislike</a></div>';
+                                if (sc_response == '1') {
+                                    html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + sc.COM_ID + ')" data-post_type="3" data-response_type="1" data-commentid="' + sc.COM_ID + '"><i class="fa fa-thumbs-up liked"></i></a>';
+                                } else {
+                                    html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + sc.COM_ID + ')" data-post_type="3" data-response_type="1" data-commentid="' + sc.COM_ID + '"><i class="fa fa-thumbs-up"></i></a>';
+                                }
+                                html += '<span class="like_count_span">';
+                                if (sc.like_count) {
+                                    html += sc.like_count + ' Likes';
+                                }
+                                html += '</span>';
+                                html += '</div>';
+                                if (sc_response == '2') {
+                                    html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + sc.COM_ID + ')" data-post_type="3" data-response_type="2" data-commentid="' + sc.COM_ID + '"><i class="fa fa-thumbs-down disliked"></i></a>';
+                                } else {
+                                    html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + sc.COM_ID + ')" data-post_type="3" data-response_type="2" data-commentid="' + sc.COM_ID + '"><i class="fa fa-thumbs-down"></i></a>';
+                                }
+                                html += '<span class="dislike_count_span">';
+                                if (sc.dislike_count) {
+                                    html += sc.dislike_count + ' Dislikes';
+                                }
+                                html += '</span>';
+                                html += '</div>';
                                 html += '</div>';
                                 html += '</div>';
                                 html += '<hr>';
@@ -492,7 +553,6 @@
                     $('.comment_button').on('click', function () {
                         $(this).parent().parent().parent().find('.comment_textarea').show();
                     });
-
 
                     $(".profile_info").mouseover(function () {
                         $(this).css('cursor', 'pointer');
@@ -519,6 +579,7 @@
     }
 
     function likeFunction(element, commentId) {
+
         var post_type = $(element).data('post_type');
         var response_type = $(element).data('response_type');
         var userid = '<?php echo $_SESSION['user_data']['UID']; ?>';
@@ -530,22 +591,27 @@
                 'type': 'post',
                 success: function (result) {
                     var obj = $.parseJSON(result);
-                    if (obj.msg === 'like') {
-                        $(element).html('');
-                        $(element).html('<i class="fa fa-thumbs-up"></i> Liked');
-                        $(element).parent().next().find('.dislike_button').html('<i class="fa fa-thumbs-down"></i> Dislike');
-                    } else if (obj.msg === 'dislike') {
-                        $(element).html('');
-                        $(element).html('<i class="fa fa-thumbs-down"></i> Disliked');
-                        $(element).find('i').css('color', 'b23939');
-                        $(element).parent().prev().find('.like_button').html('<i class="fa fa-thumbs-up"></i> Like');
+                    console.log(obj);
+                    if (obj.msg == '1') {
+                        $(element).find('i').addClass('liked');
+                        $(element).parent().next().find('.dislike_button').find('i').removeClass('disliked');
+                    } else if (obj.msg == '2') {
+                        $(element).find('i').addClass('disliked');
+                        $(element).parent().prev().find('.like_button').find('i').removeClass('liked');
                     } else {
-                        var button = $(element).attr('class');
-                        if (button == 'like_button') {
-                            $(element).html('<i class="fa fa-thumbs-up"></i> Like');
-                        } else if (button == 'dislike_button') {
-                            $(element).html('<i class="fa fa-thumbs-down"></i> Dislike');
-                        }
+                        $(element).find('i').removeClass('liked');
+                        $(element).find('i').removeClass('disliked');
+
+                    }
+                    if (obj.likeCount != 0) {
+                        $(element).parent().parent().find(".like_count_span").html(obj.likeCount + ' Likes');
+                    } else {
+                        $(element).parent().parent().find(".like_count_span").html('');
+                    }
+                    if (obj.dislikeCount != 0) {
+                        $(element).parent().parent().find('.dislike_count_span').html(obj.dislikeCount + ' Dislikes');
+                    } else {
+                        $(element).parent().parent().find('.dislike_count_span').html('');
                     }
                 }
             });

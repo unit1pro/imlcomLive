@@ -26,6 +26,10 @@ class Video extends CI_Controller {
 
         if (is_array($comments) && !empty($comments)) {
             foreach ($comments as $key => $value) {
+                $resultCommentUserResponse = $this->Comment_model->getResponse($value['COM_ID'], $user_id);
+                $comments[$key]['user_response'] = (int) $resultCommentUserResponse[0]['response_type'];
+                $comments[$key]['total_likes'] = $this->Comment_model->get_total_like(array($value['COM_ID']),1);
+                $comments[$key]['total_dislikes'] = $this->Comment_model->get_total_dislike(array($value['COM_ID']),2);
                 $comments[$key]['attachment'] = $this->Comment_model->getAttachment(array('comment_id' => $value['COM_ID']));
                 $comments[$key]['subComments'] = $this->Comment_model->get_comment_byparent($value['COM_ID']);
             }
@@ -34,7 +38,9 @@ class Video extends CI_Controller {
         $allVideos = $this->Home_model->get_video();
         $artistAllVideo = $this->Home_model->get_artist_video($song_data[0]['UID'], $song_data[0]['ID']);
         $data['songs_data'] = $song_data;
-
+        $result = $this->Comment_model->getResponse($song_data[0]['ID'], $user_id);
+        
+        $data['user_response'] = (int) $result[0]['response_type'];
         $data['total_likes'] = $this->Comment_model->get_total_like([$song_data[0]['ID']], 1);
         $data['total_dislikes'] = $this->Comment_model->get_total_dislike([$song_data[0]['ID']], 2);
         $data['comments'] = $comments;

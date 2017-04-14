@@ -2,6 +2,7 @@
 $imageUploadPath = UPLOADS . '/images';
 $videoUploadPath = UPLOADS . '/videos';
 $song_id = $songs_data[0]['ID'];
+
 ?>
 <style>
     .clickable{pointer-events: none;}
@@ -36,13 +37,13 @@ $song_id = $songs_data[0]['ID'];
                     <span class="layout-row flex-30 layout-align-start-center">
                         <!--<i class="fa fa-share"></i> share-->
                     </span>
-                    <span class="layout-row flex-20 layout-align-start-center">
+                    <span class="layout-row flex-30 layout-align-start-center">
                         <!--<i class="fa fa-ellipsis-h"></i>More-->
                     </span>
-                    <span class="layout-row flex-50 layout-align-end-center">
-                        <div class="layout-row action-wrapper">
-                            <div class="layout-row layout-align-start-center flex-40"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, <?php echo $song_id; ?> )" data-post_type="1" data-response_type="1" data-commentid="<?php echo $song_id; ?>"><i class="fa fa-thumbs-up"></i> <?php echo $total_likes.'Like';?></a></div>
-                            <div class="layout-row layout-align-start-center flex-40"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, <?php echo $song_id; ?> )" data-post_type="1" data-response_type="2" data-commentid="<?php echo $song_id; ?>"><i class="fa fa-thumbs-down"></i> <?php echo $total_dislikes.'Dislike';?></a></div>
+                    <span class="layout-row flex-20 layout-align-end-center">
+                        <div class="layout-row action-wrapper" style="width:100%">
+                            <div class="layout-row layout-align-start-center flex-50"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, <?php echo $song_id; ?> )" data-post_type="1" data-response_type="1" data-commentid="<?php echo $song_id; ?>"><i class="fa fa-thumbs-up <?php echo isset($user_response)&&$user_response==1?'liked':'' ?>"></i></a><span class="like_count_span"><?php echo $total_likes!=0?$total_likes.' Like':'';?></span></div>
+                            <div class="layout-row layout-align-start-center flex-50"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, <?php echo $song_id; ?> )" data-post_type="1" data-response_type="2" data-commentid="<?php echo $song_id; ?>"><i class="fa fa-thumbs-down  <?php echo isset($user_response)&&$user_response==2?'disliked':'' ?>"></i></a><span class="dislike_count_span"><?php echo $total_dislikes!=0?$total_dislikes.' Dislike':'';?></span></div>
                         </div>
                     </span>
                 </div>
@@ -62,6 +63,9 @@ $song_id = $songs_data[0]['ID'];
                     <?php
                     if (isset($comments) && !empty($comments)) {
                       foreach ($comments as $comment) {
+//                          print "<pre>";
+//                          print_r($comment);
+//                          exit;
                         $userImageComment = isset($comment) && $comment['Photo'] != '' ? base_url('uploads/images/') . '/' . $comment['Photo'] : base_url('front') . '/img/user-image.png';
                         ?>
                         <div class="layout-row user-comments-youtube">
@@ -79,10 +83,10 @@ $song_id = $songs_data[0]['ID'];
                                                                                         <span class="user-name">; &nbsp;<a href="javascript:void(0)" onclick="likeComment(this)" ><i class="fa fa-thumbs-up"></a></i>&nbsp;  &nbsp; <a href="javascript:void(0)" onclick="dislikeComment(this)" ><i class="fa fa-thumbs-down"></i></a></span>
                                                                                     </div>-->
 
-                                        <div class="layout-row action-wrapper">;
-                                            <div class="layout-row layout-align-start-center flex-15"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, <?php echo $comment['COM_ID'];?> )" data-post_type="3" data-response_type="1" data-commentid="<?php echo $comment['COM_ID'];?>"><i class="fa fa-thumbs-up"></i>Like</a></div>;
-                                            <div class="layout-row layout-align-start-center flex-15"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, <?php echo $comment['COM_ID'];?> )" data-post_type="3" data-response_type="2" data-commentid="<?php echo $comment['COM_ID'];?>"><i class="fa fa-thumbs-down"></i>Dislike</a></div>;
-                                        </div>;
+                                        <div class="layout-row action-wrapper">
+                                            <div class="layout-row layout-align-start-center flex-15"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, <?php echo $comment['COM_ID'];?> )" data-post_type="3" data-response_type="1" data-commentid="<?php echo $comment['COM_ID'];?>"><i class="fa fa-thumbs-up <?php echo isset($comment['user_response'])&&$comment['user_response']==1?'liked':'' ?>"></i></a><span class="like_count_span"><?php echo $comment['total_likes']!=0?$comment['total_likes'].' Like':'';?></span></div>
+                                            <div class="layout-row layout-align-start-center flex-15"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, <?php echo $comment['COM_ID'];?> )" data-post_type="3" data-response_type="2" data-commentid="<?php echo $comment['COM_ID'];?>"><i class="fa fa-thumbs-down <?php echo isset($comment['user_response'])&&$comment['user_response']==2?'disliked':'' ?>"></i></a><span class="dislike_count_span"><?php echo $comment['total_dislikes']!=0?$comment['total_dislikes'].' Dislike':'';?></span></div>
+                                        </div>
 
 
 
@@ -254,24 +258,29 @@ $song_id = $songs_data[0]['ID'];
               'data': {'comment_id': commentId, 'post_type': post_type, 'response_type': response_type, 'userid': userid},
               'type': 'post',
               success: function (result) {
-                  var obj = $.parseJSON(result);
-                  if (obj.msg === 'like') {
-                      $(element).html('');
-                      $(element).html('<i class="fa fa-thumbs-up"></i> Liked');
-                      $(element).parent().next().find('.dislike_button').html('<i class="fa fa-thumbs-down"></i> Dislike');
-                  } else if (obj.msg === 'dislike') {
-                      $(element).html('');
-                      $(element).html('<i class="fa fa-thumbs-down"></i> Disliked');
-                      $(element).find('i').css('color', 'b23939');
-                      $(element).parent().prev().find('.like_button').html('<i class="fa fa-thumbs-up"></i> Like');
-                  } else {
-                      var button = $(element).attr('class');
-                      if (button == 'like_button') {
-                          $(element).html('<i class="fa fa-thumbs-up"></i> Like');
-                      } else if (button == 'dislike_button') {
-                          $(element).html('<i class="fa fa-thumbs-down"></i> Dislike');
-                      }
-                  }
+                   var obj = $.parseJSON(result);
+                    console.log(obj);
+                    if (obj.msg == '1') {
+                        $(element).find('i').addClass('liked');
+                        $(element).parent().next().find('.dislike_button').find('i').removeClass('disliked');
+                    } else if (obj.msg == '2') {
+                        $(element).find('i').addClass('disliked');
+                        $(element).parent().prev().find('.like_button').find('i').removeClass('liked');
+                    } else {
+                        $(element).find('i').removeClass('liked');
+                        $(element).find('i').removeClass('disliked');
+
+                    }
+                    if (obj.likeCount != 0) {
+                        $(element).parent().parent().find(".like_count_span").html(obj.likeCount + ' Like');
+                    } else {
+                        $(element).parent().parent().find(".like_count_span").html('');
+                    }
+                    if (obj.dislikeCount != 0) {
+                        $(element).parent().parent().find('.dislike_count_span').html(obj.dislikeCount + ' Dislike');
+                    } else {
+                        $(element).parent().parent().find('.dislike_count_span').html('');
+                    }
               }
           });
 
