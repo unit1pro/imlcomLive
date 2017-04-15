@@ -84,7 +84,7 @@
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="text-center">
                 <?php $userImageHeader = isset($profile_data[0]) && $profile_data[0]['Photo'] != '' ? base_url('uploads/images') . '/' . $profile_data[0]['Photo'] : base_url('front') . '/img/user-image.png'; ?>
-                <img id="profile_pic" src="<?php echo $userImageHeader; ?>" name="photo" class="avatar img-circle img-thumbnail" alt="avatar">
+                <img id="profile_pic" src="<?php echo $userImageHeader; ?>" name="photo" class="avatar img-rounded img-thumbnail" alt="avatar">
                 <h6>Upload a different photo...</h6>
                 <input type="file" id="upload" name="upload" class="text-center center-block well well-sm">
             </div>
@@ -154,11 +154,19 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-3 control-label"></label>
+                <label class="controls col-md-3 control-label"></label>
                 <div class="col-md-8">
-                    <input id="profile_submit" name="update" class="btn btn-primary" value="Save Changes" type="submit"><br>
-                    <input class="btn btn-default" value="Reset" type="reset"><br>
-                    <input id="back_profile" class="btn btn-default" value="Back" type="button">
+                    <!--<div class="row">-->
+                        <span class="col-sm-4">
+                            <input id="profile_submit" name="update" class="btn btn-primary" value="Save" type="submit"><br>                            
+                        </span>
+                        <span class="col-sm-4">
+                            <input class="btn btn-default" value="Reset" type="reset"><br>                            
+                        </span>
+                        <span class="col-sm-4">
+                            <input id="back_profile" class="btn btn-default" value="Back" type="button">                                                    
+                        </span>
+                    <!--</div>-->                        
                 </div>
             </div>
         </div>

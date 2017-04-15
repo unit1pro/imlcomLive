@@ -31,12 +31,7 @@
                             <a href="<?php echo site_url() ?>"><img src="<?php echo base_url() ?>front/img/title.png" alt="tile"/></a>
                         </div>
                         <div class=" flex-15 flex-xs-30 layout-align-end-start link-wrapper">
-                            <div class="layout-row">
-                                <a href="#"><img src="<?php echo base_url() ?>front/img/facebook.png" alt="facebook"/></a>
-                                <a href="#"><img src="<?php echo base_url() ?>front/img/twitter.png" alt="twitter"/></a>
-                                <a href="#"><img src="<?php echo base_url() ?>front/img/picasa.png" alt="picasa"/></a>
-                                <a href="#"><img src="<?php echo base_url() ?>front/img/youtube.png" alt="youtube"/></a>
-                            </div>
+
                             <?php
                             if (isset($user_data[0]['UID'])) {
                                 $userImageHeader = isset($user_data) && $user_data[0]['Photo'] != '' ? base_url('uploads/images') . '/' . $user_data[0]['Photo'] : base_url('front') . '/img/user-image.png';
