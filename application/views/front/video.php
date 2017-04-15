@@ -195,7 +195,11 @@ $song_id = $songs_data[0]['ID'];
                 <p>Some More Songs of Same Artist</p>
                 <div class="flex-25 flex-xs-100 layout-column video-section" style="overflow: hidden;">
                     <div style="height: 100%;width: 100%;overflow-y: auto;" class="video-section1">
-                        <?php foreach ($artistAllVideo as $artist_video) { ?>
+                        <?php
+                        foreach ($artistAllVideo as $artist_video) {
+                            if ($artist_video['ID'] == $song_id)
+                                continue;
+                            ?>
                             <div class="layout-row">
                                 <a href="<?php echo site_url('Video/index/') . $artist_video['ID'] ?>">
                                     <img src="<?php echo base_url('uploads/images') . '/' . $artist_video['Image'] ?>" width="166">
@@ -208,7 +212,11 @@ $song_id = $songs_data[0]['ID'];
                         }
                         ?>
                         <p>Songs from other Artists</p>
-                        <?php foreach ($allVideos as $song) { ?>
+                        <?php
+                        foreach ($allVideos as $song) {
+                            if ($song['ID'] == $song_id)
+                                continue;
+                            ?>
                             <div class="layout-row">
                                 <a href="<?php echo site_url('Video/index/') . $song['ID'] ?>">
                                     <img src="<?php echo base_url('uploads/images') . '/' . $song['Image'] ?>" width="166">
@@ -217,7 +225,7 @@ $song_id = $songs_data[0]['ID'];
                             <div class="layout-column user-detail">
                                 <span class="user-name"><?php echo $song['Song_Title'] ?></span>
                             </div>
-                        <?php } ?>
+<?php } ?>
                     </div>
                 </div>
             </div>
@@ -297,9 +305,12 @@ $song_id = $songs_data[0]['ID'];
                             html += '<span class="user-name">' + comments.FirstName + ' ' + comments.LastName + '</span>';
                             html += '</div>';
                             html += '<div>' + comments.COMMENTS + '</div>';
-                            html += '<div class="layout-row">';
-                            html += '<span class="user-name"><span>Reply</span> &nbsp; &nbsp;<i class="fa fa-thumbs-up"></i>&nbsp;  &nbsp; <i class="fa fa-thumbs-down"></i></span>';
+
+                            html += '<div class="layout-row action-wrapper">';
+                            html += '<div class="layout-row layout-align-start-center flex-15"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + comments.COM_ID + ' )" data-post_type="3" data-response_type="1" data-commentid="' + comments.COM_ID + '"><i class="fa fa-thumbs-up"></i></a><span class="like_count_span"></span></div>';
+                            html += '<div class="layout-row layout-align-start-center flex-15"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + comments.COM_ID + ' )" data-post_type="3" data-response_type="2" data-commentid="' + comments.COM_ID + '"><i class="fa fa-thumbs-down"></i></a><span class="dislike_count_span"></span></div>';
                             html += '</div>';
+
                             html += '</div>';
                             html += '<div class="float-right flex-10 layout-row layout-align-end-start"><i class="fa fa-ellipsis-v"></i></div> ';
                             html += '</div>';

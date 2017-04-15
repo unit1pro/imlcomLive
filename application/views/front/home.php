@@ -299,6 +299,13 @@
                             user_image = base_url + 'uploads/images/' + comments.Photo;
                         }
 
+                        var user_image = base_url + 'uploads/images/user.png';
+                        if (comments.Photo != '') {
+                            user_image = base_url + 'uploads/images/' + comments.Photo;
+                        }
+                        html += '<img src="' + user_image + '" alt="user-image"/>';
+
+
                         html += '<div class="layout-column comment-section" data-post_id = "' + comments.COM_ID + '">';
                         html += '<div class="layout-row user-comments">';
                         html += '<a href="' + base_url + 'index.php/User/profile/' + comments.UID + '"><img src="' + user_image + '" alt="user-image"/></a>';
@@ -727,6 +734,7 @@
 
 
     function commentSubmit(ele) {
+            console.log(ele);
         var user = '<?php echo $_SESSION['user_data']['UID']; ?>';
         if (user) {
             var comment = $(ele).parent().find('textarea').val();
@@ -750,7 +758,7 @@
                         $.each(obj.comment, function (scKey, sc) {
                             var user_image = base_url + 'uploads/images/user.png'
                             if (sc.Photo != '') {
-                                user_image = base_url + 'uploadsimages/' + sc.Photo;
+                                user_image = base_url + 'uploads/images/' + sc.Photo;
                             }
                             html += '<div class="layout-row user-comments">';
                             html += '<img src="' + user_image + '" alt="user-image"/>';
@@ -759,15 +767,16 @@
                             html += '<span class="user-name">' + sc.FirstName + ' ' + sc.LastName + '</span>';
                             html += '<span>' + sc.COMMENTS + '</span>';
                             html += '</div>';
-                            html += '<div class="layout-row">';
-                            html += '<span class="user-name">Like</span>';
+                            html += '<div class="layout-row action-wrapper">';
+                            html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, ' + sc.COM_ID + ' )" data-post_type="3" data-response_type="1" data-commentid="' + sc.COM_ID + '"><i class="fa fa-thumbs-up"></i></a><span class="like_count_span"></span></div>';
+                            html += '<div class="layout-row layout-align-start-center flex-20"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, ' + sc.COM_ID + ' )" data-post_type="3" data-response_type="2" data-commentid="' + sc.COM_ID + '"><i class="fa fa-thumbs-down"></i></a><span class="dislike_count_span"></span></div>';
                             html += '</div>';
                             html += '</div>';
 
                             html += '</div>';
                         });
 
-                        $(ele).parent().parent().append(html);
+                        $(ele).parent().parent().last().append(html);
                     }
                 }
             });
