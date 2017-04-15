@@ -1,5 +1,6 @@
 <?php
 
+//echo 'hello';exit;
 class Video extends CI_Controller {
 
     function __construct() {
@@ -20,16 +21,23 @@ class Video extends CI_Controller {
         $user_id = $session_data['UID'];
 
         $song_id = $this->uri->segment(3);
-        $song_data = $this->Home_model->getVideoBySongId($song_id);
+        $artist_id = isset($_GET['artist']) && $_GET['artist'] != '' ? $_GET['artist'] : '';
+        if ($artist_id != '') {
+            $artist_song_data = $this->Home_model->get_video_by_artist($artist_id);
+            $song_data[] = $artist_song_data[0];
+        } else if ($song_id != '') {
+            $song_data = $this->Home_model->getVideoBySongId($song_id);
+        }
+//        print_r($artist_song_data);exit;
 //        $comments = $this->Comment_model->get_data(array('parent_id' => 0, 'UserType' => 4, 'iml_comment_song.Song_id' => $song_id));
-        $comments = $this->Comment_model->get_song_comment($song_id);
+        $comments = $this->Comment_model->get_song_comment($song_data[0]['SongsID']);
 
         if (is_array($comments) && !empty($comments)) {
             foreach ($comments as $key => $value) {
                 $resultCommentUserResponse = $this->Comment_model->getResponse($value['COM_ID'], $user_id);
                 $comments[$key]['user_response'] = (int) $resultCommentUserResponse[0]['response_type'];
-                $comments[$key]['total_likes'] = $this->Comment_model->get_total_like(array($value['COM_ID']),1);
-                $comments[$key]['total_dislikes'] = $this->Comment_model->get_total_dislike(array($value['COM_ID']),2);
+                $comments[$key]['total_likes'] = $this->Comment_model->get_total_like(array($value['COM_ID']), 1);
+                $comments[$key]['total_dislikes'] = $this->Comment_model->get_total_dislike(array($value['COM_ID']), 2);
                 $comments[$key]['attachment'] = $this->Comment_model->getAttachment(array('comment_id' => $value['COM_ID']));
                 $comments[$key]['subComments'] = $this->Comment_model->get_comment_byparent($value['COM_ID']);
             }
@@ -39,7 +47,7 @@ class Video extends CI_Controller {
         $artistAllVideo = $this->Home_model->get_artist_video($song_data[0]['UID'], $song_data[0]['ID']);
         $data['songs_data'] = $song_data;
         $result = $this->Comment_model->getResponse($song_data[0]['ID'], $user_id);
-        
+
         $data['user_response'] = (int) $result[0]['response_type'];
         $data['total_likes'] = $this->Comment_model->get_total_like([$song_data[0]['ID']], 1);
         $data['total_dislikes'] = $this->Comment_model->get_total_dislike([$song_data[0]['ID']], 2);

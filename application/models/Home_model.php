@@ -44,5 +44,14 @@ class Home_model extends CI_Model {
         }
         return $result;
     }
+    public function get_video_by_artist($artist_id) {
+        $sql = "Select us.*,s.*,u.* FROM " . $this->userSongTable . " AS us INNER JOIN " . $this->songsTable . " AS s ON us.SongsID = s.ID INNER JOIN " . $this->userTable . " AS u ON us.UID = u.UID WHERE s.Song_status = 1 AND us.UID = $artist_id ORDER BY us.created_On DESC";
+        $query = $this->db->query($sql);
+        $result = array();
+        if ($query !== FALSE && $query->num_rows() > 0) {
+            $result = $query->result_array();
+        }
+        return $result;
+    }
 
 }
