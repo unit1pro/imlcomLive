@@ -247,7 +247,7 @@ class Api extends CI_Controller {
         $song_data = $this->Home_model->getVideoBySongId($song_id);
 //        $date = $song_data[0]['created_On'];
         $song_data[0]['created_On'] = date('M d, Y', strtotime($songs_data[0]['created_On']));
-        $comments = $this->Comment_model->get_data(array('parent_id' => 0, 'UserType' => 4, 'iml_comment_song.Song_id' => $song_id));
+        $comments = $this->Comment_model->get_data(array('parent_id' => -1, 'UserType' => 4, 'iml_comment_song.Song_id' => $song_id));
         if (is_array($comments) && !empty($comments)) {
             foreach ($comments as $key => $value) {
                 $comments[$key]['attachment'] = $this->Comment_model->getAttachment(array('comment_id' => $value['COM_ID']));
