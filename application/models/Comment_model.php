@@ -8,7 +8,6 @@ class Comment_model extends CI_Model {
     public $response_table = 'social_response';
     public $song_table = 'songs';
 
-
     function __construct() {
         parent::__construct();
     }
@@ -31,7 +30,6 @@ class Comment_model extends CI_Model {
         $this->db->from($this->table);
         $this->db->join($this->user_table, 'iml_comment_song.id = usermain.UID', 'inner');
 //        $this->db->join($this->response_table, 'usermain.UID = social_response.updated_by', 'inner');
-        
 //        $query = "SELECT c.*,u.* from ".$this->table." as c INNER JOIN ".$this->user_table." ON c.id = u.UID INNER JOIN (SELECT count(1) as like_count,response_on from ".$this->response_table." WHERE response_type = 1 group by response_type) as lc ON c.=lc.response_on COM"
         if (!empty($conditions)) {
             foreach ($conditions as $key => $value) {
@@ -43,6 +41,16 @@ class Comment_model extends CI_Model {
         $this->db->order_by('COM_ID', $order);
         $query = $this->db->get();
         $result = $query->result_array();
+        return $result;
+    }
+
+    public function get_post_by_user($user_id) {
+        $sql = "SELECT iml_comment_song.*,comment_attachments.attachment_path FROM iml_comment_song LEFT JOIN comment_attachments ON iml_comment_song.COM_ID=comment_attachments.comment_id WHERE iml_comment_song.Created_By='$user_id' and iml_comment_song.parent_id=0 ORDER BY `Updated_On` DESC LIMIT 3";
+        $query = $this->db->query($sql);
+        $result = array();
+        if ($query !== FALSE && $query->num_rows() > 0) {
+            $result = $query->result_array();
+        }
         return $result;
     }
 
@@ -127,7 +135,7 @@ class Comment_model extends CI_Model {
             }
         }
         $this->db->update($this->response_table, $data);
-        
+
         return TRUE;
     }
 

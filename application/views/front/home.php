@@ -158,7 +158,7 @@
         $('.public-section').height($(window).height() - $('header').height());
         $('.profile-section').height($(window).height() - $('header').height() - 20);
         get_post({'limit': limit, 'offset': offset, 'offset_song': offset_song});
-        get_post_industry({'limit': limit_ind, 'offset': offset_ind});
+//        get_post_industry({'limit': limit_ind, 'offset': offset_ind});
         $('.user_signup_switch').on('click', function () {
             $('.login_form').hide();
             $('.signup_form').show();

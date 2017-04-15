@@ -6,6 +6,7 @@ class User extends CI_Controller {
         parent::__construct();
         $this->load->model('User_model');
         $this->load->model('UserType_model');
+        $this->load->model('Comment_model');
 //        $this->load->library('session');
     }
 
@@ -31,6 +32,7 @@ class User extends CI_Controller {
         if (isset($session_data) && ($session_data['UID'])) {
             $data['profile_data'] = $this->User_model->get_single($user_id);
             $data['user_data'] = $this->User_model->get_single($profile_id['UID']);
+            $data['user_posts'] = $this->Comment_model->get_post_by_user($session_data['UID']);
             $data['page_title'] = "Profile Page";
             $data['page'] = "profile";
             $this->load->view('front/page', $data);
