@@ -23,10 +23,10 @@ class Index extends CI_Controller {
         $data['songs_data'] = $this->Home_model->get_video();
         $data['login_msg'] = $this->session->userdata('login_msg');
         $data['page_title'] = "Home";
-        if($user_id){
-        $data['user_data'] = $this->User_model->get_single($user_id);            
+        if ($user_id) {
+            $data['user_data'] = $this->User_model->get_single($user_id);
         } else {
-        $data['user_data'] = $session_data;                      
+            $data['profile_data'] = $session_data;
         }
         $data['page'] = "home";
         $this->load->view('front/page', $data);
@@ -161,40 +161,57 @@ class Index extends CI_Controller {
             $limit = isset($formdata['limit']) && $formdata['limit'] ? $formdata['limit'] : NULL;
             $offset = isset($formdata['offset']) && $formdata['offset'] ? $formdata['offset'] : NULL;
             $offset_song = isset($formdata['offset_song']) && $formdata['offset_song'] ? $formdata['offset_song'] : NULL;
-            $conditions_song = array('songs.isActive'=>1);
+            $conditions_song = array('songs.isActive' => 1);
             $conditions = array(
                 'parent_id' => 0,
                 'UserType' => 4,
             );
             $comments = $this->Comment_model->get_data($conditions, $limit, $offset);
-            $song_limit = 5-count($comments);
+            $song_limit = 5 - count($comments);
             $songs = $this->Songs_model->get($conditions_song, $song_limit, $offset_song);
-//            print_r($songs);exit;
-            $i=0;
+            $session_user_id = $_SESSION['user_data']['UID'];
+            $i = 0;
             if (is_array($comments) && !empty($comments)) {
                 foreach ($comments as $key => $value) {
-//                    print_r($value['COM_ID']);
-//                    print_r($key);
                     $i++;
                     $comments[$key]['song'] = FALSE;
+                    $result = $this->Comment_model->getResponse($value['COM_ID'], $session_user_id);
+                    $comments[$key]['user_response'] = (int) $result[0]['response_type'];
                     $comments[$key]['attachment'] = $this->Comment_model->getAttachment(array('comment_id' => $value['COM_ID']));
+                    $comments[$key]['like_count'] = $this->Comment_model->get_total_like(array($value['COM_ID']), 1);
+                    $comments[$key]['dislike_count'] = $this->Comment_model->get_total_dislike(array($value['COM_ID']), 2);
                     $comments[$key]['subComments'] = $this->Comment_model->get_data(array('parent_id' => $value['COM_ID']), 2, 0, 'DESC');
-                }
-//                exit;
-            } 
-//            echo $i;
-            if(is_array($songs) && !empty($songs)){
-                foreach ($songs as $key1 => $value1) {
-                    $comments[$i]=$value1;
-                    $comments[$i]['song']=true;
-                    $comments[$i++]['subComments']=$this->Comment_model->get_data(array('Song_id' => $value1['ID']), 2, 0, 'DESC');
-                    
-                    
+                    foreach ($comments[$key]['subComments'] as $key2 => $value2) {
+                        $comments[$key]['subComments'][$key2]['like_count'] = $this->Comment_model->get_total_like(array($value2['COM_ID']), 1);
+                        $comments[$key]['subComments'][$key2]['dislike_count'] = $this->Comment_model->get_total_like(array($value2['COM_ID']), 2);
+                        $result_sub = $this->Comment_model->getResponse($value2['COM_ID'], $session_user_id);
+                        $comments[$key]['subComments'][$key2]['user_response'] = (int) $result_sub[0]['response_type'];
+                    }
                 }
             }
-//            print_r($comments);exit;
+            if (is_array($songs) && !empty($songs)) {
+                foreach ($songs as $key1 => $value1) {
+                    $result1 = array();
+                    $comments[$i] = $value1;
+                    $comments[$i]['song'] = true;
+                    $result = $this->Comment_model->getResponse($value1['ID'], $session_user_id);
+                    $comments[$i]['user_response'] = (int) $result1[0]['response_type'];
+                    $comments[$i]['like_count'] = $this->Comment_model->get_total_like(array($value1['ID']), 1);
+                    $comments[$i]['dislike_count'] = $this->Comment_model->get_total_dislike(array($value1['ID']), 2);
+                    $comments[$i]['subComments'] = $this->Comment_model->get_data(array('Song_id' => $value1['ID']), 2, 0, 'DESC');
+                    foreach ($comments[$i]['subComments'] as $key3 => $value3) {
+//                        print_r($this->Comment_model->get_total_like(array($value3['Song_id']), 1));exit;
+                        $comments[$i]['subComments'][$key3]['like_count'] = $this->Comment_model->get_total_like(array($value3['Song_id']), 1);
+                        $comments[$i]['subComments'][$key3]['dislike_count'] = $this->Comment_model->get_total_dislike(array($value3['Song_id']), 2);
+                        $result_sub = $this->Comment_model->getResponse($value3['Song_id'], $session_user_id);
+                        $comments[$i]['subComments'][$key3]['user_response'] = (int) $result_sub[0]['response_type'];
+                    }
+                    $i++;
+                }
+//                print_r($comments);exit;
+            }
             $response['success'] = TRUE;
-            $response['song_offset'] = $offset_song+$song_limit;
+            $response['song_offset'] = $offset_song + $song_limit;
             $response['comment'] = $comments;
         } catch (Exception $exc) {
             $response['success'] = FALSE;
@@ -245,6 +262,164 @@ class Index extends CI_Controller {
                     $response['comment'] = $comments;
                 }
             }
+        } catch (Exception $exc) {
+            $response['success'] = FALSE;
+            $response['msg'] = $exc->getMessage();
+        }
+        echo json_encode($response);
+        exit();
+    }
+
+    public function like() {
+
+        $data = $_POST;
+        $response = array();
+        try {
+            $conditions = array(
+                'response_on' => $data['comment_id'],
+                'post_type' => $data['post_type'],
+                'updated_by' => $data['userid'],
+            );
+
+            $search_result = $this->Comment_model->get_like_status($conditions);
+//            print "<pre>";
+//            print_r($search_result);
+//            exit;
+            if (empty($search_result)) {
+//                if ($data['response_type'] == 1) {
+                $likeData = array(
+                    'post_type' => $data['post_type'],
+                    'response_type' => $data['response_type'],
+                    'response_on' => $data['comment_id'],
+                    'created_by' => $data['userid'],
+                    'created_on' => date("Y-m-d h:i:s"),
+                    'updated_by' => $data['userid'],
+                    'updated_on' => date("Y-m-d h:i:s"),
+                );
+                $likeId = $this->Comment_model->insert_response($likeData);
+
+                if ($likeId) {
+                    $response['success'] = TRUE;
+                    $response['data'] = $likeId;
+                    $response['msg'] = $data['response_type'];
+                }
+//                } else if ($data['response_type'] == 2) {
+//                    $dislikeData = array(
+//                        'post_type' => $data['post_type'],
+//                        'response_type' => $data['response_type'],
+//                        'response_on' => $data['comment_id'],
+//                        'created_by' => $data['userid'],
+//                        'created_on' => date("Y-m-d h:i:s"),
+//                        'updated_by' => $data['userid'],
+//                        'updated_on' => date("Y-m-d h:i:s"),
+//                    );
+//                    $likeId = $this->Comment_model->insert_response($dislikeData);
+//
+//                    if ($likeId) {
+//                        $response['success'] = TRUE;
+//                        $response['data'] = $likeId;
+//                        $response['msg'] = 'dislike';
+//                        $response['likeCount'] = $this->Comment_model->get_total_like(array($data['comment_id']), 1);
+//                        $response['dislikeCount'] = $this->Comment_model->get_total_dislike(array($data['comment_id']), 2);
+//                    }
+//                }
+            } else {
+
+                $response_type = $search_result[0]['response_type'];
+                if($response_type==$data['response_type']){
+                    $like_data = array(
+                            'response_type' => 0,
+                            'updated_by' => $data['userid'],
+                            'updated_on' => date("Y-m-d h:i:s"),
+                        );
+
+                        
+                }else{
+                    $like_data = array(
+                            'response_type' => $data['response_type'],
+                            'updated_by' => $data['userid'],
+                            'updated_on' => date("Y-m-d h:i:s"),
+                        );
+                       
+                }
+                $update_result = $this->Comment_model->update_like_status($like_data, array('response_on' => $data['comment_id'], 'updated_by' => $data['userid']));
+                        if ($update_result) {
+                            $response['success'] = TRUE;
+                            $response['data'] = $update_result;
+                            $response['msg'] = $like_data['response_type'];
+                        }
+                
+                
+                
+//                if ($data['response_type'] == 1) {
+//
+//                    if ($response_type == 1) {
+//                        $dislike_data = array(
+//                            'response_type' => 0,
+//                            'updated_by' => $data['userid'],
+//                            'updated_on' => date("Y-m-d h:i:s"),
+//                        );
+//
+//                        $update_result = $this->Comment_model->update_like_status($dislike_data, array('response_on' => $data['comment_id'], 'updated_by' => $data['userid']));
+//                        if ($update_result) {
+//                            $response['success'] = TRUE;
+//                            $response['data'] = $update_result;
+//                            $response['msg'] = 'neutral';
+//                            $response['likeCount'] = $this->Comment_model->get_total_like(array($data['comment_id']), 1);
+//                            $response['dislikeCount'] = $this->Comment_model->get_total_dislike(array($data['comment_id']), 2);
+//                        }
+//                    } else {
+//                        $like_data = array(
+//                            'response_type' => 1,
+//                            'updated_by' => $data['userid'],
+//                            'updated_on' => date("Y-m-d h:i:s"),
+//                        );
+//                        $update_result = $this->Comment_model->update_like_status($like_data, array('response_on' => $data['comment_id'], 'updated_by' => $data['userid']));
+//                        if ($update_result) {
+//                            $response['success'] = TRUE;
+//                            $response['data'] = $update_result;
+//                            $response['msg'] = 'like';
+//                            $response['likeCount'] = $this->Comment_model->get_total_like(array($data['comment_id']), 1);
+//                            $response['dislikeCount'] = $this->Comment_model->get_total_dislike(array($data['comment_id']), 2);
+//                        }
+//                    }
+//                } else if ($data['response_type'] == 2) {
+//
+//                    $response_type = $search_result[0]['response_type'];
+//                    if ($response_type == 2) {
+//                        $dislike_data = array(
+//                            'response_type' => 0,
+//                            'updated_by' => $data['userid'],
+//                            'updated_on' => date("Y-m-d h:i:s"),
+//                        );
+//
+//                        $update_result = $this->Comment_model->update_like_status($dislike_data, array('response_on' => $data['comment_id'], 'updated_by' => $data['userid']));
+//                        if ($update_result) {
+//                            $response['success'] = TRUE;
+//                            $response['data'] = $update_result;
+//                            $response['msg'] = 'nuetral';
+//                            $response['likeCount'] = $this->Comment_model->get_total_like(array($data['comment_id']), 1);
+//                            $response['dislikeCount'] = $this->Comment_model->get_total_dislike(array($data['comment_id']), 2);
+//                        }
+//                    } else {
+//                        $like_data = array(
+//                            'response_type' => 2,
+//                            'updated_by' => $data['userid'],
+//                            'updated_on' => date("Y-m-d h:i:s"),
+//                        );
+//                        $update_result = $this->Comment_model->update_like_status($like_data, array('response_on' => $data['comment_id']));
+//                        if ($update_result) {
+//                            $response['success'] = TRUE;
+//                            $response['data'] = $update_result;
+//                            $response['msg'] = 'dislike';
+//                            $response['likeCount'] = $this->Comment_model->get_total_like(array($data['comment_id']), 1);
+//                            $response['dislikeCount'] = $this->Comment_model->get_total_dislike(array($data['comment_id']), 2);
+//                        }
+//                    }
+//                }
+            }
+            $response['likeCount'] = $this->Comment_model->get_total_like(array($data['comment_id']), 1);
+            $response['dislikeCount'] = $this->Comment_model->get_total_dislike(array($data['comment_id']), 2);
         } catch (Exception $exc) {
             $response['success'] = FALSE;
             $response['msg'] = $exc->getMessage();
