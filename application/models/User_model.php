@@ -45,7 +45,17 @@ class User_model extends CI_Model {
         }
         return $result;
     }
-
+    
+    function autocheck($data){
+        $sql = "SELECT * FROM usermain WHERE ".$data['key']." = '".$data['value']."'";
+//        print_r($sql);exit;
+        $query = $this->db->query($sql);
+        $result = array();
+        if ($query !== FALSE && $query->num_rows() > 0) {
+            $result = $query->result_array();
+        }
+        return $result;
+    }
     function insert_data($data) {
         $this->db->insert($this->table, $data);
         return $this->db->insert_id();

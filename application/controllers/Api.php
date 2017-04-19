@@ -54,6 +54,9 @@ class Api extends CI_Controller {
             case 'get_videos_single':
                 $result = $this->get_single_video($data['data']);
                 break;
+            case 'autocheck':
+                $result = $this->autocheck($data['data']);
+                break;
 
             default:
                 break;
@@ -77,7 +80,20 @@ class Api extends CI_Controller {
             redirect('user/login', 'refresh');
         }
     }
-
+    
+    function autocheck($data){
+        $result = $this->User_model->autocheck($data);
+//        print_r($result);exit;
+        $response = array();
+        if(!empty($result)){
+            $response['success'] = FALSE;
+            $response['msg'] = $data['value']." Already Exist Please choose diffrent ".$data['key'];
+        }else{
+             $response['success'] = TRUE;
+             $response['msg'] = $data['value']." available";
+        }
+        return $response;
+    }
     function login($data) {
         $response = array();
         if (isset($data['UserName']) && isset($data['UserName']) && $data['UserName'] != '' && $data['UserName'] != '') {
@@ -137,6 +153,7 @@ class Api extends CI_Controller {
                 if ($result) {
                     $response['success'] = true;
                     $response['msg'] = "User Updated";
+                    $response['user_data'] = $this->User_model->get_single($data['UID']);
                 } else {
                     $response['success'] = false;
                     $response['msg'] = "User not Updated";
@@ -163,9 +180,11 @@ class Api extends CI_Controller {
                 );
 
                 $result = $this->User_model->insert_data($artist_data);
+                
                 if ($result) {
                     $response['success'] = true;
                     $response['msg'] = "User added";
+                    $response['user_data'] = $this->User_model->get_single($result);
                 } else {
                     $response['success'] = false;
                     $response['msg'] = "User not added";

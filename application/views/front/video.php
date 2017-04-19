@@ -208,9 +208,7 @@ $song_id = $songs_data[0]['ID'];
                             <div class="layout-column user-detail">
                                 <span class="user-name"><?php echo $artist_video['Song_Title'] ?></span>
                             </div>
-                            <?php
-                        }
-                        ?>
+                        <?php } ?>
                         <p>Songs from other Artists</p>
                         <?php
                         foreach ($allVideos as $song) {
@@ -225,7 +223,7 @@ $song_id = $songs_data[0]['ID'];
                             <div class="layout-column user-detail">
                                 <span class="user-name"><?php echo $song['Song_Title'] ?></span>
                             </div>
-<?php } ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
