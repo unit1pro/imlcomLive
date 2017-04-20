@@ -57,6 +57,13 @@ class Api extends CI_Controller {
             case 'autocheck':
                 $result = $this->autocheck($data['data']);
                 break;
+            case 'like':
+                $result = $this->like($data['data']);
+                break;
+
+            case 'comment':
+                $result = $this->post_comment($data['data']);
+                break;
 
             default:
                 break;
@@ -80,20 +87,21 @@ class Api extends CI_Controller {
             redirect('user/login', 'refresh');
         }
     }
-    
-    function autocheck($data){
+
+    function autocheck($data) {
         $result = $this->User_model->autocheck($data);
 //        print_r($result);exit;
         $response = array();
-        if(!empty($result)){
+        if (!empty($result)) {
             $response['success'] = FALSE;
-            $response['msg'] = $data['value']." Already Exist Please choose diffrent ".$data['key'];
-        }else{
-             $response['success'] = TRUE;
-             $response['msg'] = $data['value']." available";
+            $response['msg'] = $data['value'] . " Already Exist Please choose diffrent " . $data['key'];
+        } else {
+            $response['success'] = TRUE;
+            $response['msg'] = $data['value'] . " available";
         }
         return $response;
     }
+
     function login($data) {
         $response = array();
         if (isset($data['UserName']) && isset($data['UserName']) && $data['UserName'] != '' && $data['UserName'] != '') {
@@ -105,7 +113,7 @@ class Api extends CI_Controller {
 //                redirect('User/index', 'refresh');
             } else {
                 $response['success'] = False;
-                $response['error'] = "User Id and Password Did not match.";
+                $response['error'] = "User Id and Password didn't match.";
             }
         } else {
             $response['success'] = False;
@@ -180,7 +188,7 @@ class Api extends CI_Controller {
                 );
 
                 $result = $this->User_model->insert_data($artist_data);
-                
+
                 if ($result) {
                     $response['success'] = true;
                     $response['msg'] = "User added";
@@ -224,33 +232,50 @@ class Api extends CI_Controller {
             $comments = $this->Comment_model->get_data($conditions, $limit, $offset);
             $song_limit = 5 - count($comments);
             $songs = $this->Songs_model->get($conditions_song, $song_limit, $offset_song);
-//            print_r($songs);exit;
+            $session_user_id = $formdata['user_id'];
             $i = 0;
             if (is_array($comments) && !empty($comments)) {
                 foreach ($comments as $key => $value) {
-//                    print_r($value['COM_ID']);
-//                    print_r($key);
                     $i++;
                     $comments[$key]['song'] = FALSE;
                     $comments[$key]['attachment'] = $this->Comment_model->getAttachment(array('comment_id' => $value['COM_ID']));
                     $comments[$key]['subComments'] = $this->Comment_model->get_data(array('parent_id' => $value['COM_ID']), 2, 0, 'DESC');
+                    $result = $this->Comment_model->getResponse($value['COM_ID'], $session_user_id);
+                    $comments[$key]['user_response'] = (int) $result[0]['response_type'];
+                    $comments[$key]['like_count'] = $this->Comment_model->get_total_like(array($value['COM_ID']), 1);
+                    $comments[$key]['dislike_count'] = $this->Comment_model->get_total_dislike(array($value['COM_ID']), 2);
+                    $comments[$key]['subComments'] = $this->Comment_model->get_data(array('parent_id' => $value['COM_ID']), 2, 0, 'DESC');
+                    foreach ($comments[$key]['subComments'] as $key2 => $value2) {
+                        $comments[$key]['subComments'][$key2]['like_count'] = $this->Comment_model->get_total_like(array($value2['COM_ID']), 1);
+                        $comments[$key]['subComments'][$key2]['dislike_count'] = $this->Comment_model->get_total_like(array($value2['COM_ID']), 2);
+                        $result_sub = $this->Comment_model->getResponse($value2['COM_ID'], $session_user_id);
+                        $comments[$key]['subComments'][$key2]['user_response'] = (int) $result_sub[0]['response_type'];
+                    }
                 }
-//                exit;
             }
-//            echo $i;
             if (is_array($songs) && !empty($songs)) {
                 foreach ($songs as $key1 => $value1) {
                     $comments[$i] = $value1;
                     $comments[$i]['song'] = true;
                     $comments[$i++]['subComments'] = $this->Comment_model->get_data(array('Song_id' => $value1['ID']), 2, 0, 'DESC');
+                    $result = $this->Comment_model->getResponse($value1['ID'], $session_user_id);
+                    $comments[$i]['user_response'] = (int) $result1[0]['response_type'];
+                    $comments[$i]['like_count'] = $this->Comment_model->get_total_like(array($value1['ID']), 1);
+                    $comments[$i]['dislike_count'] = $this->Comment_model->get_total_dislike(array($value1['ID']), 2);
+                    foreach ($comments[$i]['subComments'] as $key3 => $value3) {
+                        $comments[$i]['subComments'][$key3]['like_count'] = $this->Comment_model->get_total_like(array($value3['Song_id']), 1);
+                        $comments[$i]['subComments'][$key3]['dislike_count'] = $this->Comment_model->get_total_dislike(array($value3['Song_id']), 2);
+                        $result_sub = $this->Comment_model->getResponse($value3['Song_id'], $session_user_id);
+                        $comments[$i]['subComments'][$key3]['user_response'] = (int) $result_sub[0]['response_type'];
+                    }
+                    $i++;
                 }
             }
-//            print_r($comments);exit;
             $response['success'] = TRUE;
             $response['song_offset'] = $offset_song + $song_limit;
             $response['comment'] = $comments;
             $response['base_url'] = base_url();
-        $response['site_url'] = site_url();
+            $response['site_url'] = site_url();
         } catch (Exception $exc) {
             $response['success'] = FALSE;
             $response['msg'] = $exc->getMessage();
@@ -283,33 +308,10 @@ class Api extends CI_Controller {
         $data['image_base_path'] = base_url('uploads/images');
         $data['base_url'] = base_url();
         $data['site_url'] = site_url();
-        
+
         return $data;
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     function logout() {
         $this->session->unset_userdata('user_data');
         $this->session->sess_destroy();
@@ -402,6 +404,124 @@ class Api extends CI_Controller {
             }
         } catch (Exception $exc) {
             $response['success'] = FALSE;
+            $response['msg'] = $exc->getMessage();
+        }
+        echo json_encode($response);
+        exit();
+    }
+
+    public function like() {
+
+        $data = $_POST['data'];
+
+        $response = array();
+        try {
+            $conditions = array(
+                'response_on' => $data['comment_id'],
+                'post_type' => $data['post_type'],
+                'updated_by' => $data['userid'],
+            );
+
+
+            $search_result = $this->Comment_model->get_like_status($conditions);
+
+            if (empty($search_result)) {
+                $likeData = array(
+                    'post_type' => $data['post_type'],
+                    'response_type' => $data['response_type'],
+                    'response_on' => $data['comment_id'],
+                    'created_by' => $data['userid'],
+                    'created_on' => date("Y-m-d h:i:s"),
+                    'updated_by' => $data['userid'],
+                    'updated_on' => date("Y-m-d h:i:s"),
+                );
+                $likeId = $this->Comment_model->insert_response($likeData);
+
+                if ($likeId) {
+                    $response['success'] = TRUE;
+                    $response['data'] = $likeId;
+                    $response['msg'] = $data['response_type'];
+                }
+            } else {
+
+                $response_type = $search_result[0]['response_type'];
+                if ($response_type == $data['response_type']) {
+                    $like_data = array(
+                        'response_type' => 0,
+                        'updated_by' => $data['userid'],
+                        'updated_on' => date("Y-m-d h:i:s"),
+                    );
+                } else {
+                    $like_data = array(
+                        'response_type' => $data['response_type'],
+                        'updated_by' => $data['userid'],
+                        'updated_on' => date("Y-m-d h:i:s"),
+                    );
+                }
+                $update_result = $this->Comment_model->update_like_status($like_data, array('response_on' => $data['comment_id'], 'updated_by' => $data['userid']));
+                if ($update_result) {
+                    $response['success'] = TRUE;
+                    $response['data'] = $update_result;
+                    $response['msg'] = $like_data['response_type'];
+                }
+            }
+            $response['likeCount'] = $this->Comment_model->get_total_like(array($data['comment_id']), 1);
+            $response['dislikeCount'] = $this->Comment_model->get_total_dislike(array($data['comment_id']), 2);
+        } catch (Exception $exc) {
+            $response['success'] = FALSE;
+            $response['msg'] = $exc->getMessage();
+        }
+        echo json_encode($response);
+        exit();
+    }
+
+    public function post_comment() {
+        $formData = $data = $_POST['data'];
+
+        $user_id = $formData['userid'];
+        $session_data = $this->session->userdata('user_data');
+        $response = array();
+        try {
+            if (!$user_id)
+                throw new Exception("Session Expired Please Login");
+            if ($formData['COMMENTS'] == '' && (!isset($formData['attchment_path'])))
+                throw new Exception("Please write some comment or add a file to submit");
+            $insertData = array(
+                'ID' => $session_data['UID'],
+                'parent_id' => isset($formData['parent_id']) && $formData['parent_id'] ? $formData['parent_id'] : 0,
+                'Song_id' => isset($formData['Song_id']) && $formData['Song_id'] ? $formData['Song_id'] : 0,
+                'COMMENTS' => isset($formData['COMMENTS']) && $formData['COMMENTS'] ? $formData['COMMENTS'] : '',
+                'isActive' => 1,
+                'created_by' => $user_id,
+                'updated_by' => $user_id,
+            );
+
+            $comment_id = $this->Comment_model->insert_data($insertData);
+            if (!$comment_id)
+                throw new Exception("Comment not saved Please check your network and try again");
+            if ($comment_id && isset($formData['attchment_path']) && !empty($formData['attchment_path'])) {
+                $attachmentId = array();
+                foreach ($formData['attchment_path'] as $key => $attachment_path) {
+                    $attachmentData = array(
+                        'comment_id' => $comment_id,
+                        'attachment_type' => $formData['attchment_type'][$key],
+                        'attachment_path' => $attachment_path,
+                        'isActive' => 1,
+                        'created_by' => $user_id,
+                        'updated_by' => $user_id,
+                    );
+                    $attachmentId[] = $this->Comment_model->insert_comment_attachment($attachmentData);
+                }
+            }
+            $comment = $this->Comment_model->get_data(array('COM_ID' => $comment_id));
+            $comment[0]['attachment'] = $this->Comment_model->getAttachment(array('comment_id' => $comment_id));
+            $response['success'] = TRUE;
+            $response['msg'] = "Post Saved";
+            $response['base_url'] = base_url();
+            $response['comment'] = $comment;
+        } catch (Exception $exc) {
+            $response['success'] = FALSE;
+            $response['base_url'] = base_url();
             $response['msg'] = $exc->getMessage();
         }
         echo json_encode($response);

@@ -783,6 +783,5 @@
         } else {
             alert('Please Login to user the service.');
         }
-
     }
 </script>
