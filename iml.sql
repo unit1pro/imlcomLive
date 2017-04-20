@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2017 at 01:47 PM
+-- Generation Time: Apr 20, 2017 at 12:51 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -175,7 +175,11 @@ INSERT INTO `iml_comment_song` (`COM_ID`, `ID`, `parent_id`, `AUTHOR`, `EMAIL`, 
 (66, 22, 59, NULL, NULL, 'power', NULL, 0, b'1', '2017-04-15 12:35:43', 22, '2017-04-15 12:35:43', 22),
 (67, 22, 59, NULL, NULL, 'hmmm', NULL, 0, b'1', '2017-04-15 12:36:35', 22, '2017-04-15 12:36:35', 22),
 (68, 22, 59, NULL, NULL, 'again', NULL, 0, b'1', '2017-04-15 12:37:15', 22, '2017-04-15 12:37:15', 22),
-(69, 22, 0, NULL, NULL, 'wgwrtregr', NULL, 15, b'1', '2017-04-18 09:39:56', 22, '2017-04-18 09:39:56', 22);
+(69, 22, 0, NULL, NULL, 'wgwrtregr', NULL, 15, b'1', '2017-04-18 09:39:56', 22, '2017-04-18 09:39:56', 22),
+(70, 22, 69, NULL, NULL, 'sdfsdfsdfsdf', NULL, 0, b'1', '2017-04-20 12:21:27', 22, '2017-04-20 12:21:27', 22),
+(71, 22, 69, NULL, NULL, 'sdfsdfsdf', NULL, 0, b'1', '2017-04-20 12:23:26', 22, '2017-04-20 12:23:26', 22),
+(72, 22, 69, NULL, NULL, 'svscvcv', NULL, 0, b'1', '2017-04-20 12:25:22', 22, '2017-04-20 12:25:22', 22),
+(73, 22, 69, NULL, NULL, 'rajat', NULL, 0, b'1', '2017-04-20 12:27:05', 22, '2017-04-20 12:27:05', 22);
 
 -- --------------------------------------------------------
 
@@ -272,11 +276,16 @@ CREATE TABLE `social_response` (
 --
 
 INSERT INTO `social_response` (`id`, `response_type`, `response_on`, `post_type`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
-(46, 2, 69, 3, 22, '2017-04-18 04:09:59', 22, '2017-04-18 04:10:00'),
+(51, 2, 73, 3, 22, '2017-04-20 06:57:09', 22, '2017-04-20 06:57:11'),
+(50, 2, 68, 3, 22, '2017-04-20 05:41:17', 22, '2017-04-20 05:41:32'),
+(49, 0, 59, 2, 22, '2017-04-20 04:44:16', 22, '2017-04-20 04:44:51'),
+(48, 0, 27, 3, 22, '2017-04-20 02:34:28', 22, '2017-04-20 02:34:31'),
+(47, 0, 69, 2, 22, '2017-04-20 02:32:50', 22, '2017-04-20 06:49:20'),
+(46, 0, 69, 3, 22, '2017-04-18 04:09:59', 22, '2017-04-20 06:49:20'),
 (45, 2, 15, 1, 22, '2017-04-18 04:09:50', 22, '2017-04-18 04:09:51'),
 (44, 2, 63, 3, 22, '2017-04-15 07:03:23', 22, '2017-04-15 07:03:23'),
 (43, 2, 10, 1, 22, '2017-04-15 06:08:30', 22, '2017-04-15 06:08:30'),
-(42, 1, 59, 3, 22, '2017-04-15 05:48:37', 22, '2017-04-15 05:48:40'),
+(42, 0, 59, 3, 22, '2017-04-15 05:48:37', 22, '2017-04-20 04:44:51'),
 (41, 2, 53, 2, 1, '2017-04-15 04:09:14', 1, '2017-04-15 04:09:14'),
 (40, 1, 54, 3, 1, '2017-04-15 04:09:12', 1, '2017-04-15 04:09:12'),
 (39, 2, 54, 3, 22, '2017-04-15 04:08:58', 22, '2017-04-15 04:08:58'),
@@ -610,7 +619,7 @@ ALTER TABLE `group_categories`
 -- AUTO_INCREMENT for table `iml_comment_song`
 --
 ALTER TABLE `iml_comment_song`
-  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT for table `industry_communication`
 --
@@ -630,7 +639,7 @@ ALTER TABLE `m_reference_detail`
 -- AUTO_INCREMENT for table `social_response`
 --
 ALTER TABLE `social_response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `songs`
 --
