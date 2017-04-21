@@ -123,9 +123,6 @@ $song_id = $songs_data[0]['ID'];
                     <?php
                     if (isset($comments) && !empty($comments)) {
                         foreach ($comments as $comment) {
-//                          print "<pre>";
-//                          print_r($comment);
-//                          exit;
                             $userImageComment = isset($comment) && $comment['Photo'] != '' ? base_url('uploads/images/') . '/' . $comment['Photo'] : base_url('front') . '/img/user-image.png';
                             ?>
                             <div class="layout-row user-comments-youtube">
@@ -138,49 +135,13 @@ $song_id = $songs_data[0]['ID'];
                                                 <!--<span>3 min agao</span>-->
                                             </div>  
                                             <div><?php echo $comment['COMMENTS'] ?></div>
-                                            <!--                                            <div class="layout-row">
-                                                                                            <span class="user-name"><a href="javascript:void(0)" onclick="replyOnComment(this)" >Reply</a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="likeComment(this)" ><i class="fa fa-thumbs-up"></a></i>&nbsp;  &nbsp; <a href="javascript:void(0)" onclick="dislikeComment(this)" ><i class="fa fa-thumbs-down"></i></a></span>
-                                                                                            <span class="user-name">; &nbsp;<a href="javascript:void(0)" onclick="likeComment(this)" ><i class="fa fa-thumbs-up"></a></i>&nbsp;  &nbsp; <a href="javascript:void(0)" onclick="dislikeComment(this)" ><i class="fa fa-thumbs-down"></i></a></span>
-                                                                                        </div>-->
-
                                             <div class="layout-row action-wrapper">
                                                 <div class="layout-row layout-align-start-center flex-15"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, <?php echo $comment['COM_ID']; ?>)" data-post_type="3" data-response_type="1" data-commentid="<?php echo $comment['COM_ID']; ?>"><i class="fa fa-thumbs-up <?php echo isset($comment['user_response']) && $comment['user_response'] == 1 ? 'liked' : '' ?>"></i></a><span class="like_count_span"><?php echo $comment['total_likes'] != 0 ? $comment['total_likes'] . ' Like' : ''; ?></span></div>
                                                 <div class="layout-row layout-align-start-center flex-15"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, <?php echo $comment['COM_ID']; ?>)" data-post_type="3" data-response_type="2" data-commentid="<?php echo $comment['COM_ID']; ?>"><i class="fa fa-thumbs-down <?php echo isset($comment['user_response']) && $comment['user_response'] == 2 ? 'disliked' : '' ?>"></i></a><span class="dislike_count_span"><?php echo $comment['total_dislikes'] != 0 ? $comment['total_dislikes'] . ' Dislike' : ''; ?></span></div>
                                             </div>
-
-
-
-
                                         </div>
                                         <div class="float-right flex-10 layout-row layout-align-end-start"><i class="fa fa-ellipsis-v"></i></div> 
                                     </div>
-                                    <?php
-                                    if (isset($comment['subComments']) && !empty($comment['subComments'])) {
-                                        foreach ($comment['subComments'] as $subComment) {
-                                            $userImagesubComment = isset($subComment) && $subComment['Photo'] != '' ? base_url('uploads/images') . '/' . $profile_data['Photo'] : base_url('front') . '/img/user-image.png';
-                                            ?>
-                                            <div class="layout-row sub-comment">
-                                                <img src="<?php echo $userImagesubComment ?>" alt="user-image"/>
-                                                <div class="layout-column sub-comment flex-85">
-                                                    <div class="layout-row">
-                                                        <span class="user-name"><?php echo $subComment['FirstName'] . ' ' . $subComment['LastName'] ?></span>
-                                                        <!--<span>3 min agao</span>-->
-                                                    </div>
-                                                    <div><?php echo $subComment['COMMENTS'] ?></div>
-                                                    <!--                                                    <div class="layout-row">
-                                                                                                            <span class="user-name"> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="likeComment(this)" ><i class="fa fa-thumbs-up"></i></a>&nbsp;  &nbsp; <a href="javascript:void(0)" onclick="dislikeComment(this)" ><i class="fa fa-thumbs-down"></i></a></span>
-                                                                                                        </div>-->
-                                                    <div class="layout-row action-wrapper">;
-                                                        <div class="layout-row layout-align-start-center flex-15"><a href="javascript:void(0)" class="like_button" onclick="likeFunction(this, <?php echo $subComment['COM_ID']; ?>)" data-post_type="3" data-response_type="1" data-commentid="<?php echo $subComment['COM_ID']; ?>"><i class="fa fa-thumbs-up"></i>Like</a></div>;
-                                                        <div class="layout-row layout-align-start-center flex-15"><a href="javascript:void(0)" class="dislike_button" onclick="likeFunction(this, <?php echo $subComment['COM_ID']; ?>)" data-post_type="3" data-response_type="2" data-commentid="<?php echo $subComment['COM_ID']; ?>"><i class="fa fa-thumbs-down"></i>Dislike</a></div>;
-                                                    </div>;
-                                                </div>
-                                                <div class="float-right flex-10 layout-row layout-align-end-start"><i class="fa fa-ellipsis-v"></i></div>
-                                            </div>
-                                            <?php
-                                        }
-                                    }
-                                    ?>
                                 </div>
                             </div>
                             <?php

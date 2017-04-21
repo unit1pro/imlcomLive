@@ -65,6 +65,10 @@ class Api extends CI_Controller {
                 $result = $this->post_comment($data['data']);
                 break;
 
+            case 'video_views':
+                $result = $this->post_hit_count($data['data']);
+                break;
+
             default:
                 break;
         }
@@ -282,25 +286,36 @@ class Api extends CI_Controller {
         }
 
         return $response;
-//        echo json_encode($response);
-//        exit();
     }
 
     function get_single_video($vidData) {
         $song_id = $vidData['songId'];
+        $user_id = $vidData['user_id'];
         $song_data = $this->Home_model->getVideoBySongId($song_id);
-//        $date = $song_data[0]['created_On'];
         $song_data[0]['created_On'] = date('M d, Y', strtotime($songs_data[0]['created_On']));
-        $comments = $this->Comment_model->get_data(array('parent_id' => -1, 'UserType' => 4, 'iml_comment_song.Song_id' => $song_id));
+        $result = $this->Comment_model->getResponse($song_data[0]['ID'], $user_id);
+        $song_data[0]['user_response'] = (int) $result[0]['response_type'];
+        $song_data[0]['total_likes'] = $this->Comment_model->get_total_like([$song_data[0]['ID']], 1);
+        $song_data[0]['total_dislikes'] = $this->Comment_model->get_total_dislike([$song_data[0]['ID']], 2);
+        
+//        $comments = $this->Comment_model->get_data(array('parent_id' => -1, 'UserType' => 4, 'iml_comment_song.Song_id' => $song_id));
+        $comments = $this->Comment_model->get_song_comment($song_data[0]['SongsID']);
         if (is_array($comments) && !empty($comments)) {
             foreach ($comments as $key => $value) {
+                $resultCommentUserResponse = $this->Comment_model->getResponse($value['COM_ID'], $user_id);
+                $comments[$key]['user_response'] = (int) $resultCommentUserResponse[0]['response_type'];
+                $comments[$key]['total_likes'] = $this->Comment_model->get_total_like(array($value['COM_ID']), 1);
+                $comments[$key]['total_dislikes'] = $this->Comment_model->get_total_dislike(array($value['COM_ID']), 2);
+
                 $comments[$key]['attachment'] = $this->Comment_model->getAttachment(array('comment_id' => $value['COM_ID']));
                 $comments[$key]['subComments'] = $this->Comment_model->get_data(array('parent_id' => $value['COM_ID']), 2, 0, 'DESC');
             }
         }
+        
         $allVideos = $this->Home_model->get_video();
         $artistAllVideo = $this->Home_model->get_artist_video($song_data[0]['UID'], $song_data[0]['ID']);
         $data['songs_data'] = $song_data[0];
+
         $data['comments'] = $comments;
         $data['allVideos'] = $allVideos;
         $data['artistAllVideo'] = $artistAllVideo;
@@ -522,6 +537,24 @@ class Api extends CI_Controller {
         } catch (Exception $exc) {
             $response['success'] = FALSE;
             $response['base_url'] = base_url();
+            $response['msg'] = $exc->getMessage();
+        }
+        echo json_encode($response);
+        exit();
+    }
+
+    function post_hit_count() {
+
+        try {
+            $data = $_POST['data']['data'];
+            $session_data = $this->session->userdata('user_data');
+
+            $song_data = array(
+                'HITS' => $data['new_view']
+            );
+            $result = $this->Songs_model->update_song($data['song_id'], $song_data);
+        } catch (Exception $exc) {
+            $response['success'] = FALSE;
             $response['msg'] = $exc->getMessage();
         }
         echo json_encode($response);

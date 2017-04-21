@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2017 at 12:51 PM
+-- Generation Time: Apr 21, 2017 at 01:07 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -276,16 +276,18 @@ CREATE TABLE `social_response` (
 --
 
 INSERT INTO `social_response` (`id`, `response_type`, `response_on`, `post_type`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
+(53, 2, 57, 3, 22, '2017-04-21 05:19:15', 22, '2017-04-21 05:25:18'),
+(52, 1, 58, 3, 22, '2017-04-21 05:13:44', 22, '2017-04-21 05:58:30'),
 (51, 2, 73, 3, 22, '2017-04-20 06:57:09', 22, '2017-04-20 06:57:11'),
 (50, 2, 68, 3, 22, '2017-04-20 05:41:17', 22, '2017-04-20 05:41:32'),
-(49, 0, 59, 2, 22, '2017-04-20 04:44:16', 22, '2017-04-20 04:44:51'),
+(49, 1, 59, 2, 22, '2017-04-20 04:44:16', 22, '2017-04-21 05:19:46'),
 (48, 0, 27, 3, 22, '2017-04-20 02:34:28', 22, '2017-04-20 02:34:31'),
-(47, 0, 69, 2, 22, '2017-04-20 02:32:50', 22, '2017-04-20 06:49:20'),
-(46, 0, 69, 3, 22, '2017-04-18 04:09:59', 22, '2017-04-20 06:49:20'),
-(45, 2, 15, 1, 22, '2017-04-18 04:09:50', 22, '2017-04-18 04:09:51'),
+(47, 2, 69, 2, 22, '2017-04-20 02:32:50', 22, '2017-04-21 05:14:31'),
+(46, 2, 69, 3, 22, '2017-04-18 04:09:59', 22, '2017-04-21 05:14:31'),
+(45, 1, 15, 1, 22, '2017-04-18 04:09:50', 22, '2017-04-21 04:22:00'),
 (44, 2, 63, 3, 22, '2017-04-15 07:03:23', 22, '2017-04-15 07:03:23'),
 (43, 2, 10, 1, 22, '2017-04-15 06:08:30', 22, '2017-04-15 06:08:30'),
-(42, 0, 59, 3, 22, '2017-04-15 05:48:37', 22, '2017-04-20 04:44:51'),
+(42, 1, 59, 3, 22, '2017-04-15 05:48:37', 22, '2017-04-21 05:19:46'),
 (41, 2, 53, 2, 1, '2017-04-15 04:09:14', 1, '2017-04-15 04:09:14'),
 (40, 1, 54, 3, 1, '2017-04-15 04:09:12', 1, '2017-04-15 04:09:12'),
 (39, 2, 54, 3, 22, '2017-04-15 04:08:58', 22, '2017-04-15 04:08:58'),
@@ -331,11 +333,11 @@ CREATE TABLE `songs` (
 INSERT INTO `songs` (`ID`, `CAT_ID`, `Song_Title`, `composer`, `director`, `Writers`, `synopsis`, `Date`, `LINK_APPROVED`, `HITS`, `RATING`, `NO_RATES`, `TOTAL_COMMENTS`, `HIT_DATE`, `Image`, `Song_status`, `Song_File_Name`, `isActive`, `created_On`, `Created_By`, `Updated_On`, `Updated_By`) VALUES
 (10, 1, 'Ibadat', 'Alan Manjrekar', '', '', '', '2017-03-05', NULL, 6, NULL, NULL, NULL, NULL, 'Shikhar.jpg', 1, '2017201702020202133622000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-15 11:38:35', 1, '0000-00-00 00:00:00', 1),
 (11, 1, 'test 3', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 11, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133837000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-14 16:38:13', 1, '0000-00-00 00:00:00', 1),
-(12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 60, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-15 12:58:03', 1, '0000-00-00 00:00:00', 1),
+(12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 61, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-21 08:55:04', 1, '0000-00-00 00:00:00', 1),
 (13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 43, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-15 11:36:58', 1, '0000-00-00 00:00:00', 1),
-(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 48, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-15 12:13:56', 1, '0000-00-00 00:00:00', 1),
-(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 38, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-18 09:39:48', 1, '0000-00-00 00:00:00', 1),
-(16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 53, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-15 12:58:23', 1, '0000-00-00 00:00:00', 1);
+(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 56, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-21 11:37:11', 1, '0000-00-00 00:00:00', 1),
+(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 74, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-21 11:28:20', 1, '0000-00-00 00:00:00', 1),
+(16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 55, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-21 11:37:03', 1, '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -639,7 +641,7 @@ ALTER TABLE `m_reference_detail`
 -- AUTO_INCREMENT for table `social_response`
 --
 ALTER TABLE `social_response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT for table `songs`
 --
