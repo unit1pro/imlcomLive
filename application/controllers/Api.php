@@ -69,6 +69,10 @@ class Api extends CI_Controller {
                 $result = $this->post_hit_count($data['data']);
                 break;
 
+            case 'video_comment':
+                $result = $this->song_comment($data['data']);
+                break;
+
             default:
                 break;
         }
@@ -297,7 +301,7 @@ class Api extends CI_Controller {
         $song_data[0]['user_response'] = (int) $result[0]['response_type'];
         $song_data[0]['total_likes'] = $this->Comment_model->get_total_like([$song_data[0]['ID']], 1);
         $song_data[0]['total_dislikes'] = $this->Comment_model->get_total_dislike([$song_data[0]['ID']], 2);
-        
+
 //        $comments = $this->Comment_model->get_data(array('parent_id' => -1, 'UserType' => 4, 'iml_comment_song.Song_id' => $song_id));
         $comments = $this->Comment_model->get_song_comment($song_data[0]['SongsID']);
         if (is_array($comments) && !empty($comments)) {
@@ -311,7 +315,7 @@ class Api extends CI_Controller {
                 $comments[$key]['subComments'] = $this->Comment_model->get_data(array('parent_id' => $value['COM_ID']), 2, 0, 'DESC');
             }
         }
-        
+
         $allVideos = $this->Home_model->get_video();
         $artistAllVideo = $this->Home_model->get_artist_video($song_data[0]['UID'], $song_data[0]['ID']);
         $data['songs_data'] = $song_data[0];
@@ -561,6 +565,55 @@ class Api extends CI_Controller {
         exit();
     }
 
+    function song_comment() {
+        $formData = $_POST['data'];
+        $response = array();
+        try {
+            if (!$formData['userid'])
+                throw new Exception("Session Expired Please Login");
+            if ($formData['COMMENTS'] == '' && (!isset($formData['attchment_path'])))
+                throw new Exception("Please write some comment or add a file to submit");
+            $insertData = array(
+                'ID' => $formData['userid'],
+                'parent_id' => isset($formData['parent_id']) && $formData['parent_id'] ? $formData['parent_id'] : 0,
+                'Song_id' => isset($formData['Song_id']) && $formData['Song_id'] ? $formData['Song_id'] : 0,
+                'COMMENTS' => isset($formData['COMMENTS']) && $formData['COMMENTS'] ? $formData['COMMENTS'] : '',
+                'isActive' => 1,
+                'created_by' => $formData['userid'],
+                'updated_by' => $formData['userid'],
+            );
+
+            $comment_id = $this->Comment_model->insert_data($insertData);
+            if (!$comment_id)
+                throw new Exception("Comment not saved Please check your network and try again");
+            if ($comment_id && isset($formData['attchment_path']) && !empty($formData['attchment_path'])) {
+                $attachmentId = array();
+                foreach ($formData['attchment_path'] as $key => $attachment_path) {
+                    $attachmentData = array(
+                        'comment_id' => $comment_id,
+                        'attachment_type' => $formData['attchment_type'][$key],
+                        'attachment_path' => $attachment_path,
+                        'isActive' => 1,
+                        'created_by' => $formData['userid'],
+                        'updated_by' => $formData['userid'],
+                    );
+                    $attachmentId[] = $this->Comment_model->insert_comment_attachment($attachmentData);
+                }
+            }
+            $comment = $this->Comment_model->get_data(array('COM_ID' => $comment_id));
+            $comment[0]['attachment'] = $this->Comment_model->getAttachment(array('comment_id' => $comment_id));
+            $response['success'] = TRUE;
+            $response['msg'] = "Post Saved";
+            $response['base_url'] = base_url();
+            $response['comment'] = $comment;
+        } catch (Exception $exc) {
+            $response['success'] = FALSE;
+            $response['msg'] = $exc->getMessage();
+            $response['base_url'] = base_url();
+        }
+        echo json_encode($response);
+        exit();
+    }
 }
 
 ?>

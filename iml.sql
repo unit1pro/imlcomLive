@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2017 at 01:07 PM
+-- Generation Time: Apr 22, 2017 at 10:22 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -179,7 +179,17 @@ INSERT INTO `iml_comment_song` (`COM_ID`, `ID`, `parent_id`, `AUTHOR`, `EMAIL`, 
 (70, 22, 69, NULL, NULL, 'sdfsdfsdfsdf', NULL, 0, b'1', '2017-04-20 12:21:27', 22, '2017-04-20 12:21:27', 22),
 (71, 22, 69, NULL, NULL, 'sdfsdfsdf', NULL, 0, b'1', '2017-04-20 12:23:26', 22, '2017-04-20 12:23:26', 22),
 (72, 22, 69, NULL, NULL, 'svscvcv', NULL, 0, b'1', '2017-04-20 12:25:22', 22, '2017-04-20 12:25:22', 22),
-(73, 22, 69, NULL, NULL, 'rajat', NULL, 0, b'1', '2017-04-20 12:27:05', 22, '2017-04-20 12:27:05', 22);
+(73, 22, 69, NULL, NULL, 'rajat', NULL, 0, b'1', '2017-04-20 12:27:05', 22, '2017-04-20 12:27:05', 22),
+(74, 22, 13, NULL, NULL, 'sdfsdffsdf', NULL, 0, b'1', '2017-04-22 10:01:44', 22, '2017-04-22 10:01:44', 22),
+(75, 22, 13, NULL, NULL, 'sdfsdfsdfsdf', NULL, 0, b'1', '2017-04-22 10:02:41', 22, '2017-04-22 10:02:41', 22),
+(76, 22, 13, NULL, NULL, 'sdfsdfsdfsdf', NULL, 0, b'1', '2017-04-22 10:02:54', 22, '2017-04-22 10:02:54', 22),
+(77, 22, 13, NULL, NULL, 'sfdsdf', NULL, 0, b'1', '2017-04-22 10:04:36', 22, '2017-04-22 10:04:36', 22),
+(78, 22, 13, NULL, NULL, 'hello', NULL, 0, b'1', '2017-04-22 10:05:41', 22, '2017-04-22 10:05:41', 22),
+(79, 22, 0, NULL, NULL, 'ddfsdfsdfsdfs', NULL, 13, b'1', '2017-04-22 10:15:30', 22, '2017-04-22 10:15:30', 22),
+(80, 22, 0, NULL, NULL, 'hmmmm', NULL, 13, b'1', '2017-04-22 10:16:00', 22, '2017-04-22 10:16:00', 22),
+(81, 22, 0, NULL, NULL, 'trying', NULL, 13, b'1', '2017-04-22 10:20:08', 22, '2017-04-22 10:20:08', 22),
+(82, 22, 0, NULL, NULL, 'going', NULL, 13, b'1', '2017-04-22 10:20:48', 22, '2017-04-22 10:20:48', 22),
+(83, 22, 0, NULL, NULL, 'heleo', NULL, 15, b'1', '2017-04-22 10:21:49', 22, '2017-04-22 10:21:49', 22);
 
 -- --------------------------------------------------------
 
@@ -276,6 +286,11 @@ CREATE TABLE `social_response` (
 --
 
 INSERT INTO `social_response` (`id`, `response_type`, `response_on`, `post_type`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
+(58, 0, 82, 3, 22, '2017-04-22 04:50:52', 22, '2017-04-22 04:50:56'),
+(57, 0, 80, 3, 22, '2017-04-22 04:46:33', 22, '2017-04-22 04:46:35'),
+(56, 2, 13, 1, 22, '2017-04-22 03:57:33', 22, '2017-04-22 03:57:34'),
+(55, 2, 12, 1, 22, '2017-04-22 03:28:57', 22, '2017-04-22 03:28:58'),
+(54, 1, 30, 3, 22, '2017-04-22 03:27:47', 22, '2017-04-22 03:27:49'),
 (53, 2, 57, 3, 22, '2017-04-21 05:19:15', 22, '2017-04-21 05:25:18'),
 (52, 1, 58, 3, 22, '2017-04-21 05:13:44', 22, '2017-04-21 05:58:30'),
 (51, 2, 73, 3, 22, '2017-04-20 06:57:09', 22, '2017-04-20 06:57:11'),
@@ -333,10 +348,10 @@ CREATE TABLE `songs` (
 INSERT INTO `songs` (`ID`, `CAT_ID`, `Song_Title`, `composer`, `director`, `Writers`, `synopsis`, `Date`, `LINK_APPROVED`, `HITS`, `RATING`, `NO_RATES`, `TOTAL_COMMENTS`, `HIT_DATE`, `Image`, `Song_status`, `Song_File_Name`, `isActive`, `created_On`, `Created_By`, `Updated_On`, `Updated_By`) VALUES
 (10, 1, 'Ibadat', 'Alan Manjrekar', '', '', '', '2017-03-05', NULL, 6, NULL, NULL, NULL, NULL, 'Shikhar.jpg', 1, '2017201702020202133622000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-15 11:38:35', 1, '0000-00-00 00:00:00', 1),
 (11, 1, 'test 3', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 11, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133837000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-14 16:38:13', 1, '0000-00-00 00:00:00', 1),
-(12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 61, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-21 08:55:04', 1, '0000-00-00 00:00:00', 1),
-(13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 43, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-15 11:36:58', 1, '0000-00-00 00:00:00', 1),
-(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 56, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-21 11:37:11', 1, '0000-00-00 00:00:00', 1),
-(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 74, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-21 11:28:20', 1, '0000-00-00 00:00:00', 1),
+(12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 65, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-22 09:01:41', 1, '0000-00-00 00:00:00', 1),
+(13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 79, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-22 10:20:59', 1, '0000-00-00 00:00:00', 1),
+(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 57, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-22 09:10:14', 1, '0000-00-00 00:00:00', 1),
+(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 75, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-22 10:21:41', 1, '0000-00-00 00:00:00', 1),
 (16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 55, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-21 11:37:03', 1, '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
@@ -621,7 +636,7 @@ ALTER TABLE `group_categories`
 -- AUTO_INCREMENT for table `iml_comment_song`
 --
 ALTER TABLE `iml_comment_song`
-  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 --
 -- AUTO_INCREMENT for table `industry_communication`
 --
@@ -641,7 +656,7 @@ ALTER TABLE `m_reference_detail`
 -- AUTO_INCREMENT for table `social_response`
 --
 ALTER TABLE `social_response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT for table `songs`
 --
