@@ -73,6 +73,10 @@ class Api extends CI_Controller {
                 $result = $this->song_comment($data['data']);
                 break;
 
+            case 'show_profile':
+                $result = $this->show_profile($data['data']);
+                break;
+
             default:
                 break;
         }
@@ -590,7 +594,7 @@ class Api extends CI_Controller {
                 $attachmentId = array();
                 foreach ($formData['attchment_path'] as $key => $attachment_path) {
                     $attachmentData = array(
-                        'comment_id' => $comment_id,
+                        'comment_id' => $comment_iad,
                         'attachment_type' => $formData['attchment_type'][$key],
                         'attachment_path' => $attachment_path,
                         'isActive' => 1,
@@ -614,6 +618,25 @@ class Api extends CI_Controller {
         echo json_encode($response);
         exit();
     }
+
+    function show_profile() {
+        $formData = $_POST['data'];
+        $userid = $formData['userid'];
+        $profile = $this->User_model->get_single($userid);
+        if (isset($profile) && !empty($profile)) {
+            $response['success'] = TRUE;
+            $response['msg'] = "Profile Exits";
+            $response['base_url'] = base_url();
+            $response['profile_data'] = $profile;
+        } else {
+            $response['success'] = FALSE;
+            $response['msg'] = "Profile Doesn't Exits";
+            $response['base_url'] = base_url();
+        }
+        echo json_encode($response);
+        exit();
+    }
+
 }
 
 ?>
