@@ -608,7 +608,6 @@
                     } else {
                         $(element).find('i').removeClass('liked');
                         $(element).find('i').removeClass('disliked');
-
                     }
                     if (obj.likeCount != 0) {
                         $(element).parent().parent().find(".like_count_span").html(obj.likeCount + ' Likes');
