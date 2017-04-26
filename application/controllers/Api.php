@@ -30,9 +30,8 @@ class Api extends CI_Controller {
 //            $this->session->unset_userdata('user_data');
 //            redirect('user/login', 'refresh');
 //        }
-
-        $request = file_get_contents('php://input');
-        $data = json_decode($request, true);
+//        $request = file_get_contents('php://input');
+//        $data = json_decode($request, true);
         $data = $_POST;
 //        print_r($data);exit;
         switch ($data['action']) {
@@ -75,6 +74,11 @@ class Api extends CI_Controller {
 
             case 'show_profile':
                 $result = $this->show_profile($data['data']);
+                break;
+
+            case 'upload_process':
+//                print_r($_FILES);exit;
+                $result = $this->upload_process($_FILES, $_POST);
                 break;
 
             default:
@@ -335,104 +339,6 @@ class Api extends CI_Controller {
         return $data;
     }
 
-    function logout() {
-        $this->session->unset_userdata('user_data');
-        $this->session->sess_destroy();
-        redirect('User', 'refresh');
-    }
-
-    function logoutFront() {
-        $this->session->unset_userdata('user_data');
-        $this->session->sess_destroy();
-        redirect('Index', 'refresh');
-    }
-
-    function delete($user_id = NULL) {
-        if (isset($user_id) && $user_id) {
-            $result = array();
-            $result = $this->User_model->delete($user_id);
-            if (!empty($result)) {
-                $data['msg'] = "User Deleted";
-                $data['page_title'] = "List User";
-                $data['page'] = 'list_user';
-                redirect('User', 'refresh');
-            } else {
-                $response['success'] = false;
-                $response = 'User not Deleted';
-            }
-        } else {
-            $response['success'] = false;
-            $response['msg'] = 'User not Found';
-        }
-        echo json_encode($response);
-        exit;
-    }
-
-    function update_profile() {
-        $session_data = $this->session->userdata('user_data');
-        try {
-            if (!$session_data['UID'])
-                throw new Exception("Session Expired Please Login");
-
-            if (!empty($_FILES)) {
-                $target_dir = UPLOADS . '/images/';
-                $target_file = $target_dir . basename($_FILES["upload"]["name"]);
-                $uploadOk = 1;
-                $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-
-                if (imageFileType) {
-                    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-                        $data['error_msg'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                    }
-                    if (move_uploaded_file($_FILES["upload"]["tmp_name"], $target_file)) {
-                        $response['status'] = 1;
-                    } else {
-                        $data['error_msg'] = "File uploading Failed because ";
-                    }
-                }
-            } else {
-                $response['error_msg'] = "File doenst exits";
-            }
-            $formdata = $_POST;
-
-            $user_data = array(
-                'FirstName' => isset($formdata['FirstName']) && $formdata['FirstName'] ? $formdata['FirstName'] : '',
-                'LastName' => isset($formdata['LastName']) && $formdata['LastName'] ? $formdata['LastName'] : '',
-                'Email' => isset($formdata['Email']) && $formdata['Email'] ? $formdata['Email'] : '',
-                'Website' => isset($formdata['Website']) && $formdata['Website'] ? $formdata['Website'] : '',
-                'ContactMe' => isset($formdata['ContactMe']) && $formdata['ContactMe'] ? $formdata['ContactMe'] : '',
-                'DOB' => isset($formdata['DOB']) && $formdata['DOB'] ? date('Y-m-d', strtotime($formdata['DOB'])) : '',
-                'City' => isset($formdata['City']) && $formdata['City'] ? $formdata['City'] : '',
-                'State' => isset($formdata['State']) && $formdata['State'] ? $formdata['State'] : '',
-                'Country' => isset($formdata['Country']) && $formdata['Country'] ? $formdata['Country'] : '',
-                'Photo' => isset($formdata['photo_name']) && $formdata['photo_name'] ? $formdata['photo_name'] : ''
-            );
-
-            $user_id = $session_data['UID'];
-            $result = $this->User_model->update_user($user_id, $user_data);
-            if ($result) {
-                $data['success'] = true;
-                $data['user_data'] = $session_data;
-                $data['msg'] = "User Updated";
-                $data['page_title'] = "Profile Page";
-                $data['page'] = 'profile';
-                redirect('User/profile', 'refresh');
-            } else {
-                $data['success'] = false;
-                $data['error_msg'] = "Updation Failed";
-                $data['page_title'] = "Profile Page";
-                $data['page'] = 'profile';
-                $data['user_data'] = $session_data;
-                $this->load->view('front/page', $data);
-            }
-        } catch (Exception $exc) {
-            $response['success'] = FALSE;
-            $response['msg'] = $exc->getMessage();
-        }
-        echo json_encode($response);
-        exit();
-    }
-
     public function like() {
 
         $data = $_POST['data'];
@@ -636,6 +542,121 @@ class Api extends CI_Controller {
         echo json_encode($response);
         exit();
     }
-}
 
+    function upload_process($fileArray, $formData) {
+        $file = $fileArray['files'];
+        $insertData = array(
+            'ID' => $formData['UID'],
+            'parent_id' => isset($formData['parent_id']) && $formData['parent_id'] ? $formData['parent_id'] : 0,
+            'Song_id' => isset($formData['Song_id']) && $formData['Song_id'] ? $formData['Song_id'] : 0,
+            'COMMENTS' => isset($formData['COMMENTS']) && $formData['COMMENTS'] ? $formData['COMMENTS'] : '',
+            'isActive' => 1,
+            'created_by' => $formData['UID'],
+            'updated_by' => $formData['UID'],
+        );
+
+        $comment_id = $this->Comment_model->insert_data($insertData);
+        if (!$comment_id)
+            $response['error'] = "Comment not saved Please check your network and try again";
+   
+        if ($comment_id && !empty($file)) {
+            if (is_uploaded_file($file['tmp_name'])) {
+                $upload_result = $this->upload_attachment($file);
+
+
+                if ($upload_result['success']) {
+                    $attachmentId = array();
+
+                    $attachmentData = array(
+                        'comment_id' => $comment_id,
+                        'attachment_type' => $upload_result['type'],
+                        'attachment_path' => $upload_result['filename'],
+                        'isActive' => 1,
+                        'created_by' => $formData['UID'],
+                        'updated_by' => $formData['UID'],
+                    );
+                    
+                    $attachmentId = $this->Comment_model->insert_comment_attachment($attachmentData);
+                }
+            }
+        }
+
+        $comment = $this->Comment_model->get_data(array('COM_ID' => $comment_id));
+        $comment[0]['attachment'] = $this->Comment_model->getAttachment(array('comment_id' => $comment_id));
+        $response['success'] = TRUE;
+        $response['msg'] = "Post Saved";
+        $response['comment'] = $comment;
+        $response['base_url'] = base_url();
+
+        echo json_encode($response);
+        exit();
+    }
+
+    function upload_attachment($file) {
+
+        $imageUploadPath = UPLOADS . '/images';
+        $videoUploadPath = UPLOADS . '/videos';
+        $audioUploadPath = UPLOADS . '/audios';
+        $session_data = $this->session->userdata('user_data');
+//        if ($session_data['UID']) {
+        $response = array();
+        $date = date('YmdHisu');
+        $input = $file["tmp_name"];
+        $name = str_replace(' ', '', basename($file['name']));
+        $filename = explode('.', $name);
+//        print_r($filename);exit;
+//            $uploaddir = ROOT_DIR . 'community/uploads/';
+        if ($file['type'] == 'image/jpeg' || $file['type'] == 'image/png' || $file['type'] == 'image/gif') {
+            $type = 'images';
+            $uploadfile = $imageUploadPath . '/' . $date . $name;
+
+            if (move_uploaded_file($file['tmp_name'], $uploadfile)) {
+                $response['success'] = TRUE;
+                $response['type'] = $type;
+                $response['filename'] = $date . $name;
+            } else {
+                $response['success'] = FALSE;
+            }
+        } else if ($file['type'] == 'video/x-msvideo' || $file['type'] == 'video/x-flv' || $file['type'] == 'video/x-matroska' || $file['type'] == 'video/x-mpeg' || $file['type'] == 'video/ogg' || $file['type'] == 'video/x-ms-wmv' || $file['type'] == 'video/mp4') {
+            $type = 'videos';
+
+            $uploadfile = $videoUploadPath . '/' . $date . $name;
+            if (move_uploaded_file($file['tmp_name'], $uploadfile)) {
+                $response['success'] = TRUE;
+                $response['type'] = $type;
+                $response['filename'] = $date . $name;
+            } else {
+                $response['success'] = FALSE;
+            }
+//                $uploadfile = $videoUploadPath . '/' . $date . $filename[0] . '.mp4';
+//                $command = "ffmpeg -i $input -vcodec h264 -acodec aac -strict -2 $uploadfile";
+//
+//                @exec($command, $ret);
+//                $response['success'] = TRUE;
+//                $response['type'] = $type;
+//                $response['filename'] = WWWROOT . 'live/community/uploads/' . $type . '/' . $date . $filename[0] . '.mp4';
+//            var_dump($command);
+//            exit;
+        } else if ($file['type'] == 'audio/aac' || $file['type'] == 'audio/mp3' || $file['type'] == 'audio/wav' || $file['type'] == 'audio/x-ms-wma' || $file['type'] == 'audio/ogg') {
+            $type = 'audios';
+//                $uploadfile = $uploaddir . '/' . $type . '/' . $date . $filename[0] . '.mp3';
+//                $command = "ffmpeg -i $input -acodec libmp3lame $uploadfile";
+//                @exec($command, $ret);
+//                $response['success'] = TRUE;
+//                $response['type'] = $type;
+//                $response['filename'] = WWWROOT . 'live/community/uploads/' . $type . '/' . $date . $filename[0] . '.mp3';
+
+            $uploadfile = $audioUploadPath . '/' . $date . $name;
+            if (move_uploaded_file($file['tmp_name'], $uploadfile)) {
+                $response['success'] = TRUE;
+                $response['type'] = $type;
+                $response['filename'] = $date . $name;
+            } else {
+                $response['success'] = FALSE;
+            }
+        }
+        return $response;
+    }
+
+}
 ?>
