@@ -339,9 +339,10 @@ class Api extends CI_Controller {
         return $data;
     }
 
-    public function like() {
+    public function like($data) {
 
-        $data = $_POST['data'];
+//        $data = $_POST['data'];
+
 
         $response = array();
         try {
@@ -351,6 +352,7 @@ class Api extends CI_Controller {
                 'updated_by' => $data['userid'],
             );
 
+            
 
             $search_result = $this->Comment_model->get_like_status($conditions);
 
@@ -364,6 +366,7 @@ class Api extends CI_Controller {
                     'updated_by' => $data['userid'],
                     'updated_on' => date("Y-m-d h:i:s"),
                 );
+
                 $likeId = $this->Comment_model->insert_response($likeData);
 
                 if ($likeId) {
@@ -371,6 +374,7 @@ class Api extends CI_Controller {
                     $response['data'] = $likeId;
                     $response['msg'] = $data['response_type'];
                 }
+
             } else {
 
                 $response_type = $search_result[0]['response_type'];
@@ -394,18 +398,19 @@ class Api extends CI_Controller {
                     $response['msg'] = $like_data['response_type'];
                 }
             }
+
             $response['likeCount'] = $this->Comment_model->get_total_like(array($data['comment_id']), 1);
             $response['dislikeCount'] = $this->Comment_model->get_total_dislike(array($data['comment_id']), 2);
         } catch (Exception $exc) {
             $response['success'] = FALSE;
             $response['msg'] = $exc->getMessage();
         }
-        echo json_encode($response);
-        exit();
+
+        return $response;
     }
 
-    public function post_comment() {
-        $formData = $data = $_POST['data'];
+    public function post_comment($data) {
+        $formData = $data;
 
         $user_id = $formData['userid'];
         $session_data = $this->session->userdata('user_data');
@@ -416,7 +421,7 @@ class Api extends CI_Controller {
             if ($formData['COMMENTS'] == '' && (!isset($formData['attchment_path'])))
                 throw new Exception("Please write some comment or add a file to submit");
             $insertData = array(
-                'ID' => $session_data['UID'],
+                'ID' => $user_id,
                 'parent_id' => isset($formData['parent_id']) && $formData['parent_id'] ? $formData['parent_id'] : 0,
                 'Song_id' => isset($formData['Song_id']) && $formData['Song_id'] ? $formData['Song_id'] : 0,
                 'COMMENTS' => isset($formData['COMMENTS']) && $formData['COMMENTS'] ? $formData['COMMENTS'] : '',
@@ -453,8 +458,7 @@ class Api extends CI_Controller {
             $response['base_url'] = base_url();
             $response['msg'] = $exc->getMessage();
         }
-        echo json_encode($response);
-        exit();
+        return $response;
     }
 
     function post_hit_count() {
@@ -471,8 +475,7 @@ class Api extends CI_Controller {
             $response['success'] = FALSE;
             $response['msg'] = $exc->getMessage();
         }
-        echo json_encode($response);
-        exit();
+        return $response;
     }
 
     function song_comment() {
@@ -521,8 +524,7 @@ class Api extends CI_Controller {
             $response['msg'] = $exc->getMessage();
             $response['base_url'] = base_url();
         }
-        echo json_encode($response);
-        exit();
+        return $response;
     }
 
     function show_profile() {
@@ -539,8 +541,7 @@ class Api extends CI_Controller {
             $response['msg'] = "Profile Doesn't Exits";
             $response['base_url'] = base_url();
         }
-        echo json_encode($response);
-        exit();
+        return $response;
     }
 
     function upload_process($fileArray, $formData) {
@@ -588,8 +589,7 @@ class Api extends CI_Controller {
         $response['comment'] = $comment;
         $response['base_url'] = base_url();
 
-        echo json_encode($response);
-        exit();
+        return $response;
     }
 
     function upload_attachment($file) {
