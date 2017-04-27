@@ -92,7 +92,7 @@
             <div id="actions" class="row">
 
                 <div class="col-lg-7">
-                    <!-- The fileinput-button span is used to style the file input field as button -->
+                    <!-- The file input-button span is used to style the file input field as button -->
                     <span class="btn btn-success fileinput-button">
                         <i class="glyphicon glyphicon-plus"></i>
                         <span>Click To Add files Or Drop Your Files Here</span>

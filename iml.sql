@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2017 at 10:22 AM
+-- Generation Time: Apr 27, 2017 at 08:32 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -54,7 +54,22 @@ INSERT INTO `comment_attachments` (`att_id`, `comment_id`, `attachment_type`, `a
 (9, 46, 'images', '20170410090748000000d9c84860f3bef6445c8b1ed4b09de024.JPG', b'1', '2017-04-10 09:07:51', 22, '2017-04-10 09:07:51', 22),
 (10, 47, 'images', '20170410091521000000511052.jpg', b'1', '2017-04-10 09:15:23', 22, '2017-04-10 09:15:23', 22),
 (11, 48, 'images', '20170410092649000000kanganaranaut.png', b'1', '2017-04-10 09:26:52', 22, '2017-04-10 09:26:52', 22),
-(12, 49, 'images', '20170410092907000000kiaraadvani.png', b'1', '2017-04-10 09:29:08', 22, '2017-04-10 09:29:08', 22);
+(12, 49, 'images', '20170410092907000000kiaraadvani.png', b'1', '2017-04-10 09:29:08', 22, '2017-04-10 09:29:08', 22),
+(13, 97, 'images', '20170426111848000000Maoists_massacre_25_CRPF_troopers_in_Chhattisgarh__Modi_reacts234235831.JPG', b'1', '2017-04-26 11:18:48', 22, '2017-04-26 11:18:48', 22),
+(14, 111, 'images', '2017042611282600000006bb97990b06b27b2fe7880db9f798f5.JPG', b'1', '2017-04-26 11:28:26', 22, '2017-04-26 11:28:26', 22),
+(15, 112, 'images', '2017042611304300000003b842276f56861d7f1c7b33af817f87.jpg', b'1', '2017-04-26 11:30:43', 22, '2017-04-26 11:30:43', 22),
+(16, 113, 'images', '201704261135400000007e76590d10b3ff4f9f9669b11a4228d2.JPG', b'1', '2017-04-26 11:35:40', 22, '2017-04-26 11:35:40', 22),
+(17, 114, 'images', '201704261138360000002.png', b'1', '2017-04-26 11:38:36', 22, '2017-04-26 11:38:36', 22),
+(18, 115, 'images', '201704261142210000002f262f362ccfa455701129ec6aedb2df.JPG', b'1', '2017-04-26 11:42:21', 22, '2017-04-26 11:42:21', 22),
+(19, 116, 'images', '201704261142580000002f262f362ccfa455701129ec6aedb2df.JPG', b'1', '2017-04-26 11:42:58', 22, '2017-04-26 11:42:58', 22),
+(20, 117, 'images', '2017042611432600000044_Sikh_leaders_summoned_to_Akal_Takht1126405471.JPG', b'1', '2017-04-26 11:43:26', 22, '2017-04-26 11:43:26', 22),
+(21, 130, 'images', '201704261301160000002f262f362ccfa455701129ec6aedb2df.JPG', b'1', '2017-04-26 13:01:16', 22, '2017-04-26 13:01:16', 22),
+(22, 134, 'images', '2017042613141200000006bb97990b06b27b2fe7880db9f798f5.JPG', b'1', '2017-04-26 13:14:12', 22, '2017-04-26 13:14:12', 22),
+(23, 135, 'images', '2017042613154100000006bb97990b06b27b2fe7880db9f798f5.JPG', b'1', '2017-04-26 13:15:41', 22, '2017-04-26 13:15:41', 22),
+(24, 136, 'images', '201704261317310000007e76590d10b3ff4f9f9669b11a4228d2.JPG', b'1', '2017-04-26 13:17:31', 22, '2017-04-26 13:17:31', 22),
+(25, 137, 'images', '20170426131759000000615df6cc7a6bdf00c1a834140427fd63.JPG', b'1', '2017-04-26 13:17:59', 22, '2017-04-26 13:17:59', 22),
+(26, 139, 'images', '2017042613203900000080fa1fc3b27f24997e1b5fb2e6a13ac3.JPG', b'1', '2017-04-26 13:20:39', 22, '2017-04-26 13:20:39', 22),
+(27, 140, 'images', '2017042613264400000033306d6948a059f945cce56cd429fdf8.JPG', b'1', '2017-04-26 13:26:44', 22, '2017-04-26 13:26:44', 22);
 
 -- --------------------------------------------------------
 
@@ -189,7 +204,64 @@ INSERT INTO `iml_comment_song` (`COM_ID`, `ID`, `parent_id`, `AUTHOR`, `EMAIL`, 
 (80, 22, 0, NULL, NULL, 'hmmmm', NULL, 13, b'1', '2017-04-22 10:16:00', 22, '2017-04-22 10:16:00', 22),
 (81, 22, 0, NULL, NULL, 'trying', NULL, 13, b'1', '2017-04-22 10:20:08', 22, '2017-04-22 10:20:08', 22),
 (82, 22, 0, NULL, NULL, 'going', NULL, 13, b'1', '2017-04-22 10:20:48', 22, '2017-04-22 10:20:48', 22),
-(83, 22, 0, NULL, NULL, 'heleo', NULL, 15, b'1', '2017-04-22 10:21:49', 22, '2017-04-22 10:21:49', 22);
+(83, 22, 0, NULL, NULL, 'heleo', NULL, 15, b'1', '2017-04-22 10:21:49', 22, '2017-04-22 10:21:49', 22),
+(84, 22, -1, NULL, NULL, 'sddsdfdsdfds', NULL, 0, b'1', '2017-04-24 10:46:36', 22, '2017-04-24 10:46:36', 22),
+(85, 22, 0, NULL, NULL, 'sddsdfdsdfds', NULL, 14, b'1', '2017-04-24 10:46:36', 22, '2017-04-24 10:46:36', 22),
+(86, 22, -1, NULL, NULL, 'again', NULL, 0, b'1', '2017-04-24 10:46:51', 22, '2017-04-24 10:46:51', 22),
+(87, 22, 0, NULL, NULL, 'again', NULL, 14, b'1', '2017-04-24 10:46:51', 22, '2017-04-24 10:46:51', 22),
+(88, 22, 0, NULL, NULL, 'fa', NULL, 14, b'1', '2017-04-24 12:18:46', 22, '2017-04-24 12:18:46', 22),
+(89, 22, -1, NULL, NULL, 'fa', NULL, 0, b'1', '2017-04-24 12:18:46', 22, '2017-04-24 12:18:46', 22),
+(90, 22, 0, NULL, NULL, 'dsdafasdfsdfsadda', NULL, 0, b'1', '2017-04-26 10:49:29', 22, '2017-04-26 10:49:29', 22),
+(91, 22, 0, NULL, NULL, 'test post mobile with attachment', NULL, 0, b'1', '2017-04-26 10:53:18', 22, '2017-04-26 10:53:18', 22),
+(92, 22, 0, NULL, NULL, 'sdsadsd', NULL, 0, b'1', '2017-04-26 10:54:50', 22, '2017-04-26 10:54:50', 22),
+(93, 22, 0, NULL, NULL, 'dgdgdfgdfg', NULL, 0, b'1', '2017-04-26 10:56:49', 22, '2017-04-26 10:56:49', 22),
+(94, 22, 0, NULL, NULL, 'sdddfdfsdfdf', NULL, 0, b'1', '2017-04-26 10:58:09', 22, '2017-04-26 10:58:09', 22),
+(95, 22, 0, NULL, NULL, 'fwefsdfsdfsdf', NULL, 0, b'1', '2017-04-26 10:59:10', 22, '2017-04-26 10:59:10', 22),
+(96, 22, 0, NULL, NULL, 'dffgadfgfdgfdg', NULL, 0, b'1', '2017-04-26 10:59:35', 22, '2017-04-26 10:59:35', 22),
+(97, 22, 0, NULL, NULL, 'dfsfsdfsdf', NULL, 0, b'1', '2017-04-26 11:18:48', 22, '2017-04-26 11:18:48', 22),
+(98, 22, 0, NULL, NULL, 'ASSDsSas', NULL, 0, b'1', '2017-04-26 11:19:25', 22, '2017-04-26 11:19:25', 22),
+(99, 22, 0, NULL, NULL, 'sdfdafdafafsadsadsad', NULL, 0, b'1', '2017-04-26 11:19:58', 22, '2017-04-26 11:19:58', 22),
+(100, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 11:19:59', 22, '2017-04-26 11:19:59', 22),
+(101, 22, 0, NULL, NULL, 'safadsadsa', NULL, 0, b'1', '2017-04-26 11:20:48', 22, '2017-04-26 11:20:48', 22),
+(102, 22, 0, NULL, NULL, 'ffssdfsdf', NULL, 0, b'1', '2017-04-26 11:21:52', 22, '2017-04-26 11:21:52', 22),
+(103, 22, 0, NULL, NULL, 'sdfsdfsdfsdf', NULL, 0, b'1', '2017-04-26 11:22:36', 22, '2017-04-26 11:22:36', 22),
+(104, 22, 0, NULL, NULL, 'sdfsdf', NULL, 0, b'1', '2017-04-26 11:23:18', 22, '2017-04-26 11:23:18', 22),
+(105, 22, 0, NULL, NULL, 'zvczxcxz', NULL, 0, b'1', '2017-04-26 11:23:34', 22, '2017-04-26 11:23:34', 22),
+(106, 22, 0, NULL, NULL, 'sadsa', NULL, 0, b'1', '2017-04-26 11:23:49', 22, '2017-04-26 11:23:49', 22),
+(107, 22, 0, NULL, NULL, 'dssdsd', NULL, 0, b'1', '2017-04-26 11:24:43', 22, '2017-04-26 11:24:43', 22),
+(108, 22, 0, NULL, NULL, 'fwffff', NULL, 0, b'1', '2017-04-26 11:25:16', 22, '2017-04-26 11:25:16', 22),
+(109, 22, 0, NULL, NULL, '5623', NULL, 0, b'1', '2017-04-26 11:26:54', 22, '2017-04-26 11:26:54', 22),
+(110, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 11:27:27', 22, '2017-04-26 11:27:27', 22),
+(111, 22, 0, NULL, NULL, 'helloo', NULL, 0, b'1', '2017-04-26 11:28:26', 22, '2017-04-26 11:28:26', 22),
+(112, 22, 0, NULL, NULL, 'mega', NULL, 0, b'1', '2017-04-26 11:30:43', 22, '2017-04-26 11:30:43', 22),
+(113, 22, 0, NULL, NULL, 'hmm', NULL, 0, b'1', '2017-04-26 11:35:40', 22, '2017-04-26 11:35:40', 22),
+(114, 22, 0, NULL, NULL, 'fsdfsdf', NULL, 0, b'1', '2017-04-26 11:38:36', 22, '2017-04-26 11:38:36', 22),
+(115, 22, 0, NULL, NULL, 'sfdsdf', NULL, 0, b'1', '2017-04-26 11:42:21', 22, '2017-04-26 11:42:21', 22),
+(116, 22, 0, NULL, NULL, 'sfdsdf', NULL, 0, b'1', '2017-04-26 11:42:58', 22, '2017-04-26 11:42:58', 22),
+(117, 22, 0, NULL, NULL, 'sdfsdf', NULL, 0, b'1', '2017-04-26 11:43:26', 22, '2017-04-26 11:43:26', 22),
+(118, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 12:03:40', 22, '2017-04-26 12:03:40', 22),
+(119, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 12:44:28', 22, '2017-04-26 12:44:28', 22),
+(120, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 12:47:00', 22, '2017-04-26 12:47:00', 22),
+(121, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 12:51:09', 22, '2017-04-26 12:51:09', 22),
+(122, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 12:55:41', 22, '2017-04-26 12:55:41', 22),
+(123, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 12:56:09', 22, '2017-04-26 12:56:09', 22),
+(124, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 12:56:27', 22, '2017-04-26 12:56:27', 22),
+(125, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 12:56:51', 22, '2017-04-26 12:56:51', 22),
+(126, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 12:57:45', 22, '2017-04-26 12:57:45', 22),
+(127, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 12:58:18', 22, '2017-04-26 12:58:18', 22),
+(128, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:01:02', 22, '2017-04-26 13:01:02', 22),
+(129, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:01:05', 22, '2017-04-26 13:01:05', 22),
+(130, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:01:16', 22, '2017-04-26 13:01:16', 22),
+(131, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:04:15', 22, '2017-04-26 13:04:15', 22),
+(132, 22, 0, NULL, NULL, 'afdadasdassdsadsad', NULL, 0, b'1', '2017-04-26 13:06:30', 22, '2017-04-26 13:06:30', 22),
+(133, 22, 0, NULL, NULL, 'asdasdsads', NULL, 0, b'1', '2017-04-26 13:14:06', 22, '2017-04-26 13:14:06', 22),
+(134, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:14:12', 22, '2017-04-26 13:14:12', 22),
+(135, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:15:40', 22, '2017-04-26 13:15:40', 22),
+(136, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:17:31', 22, '2017-04-26 13:17:31', 22),
+(137, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:17:59', 22, '2017-04-26 13:17:59', 22),
+(138, 22, 0, NULL, NULL, 'adfasfsafsaf', NULL, 0, b'1', '2017-04-26 13:19:34', 22, '2017-04-26 13:19:34', 22),
+(139, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:20:38', 22, '2017-04-26 13:20:38', 22),
+(140, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:26:44', 22, '2017-04-26 13:26:44', 22);
 
 -- --------------------------------------------------------
 
@@ -286,6 +358,9 @@ CREATE TABLE `social_response` (
 --
 
 INSERT INTO `social_response` (`id`, `response_type`, `response_on`, `post_type`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
+(61, 0, 87, 2, 22, '2017-04-24 06:36:21', 22, '2017-04-24 06:36:22'),
+(60, 0, 14, 1, 22, '2017-04-24 05:16:28', 22, '2017-04-24 05:16:31'),
+(59, 1, 83, 2, 22, '2017-04-24 03:22:17', 22, '2017-04-24 05:11:36'),
 (58, 0, 82, 3, 22, '2017-04-22 04:50:52', 22, '2017-04-22 04:50:56'),
 (57, 0, 80, 3, 22, '2017-04-22 04:46:33', 22, '2017-04-22 04:46:35'),
 (56, 2, 13, 1, 22, '2017-04-22 03:57:33', 22, '2017-04-22 03:57:34'),
@@ -308,7 +383,8 @@ INSERT INTO `social_response` (`id`, `response_type`, `response_on`, `post_type`
 (39, 2, 54, 3, 22, '2017-04-15 04:08:58', 22, '2017-04-15 04:08:58'),
 (38, 1, 55, 3, 22, '2017-04-15 04:08:55', 22, '2017-04-15 05:35:31'),
 (37, 2, 16, 1, 1, '2017-04-15 04:07:03', 1, '2017-04-15 04:07:03'),
-(36, 1, 16, 1, 22, '2017-04-15 04:06:08', 22, '2017-04-15 04:06:10');
+(36, 1, 16, 1, 22, '2017-04-15 04:06:08', 22, '2017-04-15 04:06:10'),
+(62, 0, 112, 2, 22, '2017-04-26 06:01:12', 22, '2017-04-26 06:01:16');
 
 -- --------------------------------------------------------
 
@@ -348,10 +424,10 @@ CREATE TABLE `songs` (
 INSERT INTO `songs` (`ID`, `CAT_ID`, `Song_Title`, `composer`, `director`, `Writers`, `synopsis`, `Date`, `LINK_APPROVED`, `HITS`, `RATING`, `NO_RATES`, `TOTAL_COMMENTS`, `HIT_DATE`, `Image`, `Song_status`, `Song_File_Name`, `isActive`, `created_On`, `Created_By`, `Updated_On`, `Updated_By`) VALUES
 (10, 1, 'Ibadat', 'Alan Manjrekar', '', '', '', '2017-03-05', NULL, 6, NULL, NULL, NULL, NULL, 'Shikhar.jpg', 1, '2017201702020202133622000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-15 11:38:35', 1, '0000-00-00 00:00:00', 1),
 (11, 1, 'test 3', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 11, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133837000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-14 16:38:13', 1, '0000-00-00 00:00:00', 1),
-(12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 65, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-22 09:01:41', 1, '0000-00-00 00:00:00', 1),
-(13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 79, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-22 10:20:59', 1, '0000-00-00 00:00:00', 1),
-(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 57, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-22 09:10:14', 1, '0000-00-00 00:00:00', 1),
-(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 75, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-22 10:21:41', 1, '0000-00-00 00:00:00', 1),
+(12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 69, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-27 06:56:12', 1, '0000-00-00 00:00:00', 1),
+(13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 80, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-25 06:00:38', 1, '0000-00-00 00:00:00', 1),
+(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 61, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-24 12:19:06', 1, '0000-00-00 00:00:00', 1),
+(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 76, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-24 11:06:09', 1, '0000-00-00 00:00:00', 1),
 (16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 55, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-21 11:37:03', 1, '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
@@ -425,14 +501,14 @@ CREATE TABLE `usermain` (
 --
 
 INSERT INTO `usermain` (`UID`, `UserName`, `Password`, `FirstName`, `LastName`, `ContactMe`, `City`, `State`, `Country`, `Email`, `DOB`, `AboutMe`, `DateJoined`, `Photo`, `Website`, `Hits`, `LastVisit`, `LastUpdated`, `PMEmailNotification`, `Activation`, `ShowFriendsListinProfile`, `ShowsingerProfile`, `NumRecordsSongsQuickView`, `NumRecordsFriendsList`, `IsFirsTimeLogin`, `UserType`, `isActive`, `created_On`, `Created_By`, `Updated_On`, `Updated_By`) VALUES
-(1, 'admin', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Gaurav', 'Rao', '7388458272', 'Mumbai', 'Maharastra', 'India', 'gr19490@gmail.com', '1990-04-19', '', '0000-00-00', 'Varun Dhawan.JPG', 'gaurav.com', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, b'1', '2017-01-30 08:50:00', 1, '2017-01-30 08:50:00', 1),
+(1, 'admin', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Gaurav', 'Rao', '7388458272', 'Mumbai', 'Maharastra', 'India', 'gr19490@gmail.com', '1990-04-19', 'About Me Content', '0000-00-00', 'Varun Dhawan.JPG', 'gaurav.com', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, b'1', '2017-01-30 08:50:00', 1, '2017-01-30 08:50:00', 1),
 (7, 'RohitShethy', 'e10adc3949ba59abbe56e057f20f883e', 'Rohit', 'Shethy', '', '', '', '', 'rs@iml.com', '0000-00-00', '', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, b'1', '2017-02-11 13:48:57', 1, '2017-02-11 13:48:57', 1),
 (8, 'shikharkumar', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Shikhar', 'Kumar', '', '', '', '', 'shikhar@indianmusiclab.com', '0000-00-00', '', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, b'1', '2017-02-20 14:42:42', 1, '2017-02-20 14:42:42', 1),
 (9, 'hansa', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Hanshaduti', 'Kundu', '', '', '', '', 'hanshaduti@indianmusiclab.com', '0000-00-00', '', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, b'1', '2017-03-07 04:07:43', 1, '2017-03-07 04:07:43', 1),
 (10, 'anurag', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Anurag', 'Puranik', '', '', '', '', 'anurag@indianmusiclab.com', '0000-00-00', '', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, b'1', '2017-03-07 04:09:29', 1, '2017-03-07 04:09:29', 1),
 (11, 'ashwani', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Ashwani', 'Bisoya', '', '', '', '', 'ashwani@indianmusiclab.com', '0000-00-00', '', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, b'1', '2017-03-07 04:11:24', 1, '2017-03-07 04:11:24', 1),
-(12, 'sachin', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Sachin', 'Dave', '', '', '', '', 'sachin@indiantimesdaily.com', '0000-00-00', '', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, b'1', '2017-03-07 04:12:50', 1, '2017-03-07 04:12:50', 1),
-(22, 'rajkumar', 'fcea920f7412b5da7be0cf42b8c93759', 'Raj', 'Kumar', '9839653641', '', '', '', 'rkgt76@gmail.com', '1970-01-01', '', '2017-04-10', '855354f514e70099cbd0220ded75ddc3.JPG', 'raj.kr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, b'1', '2017-04-08 11:21:51', 1, '2017-04-08 11:21:51', 22),
+(12, 'sachin', '7c39e97815e778d2d7c3ce2f56c6fd12', 'Sachin', 'Dave', '', '', '', '', 'sachin@indiantimesdaily.com', '0000-00-00', 'About Me Content', '0000-00-00', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, b'1', '2017-03-07 04:12:50', 1, '2017-03-07 04:12:50', 1),
+(22, 'rajkumar', 'fcea920f7412b5da7be0cf42b8c93759', 'Raj', 'Kumar', '9839653641', 'Mumbai', 'Maharastra', 'India', 'rkgt76@gmail.com', '1970-01-01', 'About Me Content', '2017-04-10', '855354f514e70099cbd0220ded75ddc3.JPG', 'raj.kr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, b'1', '2017-04-08 11:21:51', 1, '2017-04-08 11:21:51', 22),
 (23, 'test1234', '7c39e97815e778d2d7c3ce2f56c6fd12', 'test', '1234', '', '', '', '', 'test1234@gmil.com', '0000-00-00', '', '2017-04-19', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, b'1', '2017-04-19 12:58:03', 0, '2017-04-19 12:58:03', 0);
 
 -- --------------------------------------------------------
@@ -626,7 +702,7 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `comment_attachments`
 --
 ALTER TABLE `comment_attachments`
-  MODIFY `att_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `att_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `group_categories`
 --
@@ -636,7 +712,7 @@ ALTER TABLE `group_categories`
 -- AUTO_INCREMENT for table `iml_comment_song`
 --
 ALTER TABLE `iml_comment_song`
-  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 --
 -- AUTO_INCREMENT for table `industry_communication`
 --
@@ -656,7 +732,7 @@ ALTER TABLE `m_reference_detail`
 -- AUTO_INCREMENT for table `social_response`
 --
 ALTER TABLE `social_response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `songs`
 --
