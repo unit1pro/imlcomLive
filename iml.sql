@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2017 at 12:30 PM
+-- Generation Time: Apr 27, 2017 at 03:44 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -263,7 +263,32 @@ INSERT INTO `iml_comment_song` (`COM_ID`, `ID`, `parent_id`, `AUTHOR`, `EMAIL`, 
 (139, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:20:38', 22, '2017-04-26 13:20:38', 22),
 (140, 22, 0, NULL, NULL, '', NULL, 0, b'1', '2017-04-26 13:26:44', 22, '2017-04-26 13:26:44', 22),
 (141, 24, 0, NULL, NULL, 'hello from test', NULL, 0, b'1', '2017-04-27 09:01:45', 24, '2017-04-27 09:01:45', 24),
-(142, 22, 141, NULL, NULL, 'hello', NULL, 0, b'1', '2017-04-27 10:58:56', 22, '2017-04-27 10:58:56', 22);
+(142, 22, 141, NULL, NULL, 'hello', NULL, 0, b'1', '2017-04-27 10:58:56', 22, '2017-04-27 10:58:56', 22),
+(143, 24, -1, NULL, NULL, 'helllo', NULL, 0, b'1', '2017-04-27 14:38:09', 24, '2017-04-27 14:38:09', 24),
+(144, 24, 0, NULL, NULL, 'helllo', NULL, 16, b'1', '2017-04-27 14:38:09', 24, '2017-04-27 14:38:09', 24),
+(145, 24, -1, NULL, NULL, 'hello', NULL, 0, b'1', '2017-04-27 14:39:44', 24, '2017-04-27 14:39:44', 24),
+(146, 24, 0, NULL, NULL, 'hello', NULL, 16, b'1', '2017-04-27 14:39:44', 24, '2017-04-27 14:39:44', 24),
+(147, 24, 0, NULL, NULL, 'hello', NULL, 16, b'1', '2017-04-27 14:40:06', 24, '2017-04-27 14:40:06', 24),
+(148, 24, -1, NULL, NULL, 'hello', NULL, 0, b'1', '2017-04-27 14:40:06', 24, '2017-04-27 14:40:06', 24),
+(149, 24, -1, NULL, NULL, 'hmmm2', NULL, 0, b'1', '2017-04-27 14:43:34', 24, '2017-04-27 14:43:34', 24),
+(150, 24, 0, NULL, NULL, 'hmmm2', NULL, 16, b'1', '2017-04-27 14:43:34', 24, '2017-04-27 14:43:34', 24),
+(151, 24, -1, NULL, NULL, 'bbbb', NULL, 0, b'1', '2017-04-27 14:46:24', 24, '2017-04-27 14:46:24', 24),
+(152, 24, 0, NULL, NULL, 'bbbb', NULL, 16, b'1', '2017-04-27 14:46:24', 24, '2017-04-27 14:46:24', 24),
+(153, 24, -1, NULL, NULL, 'aaaaa', NULL, 0, b'1', '2017-04-27 14:47:49', 24, '2017-04-27 14:47:49', 24),
+(154, 24, 0, NULL, NULL, 'aaaa', NULL, 16, b'1', '2017-04-27 14:54:44', 24, '2017-04-27 14:54:44', 24),
+(155, 24, -1, NULL, NULL, 'aaaa', NULL, 0, b'1', '2017-04-27 14:54:45', 24, '2017-04-27 14:54:45', 24),
+(156, 24, -1, NULL, NULL, 'zzzzzz', NULL, 0, b'1', '2017-04-27 14:55:14', 24, '2017-04-27 14:55:14', 24),
+(157, 24, 0, NULL, NULL, 'zzzzzz', NULL, 16, b'1', '2017-04-27 14:55:14', 24, '2017-04-27 14:55:14', 24),
+(158, 24, -1, NULL, NULL, 'qqqqq', NULL, 0, b'1', '2017-04-27 14:55:41', 24, '2017-04-27 14:55:41', 24),
+(159, 24, 0, NULL, NULL, 'qqqqq', NULL, 16, b'1', '2017-04-27 14:55:41', 24, '2017-04-27 14:55:41', 24),
+(160, 24, 0, NULL, NULL, 'wwww', NULL, 16, b'1', '2017-04-27 14:58:53', 24, '2017-04-27 14:58:53', 24),
+(161, 24, 0, NULL, NULL, 'sfsdfsd', NULL, 16, b'1', '2017-04-27 15:00:35', 24, '2017-04-27 15:00:35', 24),
+(162, 24, 0, NULL, NULL, 'asdfghjk', NULL, 16, b'1', '2017-04-27 15:12:18', 24, '2017-04-27 15:12:18', 24),
+(163, 24, 0, NULL, NULL, 'sdfsdf', NULL, 16, b'1', '2017-04-27 15:14:57', 24, '2017-04-27 15:14:57', 24),
+(164, 24, 0, NULL, NULL, 'sdfsdf', NULL, 16, b'1', '2017-04-27 15:15:23', 24, '2017-04-27 15:15:23', 24),
+(165, 24, 0, NULL, NULL, 'sdfsdf', NULL, 16, b'1', '2017-04-27 15:16:26', 24, '2017-04-27 15:16:26', 24),
+(166, 24, 0, NULL, NULL, 'ssdsdfsdfsdf', NULL, 16, b'1', '2017-04-27 15:17:32', 24, '2017-04-27 15:17:32', 24),
+(167, 24, 0, NULL, NULL, 'sdfsdfs', NULL, 16, b'1', '2017-04-27 15:18:16', 24, '2017-04-27 15:18:16', 24);
 
 -- --------------------------------------------------------
 
@@ -429,7 +454,8 @@ INSERT INTO `social_response` (`id`, `response_type`, `response_on`, `post_type`
 (102, 1, 127, 2, 22, '2017-04-27 05:20:56', 22, '2017-04-27 05:20:56'),
 (103, 2, 141, 2, 22, '2017-04-27 05:24:23', 22, '2017-04-27 05:25:45'),
 (104, 1, 142, 3, 22, '2017-04-27 05:29:10', 22, '2017-04-27 05:29:12'),
-(105, 2, 142, 3, 1, '2017-04-27 05:56:10', 1, '2017-04-27 05:56:10');
+(105, 2, 142, 3, 1, '2017-04-27 05:56:10', 1, '2017-04-27 05:56:10'),
+(106, 0, 16, 1, 24, '2017-04-26 21:49:12', 24, '2017-04-26 21:49:15');
 
 -- --------------------------------------------------------
 
@@ -470,10 +496,10 @@ INSERT INTO `songs` (`ID`, `CAT_ID`, `Song_Title`, `composer`, `director`, `Writ
 (10, 1, 'Ibadat', 'Alan Manjrekar', '', '', '', '2017-03-05', NULL, 6, NULL, NULL, NULL, NULL, 'Shikhar.jpg', 1, '2017201702020202133622000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-15 11:38:35', 1, '0000-00-00 00:00:00', 1),
 (11, 1, 'test 3', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 11, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133837000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-14 16:38:13', 1, '0000-00-00 00:00:00', 1),
 (12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 72, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-27 09:37:02', 1, '0000-00-00 00:00:00', 1),
-(13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 85, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-27 12:18:05', 1, '0000-00-00 00:00:00', 1),
-(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 61, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-24 12:19:06', 1, '0000-00-00 00:00:00', 1),
-(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 76, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-24 11:06:09', 1, '0000-00-00 00:00:00', 1),
-(16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 56, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-27 12:18:16', 1, '0000-00-00 00:00:00', 1);
+(13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 88, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-27 15:38:25', 1, '0000-00-00 00:00:00', 1),
+(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 63, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-27 15:35:47', 1, '0000-00-00 00:00:00', 1),
+(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 77, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-27 14:40:17', 1, '0000-00-00 00:00:00', 1),
+(16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 84, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-27 15:18:36', 1, '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -758,7 +784,7 @@ ALTER TABLE `group_categories`
 -- AUTO_INCREMENT for table `iml_comment_song`
 --
 ALTER TABLE `iml_comment_song`
-  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 --
 -- AUTO_INCREMENT for table `industry_communication`
 --
@@ -778,7 +804,7 @@ ALTER TABLE `m_reference_detail`
 -- AUTO_INCREMENT for table `social_response`
 --
 ALTER TABLE `social_response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 --
 -- AUTO_INCREMENT for table `songs`
 --
