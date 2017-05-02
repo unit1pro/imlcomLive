@@ -48,7 +48,6 @@ class User_model extends CI_Model {
     
     function autocheck($data){
         $sql = "SELECT * FROM usermain WHERE ".$data['key']." = '".$data['value']."'";
-//        print_r($sql);exit;
         $query = $this->db->query($sql);
         $result = array();
         if ($query !== FALSE && $query->num_rows() > 0) {

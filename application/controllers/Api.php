@@ -81,11 +81,22 @@ class Api extends CI_Controller {
                 $result = $this->upload_process($_FILES, $_POST);
                 break;
 
+            case 'update_profile':
+                $result = $this->update($_POST);
+                break;
+            
+            case 'change_password':
+                $result = $this->password($_POST);
+                break;
+            
+            case 'change_profile':
+                $result = $this->profile_picture($_FILES, $_POST);
+                break;
+
             default:
                 break;
         }
         echo json_encode($result);
-//        print_r($result);
         exit;
     }
 
@@ -352,7 +363,7 @@ class Api extends CI_Controller {
                 'updated_by' => $data['userid'],
             );
 
-            
+
 
             $search_result = $this->Comment_model->get_like_status($conditions);
 
@@ -374,7 +385,6 @@ class Api extends CI_Controller {
                     $response['data'] = $likeId;
                     $response['msg'] = $data['response_type'];
                 }
-
             } else {
 
                 $response_type = $search_result[0]['response_type'];
@@ -559,7 +569,7 @@ class Api extends CI_Controller {
         $comment_id = $this->Comment_model->insert_data($insertData);
         if (!$comment_id)
             $response['error'] = "Comment not saved Please check your network and try again";
-   
+
         if ($comment_id && !empty($file)) {
             if (is_uploaded_file($file['tmp_name'])) {
                 $upload_result = $this->upload_attachment($file);
@@ -576,7 +586,7 @@ class Api extends CI_Controller {
                         'created_by' => $formData['UID'],
                         'updated_by' => $formData['UID'],
                     );
-                    
+
                     $attachmentId = $this->Comment_model->insert_comment_attachment($attachmentData);
                 }
             }
@@ -658,5 +668,137 @@ class Api extends CI_Controller {
         return $response;
     }
 
+    function update($data) {
+
+//        if (!empty($_FILES)) {
+//            $target_dir = UPLOADS . '/images/';
+//            $target_file = $target_dir . basename($_FILES["upload"]["name"]);
+//            $uploadOk = 1;
+//            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+//
+//            if (imageFileType) {
+//                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+//                    $data['error_msg'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+//                }
+//                if (move_uploaded_file($_FILES["upload"]["tmp_name"], $target_file)) {
+//                    $response['status'] = 1;
+//                } else {
+//                    $data['error_msg'] = "File uploading Failed because ";
+//                }
+//            }
+//        } else {
+//            $response['error_msg'] = "File doenst exits";
+//        }
+        $formdata = $data;
+
+        $user_data = array(
+            'FirstName' => isset($formdata['profile_fname']) && $formdata['profile_fname'] ? $formdata['profile_fname'] : '',
+            'LastName' => isset($formdata['profile_lname']) && $formdata['profile_lname'] ? $formdata['profile_lname'] : '',
+            'Email' => isset($formdata['Email']) && $formdata['Email'] ? $formdata['Email'] : '',
+            'Website' => isset($formdata['Website']) && $formdata['Website'] ? $formdata['Website'] : '',
+            'ContactMe' => isset($formdata['ContactMe']) && $formdata['ContactMe'] ? $formdata['ContactMe'] : '',
+            'DOB' => isset($formdata['profile_dob']) && $formdata['profile_dob'] ? date('Y-m-d', strtotime($formdata['profile_dob'])) : '',
+            'City' => isset($formdata['profile_city']) && $formdata['profile_city'] ? $formdata['profile_city'] : '',
+            'State' => isset($formdata['profile_state']) && $formdata['profile_state'] ? $formdata['profile_state'] : '',
+            'Country' => isset($formdata['profile_country']) && $formdata['profile_country'] ? $formdata['profile_country'] : '',
+            'Photo' => isset($formdata['photo_name']) && $formdata['photo_name'] ? $formdata['photo_name'] : '',
+            'AboutMe' => isset($formdata['profile_about']) && $formdata['profile_about'] ? $formdata['profile_about'] : '',
+            'DateJoined' => date("Y-m-d"),
+            'UserType' => '4',
+            'isActive' => '1',
+            'Created_By' => '1',
+            'Updated_By' => $formdata['userid']
+        );
+
+        $user_id = $formdata['userid'];
+        $result = $this->User_model->update_user($user_id, $user_data);
+        $profile_data = $this->User_model->get_single($user_id);
+        if ($result) {
+            $response['success'] = true;
+            $response['profile_data'] = $profile_data;
+            $response['alert_msg'] = "User Updated";
+            $response['base_url'] = base_url();
+        } else {
+            $response['success'] = false;
+            $response['alert_msg'] = "Updation Failed";
+            $response['profile_data'] = $profile_data;
+            $response['base_url'] = base_url();
+        }
+        return $response;
+    }
+    
+    function password($data){
+        $formdata = $data;
+        
+        $user_data = $this->User_model->get_single($formdata['userid']);
+
+        $check_data = array(
+            'UserName' => $user_data[0]['UserName'],
+            'Password' => md5($formdata['profile_password'])        
+        );
+
+        $user_status = $this->User_model->get_data($check_data);
+        if(!empty($user_status)) {
+            if($formdata['profile_new_password'] == $formdata['profile_confirm_password']) {
+                $new_password = md5($formdata['profile_new_password']);
+                $user_data = array(
+                    'Email' => isset($formdata['Email']) && $formdata['Email'] ? $formdata['Email'] : '',
+                    'Password' => isset($new_password) && $new_password ? $new_password : '',
+                    'Updated_By' => $formdata['userid']
+                );
+                $result = $this->User_model->update_user($formdata['userid'], $user_data);
+                if($result){
+                    $response['success'] = true;
+                    $response['alert_msg'] = 'User Updated Successfully';
+                }
+            } else  {
+                $response['success'] = false;
+                $response['alert_msg'] = 'Two password doesn\'t Matched, Please Retry';
+            }
+            
+        } else {
+            $response['success'] = false;
+            $response['alert_msg'] = 'Please Check credential!!!'; 
+        }
+        return $response;
+    }
+    
+    function profile_picture($fileArray, $formData) {
+        $file = $fileArray['profile_pic'];
+        
+        if (!empty($file)) {
+            if (is_uploaded_file($file['tmp_name'])) {
+                $upload_result = $this->upload_attachment($file);
+
+                if ($upload_result['success']) {
+                    
+                    $user_data = array(
+                        'Photo' => isset($upload_result['filename']) && $upload_result['filename'] ? $upload_result['filename'] : '',
+                        'Updated_By' => $formData['userid']
+                    );
+                    $result = $this->User_model->update_user($formData['userid'], $user_data);
+                    if ($result) {
+                        $response['success'] = true;
+                        $response['alert_msg'] = 'Profile Updated Successfully';
+                    } else {
+                        $response['success'] = false;
+                        $response['alert_msg'] = 'Error Uploading File!';
+                    }
+                } else {
+                    $response['success'] = false;
+                    $response['alert_msg'] = 'File is to large to upload!';
+                }
+            } else {
+                $response['success'] = false;
+                $response['alert_msg'] = 'Error Uploading File!';
+            }
+        } else {
+            $response['success'] = false;
+            $response['alert_msg'] = 'File is not Found';
+        }
+        return $response;
+    }
+
 }
+
 ?>
