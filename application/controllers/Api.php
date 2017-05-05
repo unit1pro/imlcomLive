@@ -669,44 +669,16 @@ class Api extends CI_Controller {
     }
 
     function update($data) {
-
-//        if (!empty($_FILES)) {
-//            $target_dir = UPLOADS . '/images/';
-//            $target_file = $target_dir . basename($_FILES["upload"]["name"]);
-//            $uploadOk = 1;
-//            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-//
-//            if (imageFileType) {
-//                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-//                    $data['error_msg'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-//                }
-//                if (move_uploaded_file($_FILES["upload"]["tmp_name"], $target_file)) {
-//                    $response['status'] = 1;
-//                } else {
-//                    $data['error_msg'] = "File uploading Failed because ";
-//                }
-//            }
-//        } else {
-//            $response['error_msg'] = "File doenst exits";
-//        }
         $formdata = $data;
 
         $user_data = array(
             'FirstName' => isset($formdata['profile_fname']) && $formdata['profile_fname'] ? $formdata['profile_fname'] : '',
             'LastName' => isset($formdata['profile_lname']) && $formdata['profile_lname'] ? $formdata['profile_lname'] : '',
-            'Email' => isset($formdata['Email']) && $formdata['Email'] ? $formdata['Email'] : '',
-            'Website' => isset($formdata['Website']) && $formdata['Website'] ? $formdata['Website'] : '',
-            'ContactMe' => isset($formdata['ContactMe']) && $formdata['ContactMe'] ? $formdata['ContactMe'] : '',
+            'Email' => isset($formdata['email']) && $formdata['email'] ? $formdata['email'] : '',
             'DOB' => isset($formdata['profile_dob']) && $formdata['profile_dob'] ? date('Y-m-d', strtotime($formdata['profile_dob'])) : '',
             'City' => isset($formdata['profile_city']) && $formdata['profile_city'] ? $formdata['profile_city'] : '',
             'State' => isset($formdata['profile_state']) && $formdata['profile_state'] ? $formdata['profile_state'] : '',
             'Country' => isset($formdata['profile_country']) && $formdata['profile_country'] ? $formdata['profile_country'] : '',
-            'Photo' => isset($formdata['photo_name']) && $formdata['photo_name'] ? $formdata['photo_name'] : '',
-            'AboutMe' => isset($formdata['profile_about']) && $formdata['profile_about'] ? $formdata['profile_about'] : '',
-            'DateJoined' => date("Y-m-d"),
-            'UserType' => '4',
-            'isActive' => '1',
-            'Created_By' => '1',
             'Updated_By' => $formdata['userid']
         );
 
@@ -742,7 +714,6 @@ class Api extends CI_Controller {
             if($formdata['profile_new_password'] == $formdata['profile_confirm_password']) {
                 $new_password = md5($formdata['profile_new_password']);
                 $user_data = array(
-                    'Email' => isset($formdata['Email']) && $formdata['Email'] ? $formdata['Email'] : '',
                     'Password' => isset($new_password) && $new_password ? $new_password : '',
                     'Updated_By' => $formdata['userid']
                 );

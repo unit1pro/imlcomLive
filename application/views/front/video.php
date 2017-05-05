@@ -51,18 +51,12 @@ $song_id = $songs_data[0]['ID'];
                                     <img src="<?php echo base_url('uploads/images') . '/' . $songs_data[0]['Image'] ?>" width="100">
                                 </a>
                             </div>
-<!--                            <div class="layout-column user-detail">
-                                <span class="user-name"><?php echo $songs_data[0]['Song_Title'] ?></span>
-                            </div>-->
                             <?php foreach ($artistAllVideo as $artist_video1) { ?>
                             <div class="layout-row" style="padding: 5px;">
                                 <a href="<?php echo site_url('Video/index/') . $artist_video1['ID'] ?>">
                                     <img src="<?php echo base_url('uploads/images') . '/' . $artist_video1['Image'] ?>" width="100">
                                 </a>
                             </div>
-<!--                            <div class="layout-column user-detail">
-                                <span class="user-name"><?php echo $artist_video1['Song_Title'] ?></span>
-                            </div>-->
                             <?php
                         }
                         ?>
