@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2017 at 12:45 PM
+-- Generation Time: May 09, 2017 at 01:25 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -289,7 +289,39 @@ INSERT INTO `iml_comment_song` (`COM_ID`, `ID`, `parent_id`, `AUTHOR`, `EMAIL`, 
 (165, 24, 0, NULL, NULL, 'sdfsdf', NULL, 16, b'1', '2017-04-27 15:16:26', 24, '2017-04-27 15:16:26', 24),
 (166, 24, 0, NULL, NULL, 'ssdsdfsdfsdf', NULL, 16, b'1', '2017-04-27 15:17:32', 24, '2017-04-27 15:17:32', 24),
 (167, 24, 0, NULL, NULL, 'sdfsdfs', NULL, 16, b'1', '2017-04-27 15:18:16', 24, '2017-04-27 15:18:16', 24),
-(168, 22, 167, NULL, NULL, 'gsgdfgfdg', NULL, 0, b'1', '2017-05-04 07:46:28', 22, '2017-05-04 07:46:28', 22);
+(168, 22, 167, NULL, NULL, 'gsgdfgfdg', NULL, 0, b'1', '2017-05-04 07:46:28', 22, '2017-05-04 07:46:28', 22),
+(169, 22, -1, NULL, NULL, 'hello', NULL, 0, b'1', '2017-05-09 09:37:20', 22, '2017-05-09 09:37:20', 22),
+(170, 22, -1, NULL, NULL, 'hello', NULL, 0, b'1', '2017-05-09 09:38:38', 22, '2017-05-09 09:38:38', 22),
+(171, 22, 167, NULL, NULL, 'hrlll', NULL, 0, b'1', '2017-05-09 09:45:58', 22, '2017-05-09 09:45:58', 22),
+(172, 22, 167, NULL, NULL, 'trill', NULL, 0, b'1', '2017-05-09 09:49:52', 22, '2017-05-09 09:49:52', 22),
+(173, 22, 167, NULL, NULL, 'hello', NULL, 0, b'1', '2017-05-09 09:50:47', 22, '2017-05-09 09:50:47', 22),
+(174, 22, 167, NULL, NULL, 'hello1', NULL, 0, b'1', '2017-05-09 09:51:49', 22, '2017-05-09 09:51:49', 22),
+(175, 22, 167, NULL, NULL, 'helloasdf', NULL, 0, b'1', '2017-05-09 09:54:43', 22, '2017-05-09 09:54:43', 22),
+(176, 22, 167, NULL, NULL, 'sddfsdfsdfsdf', NULL, 0, b'1', '2017-05-09 09:55:16', 22, '2017-05-09 09:55:16', 22),
+(177, 22, 167, NULL, NULL, 'fsfsdffsd', NULL, 0, b'1', '2017-05-09 09:56:46', 22, '2017-05-09 09:56:46', 22),
+(178, 22, 167, NULL, NULL, 'fssdfsdfsdf', NULL, 0, b'1', '2017-05-09 09:58:21', 22, '2017-05-09 09:58:21', 22),
+(179, 22, 167, NULL, NULL, 'fssdfsdfsdf', NULL, 0, b'1', '2017-05-09 09:58:23', 22, '2017-05-09 09:58:23', 22),
+(180, 22, 167, NULL, NULL, 'fssdfsdfsdf', NULL, 0, b'1', '2017-05-09 09:58:23', 22, '2017-05-09 09:58:23', 22),
+(181, 22, 167, NULL, NULL, 'fssdfsdfsdf', NULL, 0, b'1', '2017-05-09 09:58:23', 22, '2017-05-09 09:58:23', 22),
+(182, 22, 167, NULL, NULL, 'fssdfsdfsdf', NULL, 0, b'1', '2017-05-09 09:58:24', 22, '2017-05-09 09:58:24', 22),
+(183, 22, 167, NULL, NULL, 'fssdfsdfsdf', NULL, 0, b'1', '2017-05-09 09:58:24', 22, '2017-05-09 09:58:24', 22),
+(184, 22, 167, NULL, NULL, 'hmmmmmmmmm', NULL, 0, b'1', '2017-05-09 09:59:03', 22, '2017-05-09 09:59:03', 22),
+(185, 22, -1, NULL, NULL, 'hmm', NULL, 0, b'1', '2017-05-09 10:04:11', 22, '2017-05-09 10:04:11', 22),
+(186, 22, -1, NULL, NULL, 'vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', NULL, 0, b'1', '2017-05-09 10:09:35', 22, '2017-05-09 10:09:35', 22),
+(187, 22, -1, NULL, NULL, 'dfsdfs', NULL, 0, b'1', '2017-05-09 10:10:31', 22, '2017-05-09 10:10:31', 22),
+(188, 22, 167, NULL, NULL, 'helo', NULL, 0, b'1', '2017-05-09 10:29:46', 22, '2017-05-09 10:29:46', 22),
+(189, 22, 167, NULL, NULL, 'muli', NULL, 0, b'1', '2017-05-09 10:30:35', 22, '2017-05-09 10:30:35', 22),
+(190, 22, 0, NULL, NULL, 'hello', NULL, 12, b'1', '2017-05-09 10:35:48', 22, '2017-05-09 10:35:48', 22),
+(191, 22, 190, NULL, NULL, 'zzzzz', NULL, 0, b'1', '2017-05-09 10:38:28', 22, '2017-05-09 10:38:28', 22),
+(192, 22, 190, NULL, NULL, 'ggg', NULL, 0, b'1', '2017-05-09 10:41:02', 22, '2017-05-09 10:41:02', 22),
+(193, 22, 190, NULL, NULL, 'dddddd', NULL, 0, b'1', '2017-05-09 10:52:07', 22, '2017-05-09 10:52:07', 22),
+(194, 22, 190, NULL, NULL, 'asdfgh', NULL, 0, b'1', '2017-05-09 10:53:08', 22, '2017-05-09 10:53:08', 22),
+(195, 22, 190, NULL, NULL, 'hmmm', NULL, 0, b'1', '2017-05-09 11:08:11', 22, '2017-05-09 11:08:11', 22),
+(196, 22, 190, NULL, NULL, 'azxsdc', NULL, 0, b'1', '2017-05-09 11:10:34', 22, '2017-05-09 11:10:34', 22),
+(197, 22, 190, NULL, NULL, 'adf', NULL, 0, b'1', '2017-05-09 11:11:15', 22, '2017-05-09 11:11:15', 22),
+(198, 22, 190, NULL, NULL, 'fsdfsdfsdf', NULL, 0, b'1', '2017-05-09 11:13:01', 22, '2017-05-09 11:13:01', 22),
+(199, 22, 190, NULL, NULL, 'fsdfsdfsdf', NULL, 0, b'1', '2017-05-09 11:13:02', 22, '2017-05-09 11:13:02', 22),
+(200, 22, 190, NULL, NULL, 'qwerty', NULL, 0, b'1', '2017-05-09 11:15:16', 22, '2017-05-09 11:15:16', 22);
 
 -- --------------------------------------------------------
 
@@ -461,7 +493,9 @@ INSERT INTO `social_response` (`id`, `response_type`, `response_on`, `post_type`
 (108, 2, 157, 2, 22, '2017-05-04 02:16:12', 22, '2017-05-04 02:16:13'),
 (109, 2, 168, 3, 22, '2017-05-04 02:16:30', 22, '2017-05-04 02:16:32'),
 (110, 0, 29, 3, 22, '2017-05-05 04:26:59', 22, '2017-05-05 04:27:01'),
-(111, 0, 15, 3, 22, '2017-05-05 04:27:11', 22, '2017-05-05 04:27:43');
+(111, 0, 15, 3, 22, '2017-05-05 04:27:11', 22, '2017-05-05 04:27:43'),
+(112, 0, 166, 2, 22, '2017-05-08 02:01:45', 22, '2017-05-08 02:01:48'),
+(113, 2, 194, 3, 22, '2017-05-09 05:23:11', 22, '2017-05-09 05:23:14');
 
 -- --------------------------------------------------------
 
@@ -500,12 +534,12 @@ CREATE TABLE `songs` (
 
 INSERT INTO `songs` (`ID`, `CAT_ID`, `Song_Title`, `composer`, `director`, `Writers`, `synopsis`, `Date`, `LINK_APPROVED`, `HITS`, `RATING`, `NO_RATES`, `TOTAL_COMMENTS`, `HIT_DATE`, `Image`, `Song_status`, `Song_File_Name`, `isActive`, `created_On`, `Created_By`, `Updated_On`, `Updated_By`) VALUES
 (10, 1, 'Ibadat', 'Alan Manjrekar', '', '', '', '2017-03-05', NULL, 6, NULL, NULL, NULL, NULL, 'Shikhar.jpg', 1, '2017201702020202133622000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-15 11:38:35', 1, '0000-00-00 00:00:00', 1),
-(11, 1, 'test 3', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 11, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133837000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-14 16:38:13', 1, '0000-00-00 00:00:00', 1),
-(12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 83, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-05 09:46:45', 1, '0000-00-00 00:00:00', 1),
-(13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 104, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-05 10:03:28', 1, '0000-00-00 00:00:00', 1),
-(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 68, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-05 09:38:02', 1, '0000-00-00 00:00:00', 1),
-(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 106, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-05 09:44:10', 1, '0000-00-00 00:00:00', 1),
-(16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 85, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-05 09:37:55', 1, '0000-00-00 00:00:00', 1);
+(11, 1, 'test 3', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 12, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133837000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-08 09:32:58', 1, '0000-00-00 00:00:00', 1),
+(12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 89, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-09 10:38:05', 1, '0000-00-00 00:00:00', 1),
+(13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 121, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-08 09:33:16', 1, '0000-00-00 00:00:00', 1),
+(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 69, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-08 07:19:05', 1, '0000-00-00 00:00:00', 1),
+(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 109, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-08 10:05:54', 1, '0000-00-00 00:00:00', 1),
+(16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 86, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-09 05:11:36', 1, '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -790,7 +824,7 @@ ALTER TABLE `group_categories`
 -- AUTO_INCREMENT for table `iml_comment_song`
 --
 ALTER TABLE `iml_comment_song`
-  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
+  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
 --
 -- AUTO_INCREMENT for table `industry_communication`
 --
@@ -810,7 +844,7 @@ ALTER TABLE `m_reference_detail`
 -- AUTO_INCREMENT for table `social_response`
 --
 ALTER TABLE `social_response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 --
 -- AUTO_INCREMENT for table `songs`
 --

@@ -10,7 +10,7 @@ $song_id = $songs_data[0]['ID'];
         margin-bottom: 0 !important;
         background: #000 !important;
         text-align: center;
-        /*    position: fixed;
+/*            position: fixed;
          width: 100%;
          height: 100%;*/
         overflow: hidden;
