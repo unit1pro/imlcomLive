@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2017 at 01:26 PM
+-- Generation Time: May 13, 2017 at 01:11 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -432,8 +432,8 @@ INSERT INTO `social_response` (`id`, `response_type`, `response_on`, `post_type`
 (50, 2, 68, 3, 22, '2017-04-20 05:41:17', 22, '2017-04-20 05:41:32'),
 (49, 1, 59, 2, 22, '2017-04-20 04:44:16', 22, '2017-04-21 05:19:46'),
 (48, 1, 27, 3, 22, '2017-04-20 02:34:28', 22, '2017-05-04 02:16:04'),
-(47, 2, 69, 2, 22, '2017-04-20 02:32:50', 22, '2017-04-21 05:14:31'),
-(46, 2, 69, 3, 22, '2017-04-18 04:09:59', 22, '2017-04-21 05:14:31'),
+(47, 1, 69, 2, 22, '2017-04-20 02:32:50', 22, '2017-05-12 23:40:43'),
+(46, 1, 69, 3, 22, '2017-04-18 04:09:59', 22, '2017-05-12 23:40:43'),
 (45, 0, 15, 1, 22, '2017-04-18 04:09:50', 22, '2017-05-05 04:27:43'),
 (44, 2, 63, 3, 22, '2017-04-15 07:03:23', 22, '2017-04-15 07:03:23'),
 (43, 2, 10, 1, 22, '2017-04-15 06:08:30', 22, '2017-04-15 06:08:30'),
@@ -535,11 +535,11 @@ CREATE TABLE `songs` (
 INSERT INTO `songs` (`ID`, `CAT_ID`, `Song_Title`, `composer`, `director`, `Writers`, `synopsis`, `Date`, `LINK_APPROVED`, `HITS`, `RATING`, `NO_RATES`, `TOTAL_COMMENTS`, `HIT_DATE`, `Image`, `Song_status`, `Song_File_Name`, `isActive`, `created_On`, `Created_By`, `Updated_On`, `Updated_By`) VALUES
 (10, 1, 'Ibadat', 'Alan Manjrekar', '', '', '', '2017-03-05', NULL, 6, NULL, NULL, NULL, NULL, 'Shikhar.jpg', 1, '2017201702020202133622000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-04-15 11:38:35', 1, '0000-00-00 00:00:00', 1),
 (11, 1, 'test 3', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 12, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133837000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-08 09:32:58', 1, '0000-00-00 00:00:00', 1),
-(12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 91, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-10 05:50:51', 1, '0000-00-00 00:00:00', 1),
-(13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 121, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-08 09:33:16', 1, '0000-00-00 00:00:00', 1),
-(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 69, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-08 07:19:05', 1, '0000-00-00 00:00:00', 1),
-(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 109, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-08 10:05:54', 1, '0000-00-00 00:00:00', 1),
-(16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 86, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-09 05:11:36', 1, '0000-00-00 00:00:00', 1);
+(12, 1, 'test 4', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 101, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133850000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-13 13:10:28', 1, '0000-00-00 00:00:00', 1),
+(13, 1, 'test 5', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 144, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133854000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-13 07:05:25', 1, '0000-00-00 00:00:00', 1),
+(14, 1, 'test 6', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 80, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133857000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-13 13:10:30', 1, '0000-00-00 00:00:00', 1),
+(15, 1, 'test 7', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 119, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133901000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-13 13:10:26', 1, '0000-00-00 00:00:00', 1),
+(16, 1, 'test 8', 'test c1', 'test d', 'test w', 'Test', '0000-00-00', NULL, 90, NULL, NULL, NULL, NULL, 'sample-image.jpg', 1, '2017201702020202133904000000SampleVideo_1280x720_1mb.mp4', b'1', '2017-05-13 13:10:32', 1, '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
