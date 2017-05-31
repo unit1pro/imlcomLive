@@ -33,7 +33,7 @@ class Api extends CI_Controller {
 //        $request = file_get_contents('php://input');
 //        $data = json_decode($request, true);
         $data = $_POST;
-//        print_r($data);exit;
+//                print_r($data);
         switch ($data['action']) {
             case 'login':
                 $result = $this->login($data['data']);
@@ -244,8 +244,7 @@ class Api extends CI_Controller {
     }
 
     public function get_posts($postData) {
-        $response = array();
-        $comments = array();
+        $response = $comments = array();
         try {
             $formdata = $postData;
             $limit = isset($formdata['limit']) && $formdata['limit'] ? $formdata['limit'] : NULL;
@@ -282,10 +281,11 @@ class Api extends CI_Controller {
             }
             if (is_array($songs) && !empty($songs)) {
                 foreach ($songs as $key1 => $value1) {
+                    $result1 = array();
                     $comments[$i] = $value1;
                     $comments[$i]['song'] = true;
-                    $comments[$i++]['subComments'] = $this->Comment_model->get_data(array('Song_id' => $value1['ID']), 2, 0, 'DESC');
-                    $result = $this->Comment_model->getResponse($value1['ID'], $session_user_id);
+                    $comments[$i]['subComments'] = $this->Comment_model->get_data(array('Song_id' => $value1['ID']), 2, 0, 'DESC');
+                    $result1 = $this->Comment_model->getResponse($value1['ID'], $session_user_id);
                     $comments[$i]['user_response'] = (int) $result1[0]['response_type'];
                     $comments[$i]['like_count'] = $this->Comment_model->get_total_like(array($value1['ID']), 1);
                     $comments[$i]['dislike_count'] = $this->Comment_model->get_total_dislike(array($value1['ID']), 2);
@@ -351,10 +351,6 @@ class Api extends CI_Controller {
     }
 
     public function like($data) {
-
-//        $data = $_POST['data'];
-
-
         $response = array();
         try {
             $conditions = array(
@@ -362,8 +358,7 @@ class Api extends CI_Controller {
                 'post_type' => $data['post_type'],
                 'updated_by' => $data['userid'],
             );
-
-
+                
 
             $search_result = $this->Comment_model->get_like_status($conditions);
 
